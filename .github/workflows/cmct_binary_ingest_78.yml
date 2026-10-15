@@ -1,0 +1,53 @@
+name: CMCT Binary Ingest 78
+
+on:
+  push:
+    branches:
+      - binary-ingest-20261015
+
+permissions:
+  contents: read
+
+jobs:
+  fetch-78:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Acquire PMC OA package and exact Figure 1
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p out work
+          curl --fail --show-error --location --retry 3 \
+            "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC10304078" \
+            -o work/oa.xml
+          cat work/oa.xml
+          TGZ_URL=$(grep -o 'href="[^"]*\.tar\.gz"' work/oa.xml | head -1 | sed 's/^href="//;s/"$//')
+          echo "TGZ_URL=$TGZ_URL"
+          test -n "$TGZ_URL"
+          curl --fail --show-error --location --retry 3 "$TGZ_URL" -o work/article.tar.gz
+          tar -xzf work/article.tar.gz -C work
+          find work -type f | sort
+          FIG=$(find work -type f \( -iname 'plants-12-02286-g001.jpg' -o -iname 'plants-12-02286-g001.jpeg' -o -iname 'plants-12-02286-g001.png' \) | head -1)
+          echo "FIG=$FIG"
+          test -n "$FIG"
+          EXT="${FIG##*.}"
+          cp "$FIG" "out/78_plants-12-02286-g001.$EXT"
+          {
+            echo "ROW=#78 M5 Ngan Sai Ho"
+            echo "PMC=PMC10304078"
+            echo "OA_PACKAGE=$TGZ_URL"
+            stat -c 'BYTES=%s' "$FIG"
+            file -b --mime-type "$FIG" | sed 's/^/MIME=/'
+            file -b "$FIG" | sed 's/^/FILE=/'
+            sha1sum "$FIG" | awk '{print "SHA1="$1}'
+            sha256sum "$FIG" | awk '{print "SHA256="$1}'
+          } > out/INGEST_78_MANIFEST.txt
+
+      - name: Upload #78 source bytes
+        uses: actions/upload-artifact@v4
+        with:
+          name: tap1-source-binary-78
+          path: out/
+          if-no-files-found: error
+          retention-days: 7
