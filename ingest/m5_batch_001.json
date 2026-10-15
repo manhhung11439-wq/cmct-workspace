@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #7 processed Ephedra sinica crude drug",
+  "batch": "Tập 1 REV17 consolidated FULL-GATE source binaries (Commons-only)",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,9 +14,79 @@
   },
   "items": [
     {
+      "id": 1,
+      "filename": "m5_001_Wild_Pueraria_slices.jpg",
+      "commons_title": "File:Wild Pueraria slices.jpg"
+    },
+    {
+      "id": 2,
+      "filename": "m5_002_Perilla_leaves.jpg",
+      "commons_title": "File:Perilla leaves.jpg"
+    },
+    {
       "id": 7,
-      "filename": "m5_007_Maou_processed_Ephedra_sinica.jpg",
+      "filename": "m5_007_Maou.jpg",
       "commons_title": "File:Maou.jpg"
+    },
+    {
+      "id": 11,
+      "filename": "m5_011_Dried_Angelica_dahurica_slices.jpg",
+      "commons_title": "File:Dried angelica dahurica slices.jpg"
+    },
+    {
+      "id": 13,
+      "filename": "m5_013_Xanthium_strumarium_MHNT.jpg",
+      "commons_title": "File:Xanthium strumarium MHNT.BOT.2004.0.213.jpg"
+    },
+    {
+      "id": 17,
+      "filename": "m5_017_Arctium_lappa_MHNT.jpg",
+      "commons_title": "File:Arctium lappa MHNT.BOT.2004.0.16.jpg"
+    },
+    {
+      "id": 20,
+      "filename": "m5_020_Cymbopogon_citratus.jpg",
+      "commons_title": "File:Tallos y hojas de yerba luisa (Cymbopogon citratus).jpg"
+    },
+    {
+      "id": 26,
+      "filename": "m5_026_Dried_Ocimum_basilicum.jpg",
+      "commons_title": "File:Basilikum (Ocimum basilicum) getrocknet - Josef Schlaghecken.jpg"
+    },
+    {
+      "id": 29,
+      "filename": "m5_029_Coriandrum_sativum_bunches.jpg",
+      "commons_title": "File:Koriander (Coriandrum sativum) Frische Bündel, beim Türken in MA--Josef Schlaghecken.jpg"
+    },
+    {
+      "id": 42,
+      "filename": "m5_042_Gypsum_medicinal.jpg",
+      "commons_title": "File:A herbal medicine Gypsum.jpg"
+    },
+    {
+      "id": 46,
+      "filename": "m5_046_Dried_honeysuckle.jpg",
+      "commons_title": "File:Dried honeysuckle.jpg"
+    },
+    {
+      "id": 49,
+      "filename": "m5_049_Prunella_vulgaris_spica.jpg",
+      "commons_title": "File:HK Chinese Medicine 夏枯草 Prunella Vulgaris 1.JPG"
+    },
+    {
+      "id": 50,
+      "filename": "m5_050_Dried_reed_root_segments.jpg",
+      "commons_title": "File:Dried reed root segments.jpg"
+    },
+    {
+      "id": 66,
+      "filename": "m5_066_Fresh_purslane.jpg",
+      "commons_title": "File:Fresh purslane.jpg"
+    },
+    {
+      "id": 81,
+      "filename": "m5_081_Centella_asitica_fresh.jpg",
+      "commons_title": "File:Green to cook Centella asiatica.jpg"
     }
   ]
 }
