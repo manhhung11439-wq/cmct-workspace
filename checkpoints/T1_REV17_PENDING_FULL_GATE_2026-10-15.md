@@ -59,7 +59,7 @@ Date: 2026-10-15
 - Status: FULL-GATE PASS; NOT a recovery claim for either archive-unrecovered historical CORRECTION-READY ID.
 
 
-### #1 Cát Căn — candidate FULL-GATE, identity mapping controlled
+### #1 Cát Căn — FULL-GATE PASS, medicinal-name identity mapping controlled
 - File: Wikimedia Commons `File:Wild Pueraria slices.jpg`.
 - File captions: “Wild Pueraria slices” / “野生葛根片”.
 - Official medicinal mapping used for identity reconciliation: 野葛 / Pueraria lobata → Puerariae Lobatae Radix; dried root, freshly cut into thick slices/pieces, then dried.
@@ -69,7 +69,7 @@ Date: 2026-10-15
 - License: CC0 1.0.
 - Commons checksum: c85f8ea31da21f9ed600e160b1b3cf979d818eb0.
 - Original-binary ingest run 38725302371: SUCCESS.
-- Status: PASS candidate after controlled botanical-source mapping; NOT a recovery claim for historical CR IDs.
+- Status: FULL-GATE PASS after controlled medicinal-name/botanical-source mapping; NOT a recovery claim for historical CR IDs.
 
 ### #11 Bạch Chỉ — FULL-GATE PASS
 - File: Wikimedia Commons `File:Dried angelica dahurica slices.jpg`.
@@ -202,7 +202,7 @@ Exact-variety search remains unresolved. Exact-name results are preserved/herbar
 
 ## Next exact mutation sequence
 When DOCX/runtime access is available:
-1. Rebuild REV17 from REV16 with the consolidated PASS batch (#1 if final identity mapping remains accepted, #2, #11, #13, #17, #20, #26, #28, #29, #42, #46, #49, #50, #66, #81), rather than stacking uncertain PRETOC branches.
+1. Rebuild REV17 from REV16 with the consolidated PASS batch (#1, #2, #11, #13, #17, #20, #26, #28, #29, #42, #46, #49, #50, #66, #81), rather than stacking uncertain PRETOC branches.
 2. Preserve all existing REV16 M5 upgrades.
 3. Render full artifact.
 4. Derive actual page-map; do not reuse the prior #28-only +1 TOC shift.
