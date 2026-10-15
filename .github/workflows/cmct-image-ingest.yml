@@ -1,29 +1,47 @@
-name: CMCT T1 M5-19 permissive exuvia search
+name: CMCT T1 M5 batch exact ingest
 on:
   push:
     paths:
       - .cmct-ingest-trigger
-permissions:
-  contents: write
 jobs:
-  search:
+  acquire:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Install dependencies
-        run: python -m pip install --quiet requests pillow
-      - name: Search exact taxon permissive photos
+      - name: Prepare
         run: |
-          mkdir -p evidence/m5_19_inat_permissive
-          python scripts/cmct_search_m5_19.py | tee evidence/m5_19_inat_permissive/search.log
-      - name: Commit search evidence
+          mkdir -p images
+          python -m pip install --quiet pillow
+      - name: Download exact originals
+        shell: bash
         run: |
-          git config user.name "CMCT evidence bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add evidence/m5_19_inat_permissive
-          if git diff --cached --quiet; then
-            echo "No changes"
-          else
-            git commit -m "Search permissive exact C. atrata exuvia candidates"
-            git push
-          fi
+          set -e
+          curl -L --fail --retry 4 --retry-all-errors -A "CMCT-image-audit/1.0" "https://commons.wikimedia.org/wiki/Special:Redirect/file/Puerariae1.JPG" -o "images/1_M5_Puerariae1.JPG"
+          curl -L --fail --retry 4 --retry-all-errors -A "CMCT-image-audit/1.0" "https://commons.wikimedia.org/wiki/Special:Redirect/file/Fresh_ginger_rhizome_02.jpg" -o "images/3_M5_Fresh_ginger_rhizome_02.jpg"
+          curl -L --fail --retry 4 --retry-all-errors -A "CMCT-image-audit/1.0" "https://commons.wikimedia.org/wiki/Special:Redirect/file/%E7%99%BD%E8%8A%B7%E9%A5%AE%E7%89%87.jpg" -o "images/11_M5_Baizhi_slices.jpg"
+          curl -L --fail --retry 4 --retry-all-errors -A "CMCT-image-audit/1.0" "https://commons.wikimedia.org/wiki/Special:Redirect/file/%E8%9D%89%E8%9C%95%E9%A5%AE%E7%89%87.jpg" -o "images/19_M5_Chantui_exuviae.jpg"
+      - name: Verify byte properties
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib, mimetypes
+          from PIL import Image
+          out=Path("images/manifest.tsv")
+          with out.open("w",encoding="utf-8") as f:
+              f.write("row\tfilename\tbytes\tmime\twidth\theight\tsha1\tsha256\n")
+              for p in sorted(Path("images").glob("*")):
+                  if not p.is_file() or p.name=="manifest.tsv": continue
+                  data=p.read_bytes()
+                  with Image.open(p) as im:
+                      w,h=im.size; fmt=im.format
+                  mime={"JPEG":"image/jpeg","PNG":"image/png"}.get(fmt,mimetypes.guess_type(p.name)[0] or "application/octet-stream")
+                  row=p.name.split("_",1)[0]
+                  f.write(f"{row}\t{p.name}\t{len(data)}\t{mime}\t{w}\t{h}\t{hashlib.sha1(data).hexdigest()}\t{hashlib.sha256(data).hexdigest()}\n")
+          print(out.read_text())
+          PY
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cmct-tap1-m5-batch1-exact
+          path: images/
+          compression-level: 0
+          retention-days: 7
