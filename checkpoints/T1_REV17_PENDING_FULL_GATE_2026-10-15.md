@@ -183,6 +183,23 @@ Date: 2026-10-15
 
 ## Systematic processed-material searches
 
+### Targeted #82–97 follow-up
+- Run 38738843297: SUCCESS.
+- #82 Houttuynia cordata: no exact harvested whole aerial-herb photograph returned → HOLD.
+- #83 Ageratum conyzoides: no exact harvested/dried aerial-herb photograph returned → HOLD.
+- #84 Oroxylum indicum: exact-taxon photographs returned, but candidate metadata shows living/tree/fruit botanical material rather than separated dried bark or dried winged seeds required by manuscript → HOLD.
+- #85 Euphorbia thymifolia: no exact harvested whole-herb material photograph returned → HOLD.
+- #86 Catharanthus roseus: no exact dried whole-plant/root medicinal material photograph returned → HOLD.
+- #87 Gymnanthemum amygdalinum / Vernonia amygdalina: no exact harvested/dried detached-leaf photograph returned → HOLD.
+- #88 Jasminum subtriplinerve: no exact dried stem-leaf medicinal material photograph returned → HOLD.
+- #89 Excoecaria cochinchinensis: no exact harvested/roasted/dried leaf-and-young-branch photograph returned → HOLD.
+- #92 Eleusine indica: no exact harvested whole-plant-with-root photograph returned → HOLD.
+- #93 Bidens pilosa: no exact harvested/dried aerial-herb photograph returned → HOLD.
+- #94 Pulsatilla chinensis: no exact dried medicinal-root photograph returned → HOLD.
+- #95 Sophora tonkinensis: no exact dried root/rhizome photograph returned → HOLD.
+- #96 Lasiosphaera/Calvatia group: no exact mature dried puffball fruit-body/spore medicinal-material photograph returned → HOLD.
+- #97 Lobelia chinensis: no exact dried whole-herb photograph returned → HOLD.
+
 ### Targeted #59–75 follow-up
 - Run 38738501641: SUCCESS.
 - #59–65: no exact harvested/processed medicinal-material photograph returned; results were mostly scans/PDFs or zero-result → HOLD.
