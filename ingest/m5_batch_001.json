@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #17 Arctium lappa dried fruits and seeds",
+  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #29 fresh harvested Coriandrum sativum",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,10 +14,9 @@
   },
   "items": [
     {
-      "id": 17,
-      "filename": "m5_017_Arctium_lappa_fruits_seeds_MHNT.jpg",
-      "commons_title": "File:Arctium lappa MHNT.BOT.2004.0.16.jpg",
-      "expected_sha1": "c6e1ecd2b9291e545063dd5df2a91503669535a0"
+      "id": 29,
+      "filename": "m5_029_Coriandrum_sativum_fresh_bunches_market.jpg",
+      "commons_title": "File:Koriander (Coriandrum sativum) Frische Bündel, beim Türken in MA--Josef Schlaghecken.jpg"
     }
   ]
 }
