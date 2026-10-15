@@ -4,3 +4,5 @@ Rows: #19 #87 #3 #41 #42 #47 #58 #77 #82 #117 #125
 Purpose: acquire original Wikimedia Commons bytes for controlled Tập 1 image completion.
 
 retry: 2026-10-15T10:10+07:00
+
+full-ingest: 2026-10-15T10:12+07:00
