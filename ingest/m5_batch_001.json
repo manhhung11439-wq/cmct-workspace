@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 verification — #73 Violae herba candidate",
+  "batch": "Tập 1 M5 verification — #114 Gynura procumbens fresh harvested material",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,9 +14,9 @@
   },
   "items": [
     {
-      "id": 73,
-      "filename": "m5_073_Violae_herba_044326.jpg",
-      "commons_title": "File:Violae herba 044326.jpg"
+      "id": 114,
+      "filename": "m5_114_Gynura_procumbens_Zarit-yo.jpg",
+      "commons_title": "File:Zarit-yo.jpg"
     }
   ]
 }
