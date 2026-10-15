@@ -1,36 +1,158 @@
-name: CMCT T1 M5-19 iNaturalist exuvia verify
+name: CMCT T1 M5-19 permissive exuvia search
 on:
   push:
     paths:
       - .cmct-ingest-trigger
 permissions:
-  contents: read
+  contents: write
 jobs:
-  verify:
+  search:
     runs-on: ubuntu-latest
     steps:
-      - name: Query photo metadata and exact bytes
+      - uses: actions/checkout@v4
+      - name: Search iNaturalist exact taxon permissive photos
         shell: bash
         run: |
-          set -u
-          mkdir -p out
-          UA="Mozilla/5.0 CMCT-image-audit/1.0"
-          for u in             "https://api.inaturalist.org/v1/photos/21995070"             "https://www.inaturalist.org/photos/21995070.json"             "https://api.inaturalist.org/v1/observations?photo_id=21995070"             "https://api.inaturalist.org/v1/observations?taxon_id=319989&photos=true&per_page=200&d1=2018-07-26&d2=2018-07-27"
-          do
-            echo "===== $u ====="
-            curl -L -A "$UA" --connect-timeout 15 --max-time 120 -sS "$u" || true
-            echo
-          done | tee out/metadata.txt
-          URL="https://inaturalist-open-data.s3.amazonaws.com/photos/21995070/original.jpg"
-          code=$(curl -L -A "$UA" --retry 3 --retry-all-errors --connect-timeout 15 --max-time 120 -sS -w "%{http_code}" -o out/21995070_original.jpg "$URL" || true)
-          echo "image_http=$code"
-          file out/21995070_original.jpg || true
-          wc -c out/21995070_original.jpg || true
-          sha1sum out/21995070_original.jpg || true
-          sha256sum out/21995070_original.jpg || true
-      - uses: actions/upload-artifact@v4
-        with:
-          name: cmct-tap1-m5-19-inat-exuvia
-          path: out/
-          compression-level: 0
-          retention-days: 7
+          set -euo pipefail
+          python -m pip install --quiet requests pillow
+          cat > /tmp/search.py <<'PY'
+import json, os, re, math, hashlib
+from pathlib import Path
+import requests
+from PIL import Image, ImageOps, ImageDraw, ImageFont
+from io import BytesIO
+
+OUT=Path("evidence/m5_19_inat_permissive")
+OUT.mkdir(parents=True,exist_ok=True)
+TAXON_ID=319989
+licenses={"cc0","cc-by","cc-by-sa"}
+terms=["exuvia","molt","molting","shell","exoskeleton","nymph","cicada shell"]
+session=requests.Session()
+session.headers["User-Agent"]="CMCT-image-audit/1.0"
+
+records={}
+counts={}
+for term in terms:
+    params={
+      "taxon_id":TAXON_ID,
+      "photos":"true",
+      "per_page":200,
+      "page":1,
+      "q":term,
+      "order_by":"created_at",
+      "order":"desc"
+    }
+    r=session.get("https://api.inaturalist.org/v1/observations",params=params,timeout=60)
+    r.raise_for_status()
+    data=r.json()
+    counts[term]=data.get("total_results",0)
+    for ob in data.get("results",[]):
+        tax=ob.get("taxon") or {}
+        # exact taxon only
+        if tax.get("id")!=TAXON_ID:
+            continue
+        desc=(ob.get("description") or "")
+        tags=ob.get("tags") or []
+        for ph in ob.get("photos") or []:
+            lic=(ph.get("license_code") or "").lower()
+            if lic not in licenses:
+                continue
+            pid=ph.get("id")
+            url=ph.get("url") or ""
+            if not pid or not url: continue
+            original=url.replace("/square.","/original.")
+            large=url.replace("/square.","/large.")
+            records[pid]={
+              "photo_id":pid,
+              "license":lic,
+              "attribution":ph.get("attribution"),
+              "original_dimensions":ph.get("original_dimensions"),
+              "obs_id":ob.get("id"),
+              "obs_uri":ob.get("uri"),
+              "observed_on":ob.get("observed_on"),
+              "quality_grade":ob.get("quality_grade"),
+              "description":desc,
+              "tags":tags,
+              "matched_term":term,
+              "large_url":large,
+              "original_url":original,
+              "taxon_name":tax.get("name"),
+            }
+
+# Also scan first 10 pages of permissive-looking exact taxon obs and keyword metadata.
+keyword=re.compile(r"exuv|molt|shell|exoskel|nymph",re.I)
+for page in range(1,11):
+    params={"taxon_id":TAXON_ID,"photos":"true","per_page":200,"page":page,"order_by":"created_at","order":"desc"}
+    r=session.get("https://api.inaturalist.org/v1/observations",params=params,timeout=60)
+    r.raise_for_status()
+    for ob in r.json().get("results",[]):
+        tax=ob.get("taxon") or {}
+        if tax.get("id")!=TAXON_ID: continue
+        blob=" ".join([ob.get("description") or "",*(ob.get("tags") or [])])
+        if not keyword.search(blob): continue
+        for ph in ob.get("photos") or []:
+            lic=(ph.get("license_code") or "").lower()
+            if lic not in licenses: continue
+            pid=ph.get("id"); url=ph.get("url") or ""
+            if not pid or not url: continue
+            records[pid]={
+              "photo_id":pid,"license":lic,"attribution":ph.get("attribution"),
+              "original_dimensions":ph.get("original_dimensions"),"obs_id":ob.get("id"),
+              "obs_uri":ob.get("uri"),"observed_on":ob.get("observed_on"),
+              "quality_grade":ob.get("quality_grade"),"description":ob.get("description") or "",
+              "tags":ob.get("tags") or [],"matched_term":"metadata-scan",
+              "large_url":url.replace("/square.","/large."),
+              "original_url":url.replace("/square.","/original."),
+              "taxon_name":tax.get("name"),
+            }
+
+recs=list(records.values())
+recs.sort(key=lambda x:(x["license"],str(x["photo_id"])))
+(OUT/"query_counts.json").write_text(json.dumps(counts,ensure_ascii=False,indent=2),encoding="utf-8")
+(OUT/"candidates.json").write_text(json.dumps(recs,ensure_ascii=False,indent=2),encoding="utf-8")
+
+# download thumbnails and build contact sheets
+thumbs=[]
+for rec in recs[:160]:
+    try:
+        rr=session.get(rec["large_url"],timeout=60)
+        rr.raise_for_status()
+        im=Image.open(BytesIO(rr.content)).convert("RGB")
+        im.thumbnail((220,160))
+        canvas=Image.new("RGB",(240,205),"white")
+        x=(240-im.width)//2; y=4+(160-im.height)//2
+        canvas.paste(im,(x,y))
+        d=ImageDraw.Draw(canvas)
+        label=f'pid {rec["photo_id"]} | {rec["license"]}\nobs {rec["obs_id"]} | {rec["matched_term"]}'
+        d.multiline_text((5,168),label,fill="black",spacing=2)
+        thumbs.append(canvas)
+    except Exception as e:
+        rec["thumb_error"]=str(e)
+
+for si in range(0,len(thumbs),20):
+    batch=thumbs[si:si+20]
+    if not batch: continue
+    sheet=Image.new("RGB",(240*4,205*5),"white")
+    for j,im in enumerate(batch):
+        sheet.paste(im,((j%4)*240,(j//4)*205))
+    sheet.save(OUT/f"contact_{si//20+1:02d}.jpg",quality=90)
+
+print("QUERY_COUNTS",json.dumps(counts,ensure_ascii=False))
+print("PERMISSIVE_CANDIDATES",len(recs))
+for r in recs:
+    print(json.dumps(r,ensure_ascii=False))
+PY
+          python /tmp/search.py | tee evidence/m5_19_inat_permissive/search.log
+      - name: Commit search evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "CMCT evidence bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add evidence/m5_19_inat_permissive
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Search permissive exact C. atrata exuvia candidates"
+            git push
+          fi
