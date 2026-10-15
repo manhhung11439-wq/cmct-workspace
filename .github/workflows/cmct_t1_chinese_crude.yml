@@ -1,0 +1,22 @@
+name: CMCT T1 Chinese crude-drug search
+on:
+  push:
+    paths:
+      - 'scripts/search_commons_t1_chinese_crude.py'
+      - '.github/workflows/cmct_t1_chinese_crude.yml'
+  workflow_dispatch:
+jobs:
+  search:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests
+      - run: python scripts/search_commons_t1_chinese_crude.py | tee search_chinese_crude.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-t1-chinese-crude
+          path: |
+            evidence/m5_t1_chinese_crude_search/
+            search_chinese_crude.log
+          if-no-files-found: error
+          retention-days: 30
