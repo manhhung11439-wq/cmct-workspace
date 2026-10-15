@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #100",
+  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #91",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,10 +14,10 @@
   },
   "items": [
     {
-      "id": 100,
-      "filename": "m5_100_Kalanchoe_pinnata_leaf.jpg",
-      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Kalanchoe_pinnata_leaf.jpg",
-      "expected_sha1": "c8f84691e9d4a4b07b076fb64204e4a23cd220d5"
+      "id": 91,
+      "filename": "m5_091_Dried_lotus_leaf_tea.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Dried_lotus_leaf_tea.jpg",
+      "expected_sha1": "e39ac3e5c6462513037c9426dc03b639374a3685"
     }
   ]
 }
