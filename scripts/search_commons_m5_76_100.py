@@ -63,3 +63,4 @@ for rid,(taxon,roles) in rows.items():
     allout[str(rid)]={'taxon':taxon,'roles':roles,'queries':qlog,'candidates':vals[:25]}
     print(rid,taxon,'unique',len(vals),'top',[(v['score'],v['title'],v.get('license')) for v in vals[:6]],flush=True)
 (OUT/'candidates.json').write_text(json.dumps(allout,ensure_ascii=False,indent=2),encoding='utf-8')
+
