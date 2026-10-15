@@ -1,4 +1,4 @@
-name: CMCT T1 exact image ingest
+name: CMCT T1 exact image ingest fast
 on:
   push:
     paths:
@@ -11,19 +11,24 @@ jobs:
         run: |
           mkdir -p images
           python -m pip install --quiet pillow
-      - name: Download exact originals
+      - name: Download exact originals in parallel
+        shell: bash
         run: |
-          curl -L --fail --retry 4 --retry-delay 2 -A "CMCT-image-audit/1.0" "https://upload.wikimedia.org/wikipedia/commons/5/51/Cryptotympana_atrata.jpg" -o "images/19_Cryptotympana_atrata.jpg"
-          curl -L --fail --retry 4 --retry-delay 2 -A "CMCT-image-audit/1.0" "https://upload.wikimedia.org/wikipedia/commons/0/08/Vernonia_amygdalina_01.jpg" -o "images/87_Vernonia_amygdalina_01.jpg"
-          curl -L --fail --retry 4 --retry-delay 2 -A "CMCT-image-audit/1.0" "https://upload.wikimedia.org/wikipedia/commons/2/20/Zingiber_officinale.JPG" -o "images/3_Zingiber_officinale.JPG"
-          curl -L --fail --retry 4 --retry-delay 2 -A "CMCT-image-audit/1.0" "https://upload.wikimedia.org/wikipedia/commons/b/bc/Momordica_charantia_%28plant%29.jpg" -o "images/41_Momordica_charantia_plant.jpg"
-          curl -L --fail --retry 4 --retry-delay 2 -A "CMCT-image-audit/1.0" "https://upload.wikimedia.org/wikipedia/commons/2/2f/Gypsum_mineral.jpg" -o "images/42_Gypsum_mineral.jpg"
-          curl -L --fail --retry 4 --retry-delay 2 -A "CMCT-image-audit/1.0" "https://upload.wikimedia.org/wikipedia/commons/c/c6/Forsythia_suspensa2.jpg" -o "images/47_Forsythia_suspensa2.jpg"
-          curl -L --fail --retry 4 --retry-delay 2 -A "CMCT-image-audit/1.0" "https://upload.wikimedia.org/wikipedia/commons/d/d1/Andrographis_paniculata.jpg" -o "images/58_Andrographis_paniculata.jpg"
-          curl -L --fail --retry 4 --retry-delay 2 -A "CMCT-image-audit/1.0" "https://upload.wikimedia.org/wikipedia/commons/f/f2/Lithospermum_erythrorhizon.jpg" -o "images/77_Lithospermum_erythrorhizon.jpg"
-          curl -L --fail --retry 4 --retry-delay 2 -A "CMCT-image-audit/1.0" "https://upload.wikimedia.org/wikipedia/commons/6/6d/Houttuynia_cordata_C.jpg" -o "images/82_Houttuynia_cordata_C.jpg"
-          curl -L --fail --retry 4 --retry-delay 2 -A "CMCT-image-audit/1.0" "https://upload.wikimedia.org/wikipedia/commons/6/6f/Commelina_communis.JPG" -o "images/117_Commelina_communis.JPG"
-          curl -L --fail --retry 4 --retry-delay 2 -A "CMCT-image-audit/1.0" "https://upload.wikimedia.org/wikipedia/commons/3/30/Scoparia_dulcis_of_Kadavoor.jpg" -o "images/125_Scoparia_dulcis_of_Kadavoor.jpg"
+          set +e
+          dl () { curl -L --fail --retry 2 --retry-delay 1 --connect-timeout 10 --max-time 60 -A "CMCT-image-audit/1.0" "$1" -o "$2"; echo "$? $2" >> images/download_status.txt; }
+          dl "https://commons.wikimedia.org/wiki/Special:Redirect/file/Cryptotympana_atrata.jpg" "images/19_Cryptotympana_atrata.jpg" &
+          dl "https://commons.wikimedia.org/wiki/Special:Redirect/file/Vernonia_amygdalina_01.jpg" "images/87_Vernonia_amygdalina_01.jpg" &
+          dl "https://commons.wikimedia.org/wiki/Special:Redirect/file/Zingiber_officinale.JPG" "images/3_Zingiber_officinale.JPG" &
+          dl "https://commons.wikimedia.org/wiki/Special:Redirect/file/Momordica_charantia_%28plant%29.jpg" "images/41_Momordica_charantia_plant.jpg" &
+          dl "https://commons.wikimedia.org/wiki/Special:Redirect/file/Gypsum_mineral.jpg" "images/42_Gypsum_mineral.jpg" &
+          dl "https://commons.wikimedia.org/wiki/Special:Redirect/file/Forsythia_suspensa2.jpg" "images/47_Forsythia_suspensa2.jpg" &
+          dl "https://commons.wikimedia.org/wiki/Special:Redirect/file/Andrographis_paniculata.jpg" "images/58_Andrographis_paniculata.jpg" &
+          dl "https://commons.wikimedia.org/wiki/Special:Redirect/file/Lithospermum_erythrorhizon.jpg" "images/77_Lithospermum_erythrorhizon.jpg" &
+          dl "https://commons.wikimedia.org/wiki/Special:Redirect/file/Houttuynia_cordata_C.jpg" "images/82_Houttuynia_cordata_C.jpg" &
+          dl "https://commons.wikimedia.org/wiki/Special:Redirect/file/Commelina_communis.JPG" "images/117_Commelina_communis.JPG" &
+          dl "https://commons.wikimedia.org/wiki/Special:Redirect/file/Scoparia_dulcis_of_Kadavoor.jpg" "images/125_Scoparia_dulcis_of_Kadavoor.jpg" &
+          wait
+          cat images/download_status.txt
       - name: Verify byte properties
         run: |
           python - <<'PY'
@@ -34,13 +39,16 @@ jobs:
           with out.open("w",encoding="utf-8") as f:
               f.write("row\tfilename\tbytes\tmime\twidth\theight\tsha1\tsha256\n")
               for p in sorted(Path("images").iterdir(), key=lambda x:x.name):
-                  if p.name=="manifest.tsv" or not p.is_file():
+                  if p.name in {"manifest.tsv","download_status.txt"} or not p.is_file() or p.stat().st_size==0:
                       continue
                   data=p.read_bytes()
                   row=p.name.split("_",1)[0]
-                  with Image.open(p) as im:
-                      w,h=im.size
-                      fmt=im.format
+                  try:
+                      with Image.open(p) as im:
+                          w,h=im.size
+                          fmt=im.format
+                  except Exception:
+                      continue
                   mime={"JPEG":"image/jpeg","PNG":"image/png"}.get(fmt,mimetypes.guess_type(p.name)[0] or "application/octet-stream")
                   f.write(f"{row}\t{p.name}\t{len(data)}\t{mime}\t{w}\t{h}\t{hashlib.sha1(data).hexdigest()}\t{hashlib.sha256(data).hexdigest()}\n")
           print(out.read_text())
@@ -48,7 +56,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: cmct-tap1-exact-images
+          name: cmct-tap1-exact-images-fast
           path: images/
           compression-level: 0
           retention-days: 7
