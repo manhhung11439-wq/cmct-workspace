@@ -7,18 +7,18 @@ jobs:
   acquire:
     runs-on: ubuntu-latest
     steps:
-      - name: Acquire photo metadata and original
+      - name: Acquire photo page and original
         shell: bash
         run: |
           set -euxo pipefail
           mkdir -p m5_19
-          curl -L --fail --retry 5 --retry-all-errors --retry-delay 3 -A "CMCT-image-audit/1.0" "https://api.inaturalist.org/v1/photos/21995070" -o m5_19/photo_21995070.json
-          python -c 'import json; p=json.load(open("m5_19/photo_21995070.json")); print(json.dumps(p, ensure_ascii=False, indent=2))'
+          curl -L --fail --retry 4 --retry-all-errors --retry-delay 2 -A "Mozilla/5.0 CMCT-image-audit/1.0" "https://www.inaturalist.org/photos/21995070" -o m5_19/photo_21995070.html
+          grep -Eio 'CC BY(-NC|-SA|-ND)?[^<"]*|creativecommons.org/licenses/[^"< ]+|license[^<]{0,120}' m5_19/photo_21995070.html | head -50 > m5_19/license_extract.txt || true
           curl -L --fail --retry 5 --retry-all-errors --retry-delay 3 -A "CMCT-image-audit/1.0" "https://inaturalist-open-data.s3.amazonaws.com/photos/21995070/original.jpg" -o m5_19/Cryptotympana_atrata_exuvia_photo_21995070.jpg
           sha1sum m5_19/Cryptotympana_atrata_exuvia_photo_21995070.jpg > m5_19/sha1.txt
           sha256sum m5_19/Cryptotympana_atrata_exuvia_photo_21995070.jpg > m5_19/sha256.txt
           file m5_19/Cryptotympana_atrata_exuvia_photo_21995070.jpg > m5_19/file.txt
-          python -c 'import imghdr; p="m5_19/Cryptotympana_atrata_exuvia_photo_21995070.jpg"; print(imghdr.what(p))' > m5_19/mime_probe.txt
+          wc -c m5_19/Cryptotympana_atrata_exuvia_photo_21995070.jpg > m5_19/bytes.txt
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
