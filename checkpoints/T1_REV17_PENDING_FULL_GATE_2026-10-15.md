@@ -136,6 +136,15 @@ Date: 2026-10-15
 - Original-binary ingest run 38730004822: SUCCESS.
 - Status: FULL-GATE PASS.
 
+
+### #42 Thạch Cao — FULL-GATE PASS
+- File: Wikimedia Commons `File:A herbal medicine Gypsum.jpg`.
+- Exact material/role: gypsum explicitly photographed for use as a herbal/crude medicinal material (生薬用の石膏), not a generic mineral specimen.
+- Author: Hanabishi.
+- License: CC BY-SA 3.0.
+- Original-binary ingest run 38730483620: SUCCESS.
+- Status: FULL-GATE PASS.
+
 ### #49 Hạ Khô Thảo — FULL-GATE PASS
 - File: Wikimedia Commons `File:HK Chinese Medicine 夏枯草 Prunella Vulgaris 1.JPG`.
 - Exact identity/material: 夏枯草 / `Prunella vulgaris`; categorized as Chinese herbal medicine and `Prunella vulgaris (fruit)`.
@@ -179,7 +188,7 @@ Exact-variety search remains unresolved. Exact-name results are preserved/herbar
 
 ## Next exact mutation sequence
 When DOCX/runtime access is available:
-1. Rebuild REV17 from REV16 with the consolidated PASS batch (#1 if final identity mapping remains accepted, #2, #11, #13, #17, #20, #26, #28, #29, #49, #50, #66, #81), rather than stacking uncertain PRETOC branches.
+1. Rebuild REV17 from REV16 with the consolidated PASS batch (#1 if final identity mapping remains accepted, #2, #11, #13, #17, #20, #26, #28, #29, #42, #49, #50, #66, #81), rather than stacking uncertain PRETOC branches.
 2. Preserve all existing REV16 M5 upgrades.
 3. Render full artifact.
 4. Derive actual page-map; do not reuse the prior #28-only +1 TOC shift.
