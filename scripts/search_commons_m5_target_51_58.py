@@ -1,3 +1,4 @@
+# rerun marker 2026-10-16 — criteria unchanged; trigger targeted acquisition
 import json,time,re,html
 from pathlib import Path
 import requests
