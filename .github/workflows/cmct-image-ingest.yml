@@ -7,32 +7,15 @@ jobs:
   acquire:
     runs-on: ubuntu-latest
     steps:
-      - name: Acquire Commons metadata and exact original
+      - name: Acquire exact Commons original
         shell: bash
         run: |
           set -euxo pipefail
           mkdir -p m5_41
-          TITLE='File:Dried bitter melon slices (20240123).jpg'
-          curl -L --fail --retry 5 --retry-all-errors --retry-delay 2 -G 'https://commons.wikimedia.org/w/api.php' \
-            --data-urlencode 'action=query' \
-            --data-urlencode 'format=json' \
-            --data-urlencode 'prop=imageinfo' \
-            --data-urlencode 'iiprop=url|size|sha1|mime|extmetadata' \
-            --data-urlencode "titles=$TITLE" \
-            -o m5_41/commons_imageinfo.json
-          python - <<'PY'
-import json, urllib.request
-j=json.load(open('m5_41/commons_imageinfo.json',encoding='utf-8'))
-page=next(iter(j['query']['pages'].values()))
-ii=page['imageinfo'][0]
-open('m5_41/original_url.txt','w',encoding='utf-8').write(ii['url']+'\n')
-meta={k:ii.get(k) for k in ['url','descriptionurl','width','height','size','sha1','mime']}
-for k,v in ii.get('extmetadata',{}).items():
-    if k in ['Artist','Credit','LicenseShortName','LicenseUrl','UsageTerms','ImageDescription','DateTimeOriginal','DateTime','Categories']:
-        meta[k]=v.get('value')
-open('m5_41/metadata_selected.json','w',encoding='utf-8').write(json.dumps(meta,ensure_ascii=False,indent=2))
-urllib.request.urlretrieve(ii['url'],'m5_41/Dried_bitter_melon_slices_20240123.jpg')
-PY
+          curl -L --fail --retry 5 --retry-all-errors --retry-delay 2 -G "https://commons.wikimedia.org/w/api.php" --data-urlencode "action=query" --data-urlencode "format=json" --data-urlencode "prop=imageinfo" --data-urlencode "iiprop=url|size|sha1|mime|extmetadata" --data-urlencode "titles=File:Dried bitter melon slices (20240123).jpg" -o m5_41/commons_imageinfo.json
+          jq '.query.pages[] .imageinfo[0] | {url,descriptionurl,width,height,size,sha1,mime,extmetadata}' m5_41/commons_imageinfo.json > m5_41/metadata_selected.json
+          URL=$(jq -r '.query.pages[] .imageinfo[0].url' m5_41/commons_imageinfo.json)
+          curl -L --fail --retry 5 --retry-all-errors --retry-delay 2 -A "CMCT-image-audit/1.0" "$URL" -o m5_41/Dried_bitter_melon_slices_20240123.jpg
           sha1sum m5_41/Dried_bitter_melon_slices_20240123.jpg | tee m5_41/local_sha1.txt
           sha256sum m5_41/Dried_bitter_melon_slices_20240123.jpg | tee m5_41/local_sha256.txt
           file m5_41/Dried_bitter_melon_slices_20240123.jpg | tee m5_41/file.txt
