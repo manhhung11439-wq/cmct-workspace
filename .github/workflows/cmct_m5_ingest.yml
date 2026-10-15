@@ -15,33 +15,66 @@ jobs:
       - name: Download exact original binaries
         shell: bash
         run: |
-          python -m pip install --quiet pillow
+          python -m pip install --quiet pillow requests
           python - <<'PY'
-          import json, hashlib, mimetypes, pathlib, urllib.request
+          import json, hashlib, mimetypes, pathlib, time
+          import requests
           from PIL import Image
+
           out=pathlib.Path("out_m5_batch_001"); out.mkdir(exist_ok=True)
           req=json.loads(pathlib.Path("ingest/m5_batch_001.json").read_text(encoding="utf-8"))
-          lines=["id\tfilename\turl\tbytes\tsha1\tsha256\tmime\twidth\theight\texpected_sha1_match"]
+          s=requests.Session()
+          s.headers["User-Agent"]="CMCT-image-audit/1.2 (exact original binary verification)"
+          api="https://commons.wikimedia.org/w/api.php"
+
+          def get_with_retry(url, params=None, attempts=8):
+              last=None
+              for i in range(attempts):
+                  r=s.get(url,params=params,timeout=120,allow_redirects=True)
+                  last=r
+                  if r.status_code in (429,500,502,503,504):
+                      wait=int(r.headers.get("Retry-After") or min(60,3*(2**i)))
+                      time.sleep(wait); continue
+                  r.raise_for_status()
+                  return r
+              last.raise_for_status()
+
+          lines=["id\tfilename\tresolved_url\tbytes\tsha1\tsha256\tmime\twidth\theight\texpected_sha1\texpected_sha1_match\tcommons_title"]
+          resolved=[]
           for item in req["items"]:
               fn=item["filename"]
-              url=item["url"]
-              request=urllib.request.Request(url, headers={"User-Agent":"CMCT-image-audit/1.0"})
-              with urllib.request.urlopen(request, timeout=120) as r:
-                  data=r.read()
-                  ctype=(r.headers.get_content_type() or "")
+              url=item.get("url")
+              exp=(item.get("expected_sha1") or "").lower()
+              ctitle=item.get("commons_title") or ""
+              if ctitle:
+                  title=ctitle if ctitle.startswith("File:") else "File:"+ctitle
+                  params={"action":"query","titles":title,"prop":"imageinfo","iiprop":"url|sha1|size|extmetadata","format":"json","formatversion":2}
+                  meta=get_with_retry(api,params=params).json()
+                  pages=meta.get("query",{}).get("pages",[])
+                  if not pages or pages[0].get("missing"):
+                      raise SystemExit(f"Commons file not found: {title}")
+                  ii=(pages[0].get("imageinfo") or [{}])[0]
+                  url=ii.get("url")
+                  commons_sha=(ii.get("sha1") or "").lower()
+                  if not exp: exp=commons_sha
+                  resolved.append({"id":item["id"],"commons_title":title,"url":url,"commons_sha1":commons_sha})
+              if not url:
+                  raise SystemExit(f"No URL resolved for {fn}")
+              r=get_with_retry(url)
+              data=r.content
+              ctype=(r.headers.get("content-type") or "").split(";")[0]
               p=out/fn; p.write_bytes(data)
               s1=hashlib.sha1(data).hexdigest(); s256=hashlib.sha256(data).hexdigest()
               with Image.open(p) as im:
-                  w,h=im.size
-                  fmt=im.format
+                  w,h=im.size; fmt=im.format
               mime=ctype or (Image.MIME.get(fmt) if fmt else "") or mimetypes.guess_type(fn)[0] or ""
-              exp=(item.get("expected_sha1") or "").lower()
               match="NA" if not exp else str(s1.lower()==exp).upper()
               if exp and s1.lower()!=exp:
                   raise SystemExit(f"SHA1 mismatch for {fn}: got {s1}, expected {exp}")
-              lines.append("\t".join(map(str,[item["id"],fn,url,len(data),s1,s256,mime,w,h,match])))
-          (out/"binary_manifest.tsv").write_text("\n".join(lines)+"\n", encoding="utf-8")
+              lines.append("\t".join(map(str,[item["id"],fn,url,len(data),s1,s256,mime,w,h,exp,match,ctitle])))
+          (out/"binary_manifest.tsv").write_text("\n".join(lines)+"\n",encoding="utf-8")
           (out/"request.json").write_text(json.dumps(req,ensure_ascii=False,indent=2),encoding="utf-8")
+          (out/"resolved_sources.json").write_text(json.dumps(resolved,ensure_ascii=False,indent=2),encoding="utf-8")
           PY
       - name: Upload original-binary evidence
         uses: actions/upload-artifact@v4
