@@ -183,6 +183,17 @@ Date: 2026-10-15
 
 ## Systematic processed-material searches
 
+### Targeted #51–58 follow-up
+- Run 38737849024: SUCCESS.
+- #51 Gentiana scabra: no exact dried root/rhizome photo; results were materia-medica scans/PDFs → HOLD.
+- #52 Taraxacum mongolicum: strongest drug-form hit `File:Taraxaci herba cum radix 132292.jpg` is explicitly `Taraxacum officinale`, not manuscript `T. mongolicum` → reject as wrong source species / HOLD.
+- #53 Isatis tinctoria: no exact dried root image; results were botanical/scanned works → HOLD.
+- #54 Iris domestica: no exact dried rhizome photo; results were materia-medica scans → HOLD.
+- #55 Paeonia lactiflora: no exact red-peony medicinal root image → HOLD.
+- #56 Lycium chinense: no exact dried root-bark image → HOLD.
+- #57 Artemisia annua: no exact dried aerial-herb photograph; strongest hit was a PDF → HOLD.
+- #58 Andrographis paniculata: no exact dried aerial-herb photograph; results were PDFs/live botanical material → HOLD.
+
 ### Targeted #43–48 follow-up
 - Run 38737464698: SUCCESS.
 - #43 Scutellaria baicalensis: no reusable exact processed-root photograph returned; top hits were scans/illustrations/non-material pages → HOLD.
