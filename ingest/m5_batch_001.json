@@ -1,7 +1,8 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #11 dried Angelica dahurica slices",
+  "batch": "Tập 1 M5 candidate binary acquisition — #1 Wild Pueraria slices",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
+    "status": "CANDIDATE until botanical-source mapping is locked",
     "require": [
       "identity_material",
       "medicinal_part",
@@ -14,9 +15,9 @@
   },
   "items": [
     {
-      "id": 11,
-      "filename": "m5_011_Dried_angelica_dahurica_slices.jpg",
-      "commons_title": "File:Dried angelica dahurica slices.jpg"
+      "id": 1,
+      "filename": "m5_001_Wild_Pueraria_slices.jpg",
+      "commons_title": "File:Wild Pueraria slices.jpg"
     }
   ]
 }
