@@ -182,6 +182,15 @@ Date: 2026-10-15
 - Status: FULL-GATE PASS.
 
 ## Systematic processed-material searches
+
+### Targeted #43–48 follow-up
+- Run 38737464698: SUCCESS.
+- #43 Scutellaria baicalensis: no reusable exact processed-root photograph returned; top hits were scans/illustrations/non-material pages → HOLD.
+- #44 Coptis chinensis: no exact dried-rhizome photo returned; top-ranked Wellcome hit is an illustration, not crude drug material → HOLD.
+- #45 Phellodendron chinense: strongest crude-drug hit is `File:Huangbai Phellodendron amurense.jpg`, which is the wrong source species for the manuscript → HOLD; do not substitute `P. amurense`.
+- #47 Forsythia suspensa: no exact dried medicinal-fruit photograph returned → HOLD.
+- #48 Gardenia jasminoides: no exact dried whole medicinal-fruit photograph returned; `Dried gardenia seeds.jpg` remains wrong part → HOLD.
+
 - #26–50: completed.
 - #51–75: run 38724494988 completed SUCCESS.
 - #76–100: run 38724583436 completed SUCCESS.
@@ -198,7 +207,7 @@ Specific rejects / HOLD:
 - #48 available “Dried gardenia seeds” is wrong part relative to manuscript’s mature dried whole fruit → reject.
 
 ## M4 #78 parallel state
-Exact-variety search remains unresolved. Exact-name results are preserved/herbarium specimens, not natural field photographs. Species-level natural images and exact-variety herbarium sheets remain prohibited substitutes.
+Exact-variety search remains unresolved. 2026-10-15 refresh reconfirmed the accepted taxon `Mesostemma dichotomum var. lanceolatum` (syn. `Stellaria dichotoma var. lanceolata`) and medicinal-name mapping for Yinchaihu, but reusable search results still do not provide an exact-variety natural field photograph. GRIN explicitly reports no images for the exact variety; species-level natural images and exact-variety herbarium/illustration substitutes remain prohibited.
 
 ## Next exact mutation sequence
 When DOCX/runtime access is available:
