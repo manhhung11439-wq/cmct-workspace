@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #29 fresh harvested Coriandrum sativum",
+  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #49 Prunella vulgaris Chinese medicinal material",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,9 +14,9 @@
   },
   "items": [
     {
-      "id": 29,
-      "filename": "m5_029_Coriandrum_sativum_fresh_bunches_market.jpg",
-      "commons_title": "File:Koriander (Coriandrum sativum) Frische Bündel, beim Türken in MA--Josef Schlaghecken.jpg"
+      "id": 49,
+      "filename": "m5_049_Prunella_vulgaris_Xiakucao_Chinese_medicine.jpg",
+      "commons_title": "File:HK Chinese Medicine 夏枯草 Prunella Vulgaris 1.JPG"
     }
   ]
 }
