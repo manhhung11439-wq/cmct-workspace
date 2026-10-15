@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 strict verification — #52 Taraxaci herba cum radix",
+  "batch": "Tập 1 M5 strict verification — #90 Sauropus androgynus leafy vegetable",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,9 +14,10 @@
   },
   "items": [
     {
-      "id": 52,
-      "filename": "m5_052_Taraxaci_herba_cum_radix_132292.jpg",
-      "commons_title": "File:Taraxaci herba cum radix 132292.jpg"
+      "id": 90,
+      "filename": "m5_090_Sauropus_androgynus_Maddaji_leafy_vegetable.jpg",
+      "commons_title": "File:'Maddaji' or Leaf Asparagus,Sauropus androgynus.jpg",
+      "expected_sha1": "5748e94a68436b17f383cfdb1534e67a84dcc138"
     }
   ]
 }
