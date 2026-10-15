@@ -1,77 +1,29 @@
 {
-  "batch": "M5 systematic 1-25 / binary pass 001-rev3",
+  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #16 + #99",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
+      "identity_material",
       "medicinal_part",
-      "preparation",
+      "preparation_form",
       "provenance",
-      "license",
-      "original_bytes"
+      "author",
+      "file_level_license",
+      "original_bytes_hash"
     ]
   },
   "items": [
     {
-      "id": 3,
-      "filename": "m5_003_Ginger_rhizome.jpg",
-      "url": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Ginger_rhizome.jpg",
-      "expected_sha1": "d8288037c55d78e4aea4f7a6c92e6c1fa8a50f5d"
-    },
-    {
-      "id": 25,
-      "filename": "m5_025_Douchiphoto.jpg",
-      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Douchiphoto.jpg"
-    },
-    {
-      "id": 19,
-      "filename": "m5_019_inat_134585922.jpeg",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/134585922/original.jpeg"
-    },
-    {
-      "id": 19,
-      "filename": "m5_019_inat_134586186.jpeg",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/134586186/original.jpeg"
-    },
-    {
-      "id": 19,
-      "filename": "m5_019_inat_134586716.jpeg",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/134586716/original.jpeg"
-    },
-    {
-      "id": 19,
-      "filename": "m5_019_inat_134586980.jpeg",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/134586980/original.jpeg"
-    },
-    {
-      "id": 19,
-      "filename": "m5_019_inat_134587112.jpeg",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/134587112/original.jpeg"
-    },
-    {
-      "id": 19,
-      "filename": "m5_019_inat_134587226.jpeg",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/134587226/original.jpeg"
-    },
-    {
-      "id": 19,
-      "filename": "m5_019_inat_134639281.jpeg",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/134639281/original.jpeg"
-    },
-    {
-      "id": 19,
-      "filename": "m5_019_inat_134639427.jpeg",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/134639427/original.jpeg"
-    },
-    {
-      "id": 19,
-      "filename": "m5_019_inat_134639437.jpeg",
-      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/134639437/original.jpeg"
-    },
-    {
       "id": 16,
       "filename": "m5_016_Chrysanthemum_tea_20240131.jpg",
-      "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Chrysanthemum%20tea%20%2820240131%29.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Chrysanthemum_tea_%2820240131%29.jpg",
       "expected_sha1": "d4812e8b7da4a14e4410b3850cdec222d14f1c82"
+    },
+    {
+      "id": 99,
+      "filename": "m5_099_Longjing_tea_dried.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/30/Longjing_tea_%28dried%29.jpg",
+      "expected_sha1": "bb488d006b6739414f5f3610b18bf7eed0de72b1"
     }
   ]
 }
