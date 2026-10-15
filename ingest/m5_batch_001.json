@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #28 harvested Allium fistulosum",
+  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #50 dried Phragmites australis root segments",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,9 +14,9 @@
   },
   "items": [
     {
-      "id": 28,
-      "filename": "m5_028_Allium_fistulosum_in_store.jpg",
-      "commons_title": "File:Starr 070730-7902 Allium fistulosum.jpg"
+      "id": 50,
+      "filename": "m5_050_Dried_reed_root_segments.jpg",
+      "commons_title": "File:Dried reed root segments.jpg"
     }
   ]
 }
