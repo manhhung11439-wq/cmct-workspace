@@ -13,6 +13,17 @@ Date: 2026-10-15
 
 
 
+
+### #29 Rau Mùi — FULL-GATE PASS
+- File: Wikimedia Commons `File:Koriander (Coriandrum sativum) Frische Bündel, beim Türken in MA--Josef Schlaghecken.jpg`.
+- Exact identity: `Coriandrum sativum`.
+- Exact material/form: fresh harvested cilantro/coriander bunches at market; manuscript permits the fresh form (wash and use immediately).
+- Source: own work / Wikimedia Commons.
+- Author: Schlaghecken Josef.
+- License: CC BY-SA 4.0.
+- Original-binary ingest run 38729194115: SUCCESS.
+- Status: FULL-GATE PASS.
+
 ### #17 Ngưu Bàng Tử — FULL-GATE PASS
 - File: Wikimedia Commons `File:Arctium lappa MHNT.BOT.2004.0.16.jpg`.
 - Exact identity: `Arctium lappa`.
@@ -127,7 +138,7 @@ Exact-variety search remains unresolved. Exact-name results are preserved/herbar
 
 ## Next exact mutation sequence
 When DOCX/runtime access is available:
-1. Rebuild REV17 from REV16 with the consolidated PASS batch (#1 if final identity mapping remains accepted, #2, #11, #13, #17, #20, #28, #50), rather than stacking uncertain PRETOC branches.
+1. Rebuild REV17 from REV16 with the consolidated PASS batch (#1 if final identity mapping remains accepted, #2, #11, #13, #17, #20, #28, #29, #50), rather than stacking uncertain PRETOC branches.
 2. Preserve all existing REV16 M5 upgrades.
 3. Render full artifact.
 4. Derive actual page-map; do not reuse the prior #28-only +1 TOC shift.
