@@ -105,6 +105,27 @@ Date: 2026-10-15
 - Status: FULL-GATE PASS.
 
 
+
+### #26 Húng Quế — FULL-GATE PASS
+- File: Wikimedia Commons `File:Basilikum (Ocimum basilicum) getrocknet - Josef Schlaghecken.jpg`.
+- Exact identity: `Ocimum basilicum`.
+- Exact represented form: dried basil material; manuscript permits fresh leaves and a dry medicinal-use dose/form.
+- Author: Schlaghecken Josef.
+- License: CC BY-SA 4.0.
+- Commons SHA1: 94c75af5512c87be323159a6ed0921b47c2f2de5.
+- Original-binary ingest run 38729923764: SUCCESS.
+- Caption control: describe only as dried Húng Quế material, not as a proprietary medicinal product.
+- Status: FULL-GATE PASS.
+
+### #66 Rau Sam — FULL-GATE PASS
+- File: Wikimedia Commons `File:Fresh purslane.jpg`.
+- Structured data exact identity: depicts `Portulaca oleracea`.
+- Exact represented form: fresh harvested purslane; manuscript medicinal-material target permits whole plant fresh or dried.
+- Author: Fumikas Sagisavas.
+- License: CC0 1.0.
+- Original-binary ingest run 38730004822: SUCCESS.
+- Status: FULL-GATE PASS.
+
 ### #49 Hạ Khô Thảo — FULL-GATE PASS
 - File: Wikimedia Commons `File:HK Chinese Medicine 夏枯草 Prunella Vulgaris 1.JPG`.
 - Exact identity/material: 夏枯草 / `Prunella vulgaris`; categorized as Chinese herbal medicine and `Prunella vulgaris (fruit)`.
@@ -148,7 +169,7 @@ Exact-variety search remains unresolved. Exact-name results are preserved/herbar
 
 ## Next exact mutation sequence
 When DOCX/runtime access is available:
-1. Rebuild REV17 from REV16 with the consolidated PASS batch (#1 if final identity mapping remains accepted, #2, #11, #13, #17, #20, #28, #29, #49, #50), rather than stacking uncertain PRETOC branches.
+1. Rebuild REV17 from REV16 with the consolidated PASS batch (#1 if final identity mapping remains accepted, #2, #11, #13, #17, #20, #26, #28, #29, #49, #50, #66), rather than stacking uncertain PRETOC branches.
 2. Preserve all existing REV16 M5 upgrades.
 3. Render full artifact.
 4. Derive actual page-map; do not reuse the prior #28-only +1 TOC shift.
