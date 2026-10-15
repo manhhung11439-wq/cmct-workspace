@@ -11,6 +11,18 @@ Date: 2026-10-15
 
 ## Newly locked / acquired M5 candidates for one consolidated REV17 batch
 
+### #2 Tía Tô — FULL-GATE PASS
+- File: Wikimedia Commons `File:Perilla leaves.jpg`.
+- Structured data depicts `Perilla frutescens`; file description identifies detached kkaennip/perilla leaves.
+- Manuscript M5 target: leaf; fresh or dried form permitted. This image is controlled as the fresh harvested/detached-leaf form.
+- Source: Flickr → Wikimedia Commons; Flickr review confirmed.
+- Author: Sous Chef.
+- License: CC BY 2.0.
+- Commons SHA1: 57f55f6f6db99853238253aba56559b0d9118839.
+- Original-binary ingest run 38727978197: SUCCESS; artifact 11969590327.
+- Status: FULL-GATE PASS; NOT a recovery claim for either archive-unrecovered historical CORRECTION-READY ID.
+
+
 ### #1 Cát Căn — candidate FULL-GATE, identity mapping controlled
 - File: Wikimedia Commons `File:Wild Pueraria slices.jpg`.
 - File captions: “Wild Pueraria slices” / “野生葛根片”.
@@ -90,7 +102,7 @@ Exact-variety search remains unresolved. Exact-name results are preserved/herbar
 
 ## Next exact mutation sequence
 When DOCX/runtime access is available:
-1. Rebuild REV17 from REV16 with the consolidated PASS batch (#1 if final identity mapping remains accepted, #11, #13, #28, #50), rather than stacking uncertain PRETOC branches.
+1. Rebuild REV17 from REV16 with the consolidated PASS batch (#1 if final identity mapping remains accepted, #2, #11, #13, #28, #50), rather than stacking uncertain PRETOC branches.
 2. Preserve all existing REV16 M5 upgrades.
 3. Render full artifact.
 4. Derive actual page-map; do not reuse the prior #28-only +1 TOC shift.
