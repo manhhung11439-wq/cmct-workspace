@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 verification — #4 Bupleurum shop candidate",
+  "batch": "Tập 1 M5 verification — #114 Gynura procumbens Longevity spinach candidate",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,9 +14,9 @@
   },
   "items": [
     {
-      "id": 4,
-      "filename": "m5_004_Bupleurum_shop_candidate.jpg",
-      "commons_title": "File:HK 金鐘 Admiralty 德立街 Drake Street 海富中心商場 Admiralty Centre mall shop 新生堂 June 2020 SS2 18.jpg"
+      "id": 114,
+      "filename": "m5_114_Longevity_spinach.jpg",
+      "commons_title": "File:Longevity spinach.jpg"
     }
   ]
 }
