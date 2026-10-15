@@ -183,6 +183,35 @@ Date: 2026-10-15
 
 ## Systematic processed-material searches
 
+
+### Targeted #101–125 follow-up
+- Run 38739823717: SUCCESS.
+- #101 Paris polyphylla: only scans/PDFs; no exact dried rhizome photograph → HOLD.
+- #102 Premna serratifolia: no exact harvested/dried medicinal leaf material → HOLD.
+- #103 Tiliacora triandra: exact file `Lá sương sâm.jpg` passed identity/provenance/license/original-byte gates (run 38743284675; SHA1 564d1d17704356b2aa5df37c68db0188cd79391a), but direct visual inspection shows leaves still attached to the living vine → material-role FAIL / HOLD.
+- #104 Platostoma palustre / Mesona: results were PDFs/general herb sources; no exact dried aerial-herb material → HOLD.
+- #105 Peperomia pellucida: no exact harvested whole-plant material photograph found → HOLD.
+- #106 Glinus oppositifolius: strongest hit is a cooked/stir-fried dish with sambal; not raw fresh/dried medicinal material → reject / HOLD.
+- #107 Hibiscus rosa-sinensis: exact species results are living/ornamental flower material; no harvested medicinal-part photo locked → HOLD.
+- #108 Blumea lacera: only scans/PDFs → HOLD.
+- #109 Terminalia catappa: leaf images found, but no clearly harvested medicinal leaf material with exact role locked → HOLD.
+- #110 Mangifera indica: `Dried Mango Leaves.jpg` passed binary/provenance/license/hash, but Commons categorizes it as `Unidentified Mangifera`; exact species identity is not file-level controlled → identity FAIL / HOLD.
+- #111 Annona muricata: exact leaves exist, but current candidates are leaves attached to living plants; no harvested/dried medicinal leaf material locked → HOLD.
+- #112 Pteris multifida: no exact harvested/dried herb photograph → HOLD.
+- #113 Peristrophe bivalvis: no exact harvested leaf/stem material → HOLD.
+- #114 Gynura procumbens: no exact harvested leaves/young-stem material photograph → HOLD.
+- #115 Clerodendrum chinense: no exact controlled medicinal-part image → HOLD.
+- #116 Acanthus ilicifolius: only scans/materia-medica PDFs, no exact dried root photograph → HOLD.
+- #117 Commelina communis: results are botanical/scanned sources, not dried aerial drug → HOLD.
+- #118 Barleria lupulina: no exact harvested leaves/young-twig material → HOLD.
+- #119 Breynia fruticosa: no exact harvested medicinal material → HOLD.
+- #120 Ludwigia hyssopifolia: no exact harvested/dried aerial herb → HOLD.
+- #121 Phyllanthus acidus: top exact-image hit was wrong taxon (`Sauropus androgynus`) → reject / HOLD.
+- #122 Paramignya trimera: no exact dried root/stem slices → HOLD.
+- #123 Scutellaria barbata: no exact dried whole herb at flowering; results were scans/catalogues → HOLD.
+- #124 Clinacanthus nutans: exact species photos exist, but current files show living plants; no harvested leaves/young twigs locked → HOLD.
+- #125 Scoparia dulcis: strongest exact-species candidate is a living plant, while manuscript target is whole plant dried → HOLD.
+
 ### Targeted #82–97 follow-up
 - Run 38738843297: SUCCESS.
 - #82 Houttuynia cordata: no exact harvested whole aerial-herb photograph returned → HOLD.
