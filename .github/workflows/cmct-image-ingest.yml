@@ -1,4 +1,4 @@
-name: CMCT T1 M5-19 exact-exuvia hash provenance
+name: CMCT T1 M5-41 dried bitter melon ingest
 on:
   push:
     paths:
@@ -7,30 +7,41 @@ jobs:
   acquire:
     runs-on: ubuntu-latest
     steps:
-      - name: Acquire exact exuvia and search Commons by SHA1
+      - name: Acquire Commons metadata and exact original
         shell: bash
         run: |
           set -euxo pipefail
-          mkdir -p m5_19
-          curl -L --retry 2 --retry-all-errors --retry-delay 2 -A "Mozilla/5.0 CMCT-image-audit/1.0" "https://www.inaturalist.org/photos/21995070" -o m5_19/photo_21995070.html || true
-          curl -L --fail --retry 5 --retry-all-errors --retry-delay 3 -A "CMCT-image-audit/1.0" "https://inaturalist-open-data.s3.amazonaws.com/photos/21995070/original.jpg" -o m5_19/Cryptotympana_atrata_exuvia_photo_21995070.jpg
-          sha1sum m5_19/Cryptotympana_atrata_exuvia_photo_21995070.jpg | tee m5_19/sha1.txt
-          sha256sum m5_19/Cryptotympana_atrata_exuvia_photo_21995070.jpg | tee m5_19/sha256.txt
-          file m5_19/Cryptotympana_atrata_exuvia_photo_21995070.jpg | tee m5_19/file.txt
-          wc -c m5_19/Cryptotympana_atrata_exuvia_photo_21995070.jpg | tee m5_19/bytes.txt
-          SHA1=$(cut -d' ' -f1 m5_19/sha1.txt)
-          curl -L --fail --retry 4 --retry-all-errors --retry-delay 2 -G "https://commons.wikimedia.org/w/api.php" \
-            --data-urlencode "action=query" \
-            --data-urlencode "format=json" \
-            --data-urlencode "list=allimages" \
-            --data-urlencode "aisha1=$SHA1" \
-            --data-urlencode "aiprop=url|sha1|size|extmetadata" \
-            -o m5_19/commons_sha1_lookup.json
-          python -c 'import json; print(json.dumps(json.load(open("m5_19/commons_sha1_lookup.json")),ensure_ascii=False,indent=2))'
+          mkdir -p m5_41
+          TITLE='File:Dried bitter melon slices (20240123).jpg'
+          curl -L --fail --retry 5 --retry-all-errors --retry-delay 2 -G 'https://commons.wikimedia.org/w/api.php' \
+            --data-urlencode 'action=query' \
+            --data-urlencode 'format=json' \
+            --data-urlencode 'prop=imageinfo' \
+            --data-urlencode 'iiprop=url|size|sha1|mime|extmetadata' \
+            --data-urlencode "titles=$TITLE" \
+            -o m5_41/commons_imageinfo.json
+          python - <<'PY'
+import json, urllib.request
+j=json.load(open('m5_41/commons_imageinfo.json',encoding='utf-8'))
+page=next(iter(j['query']['pages'].values()))
+ii=page['imageinfo'][0]
+open('m5_41/original_url.txt','w',encoding='utf-8').write(ii['url']+'\n')
+meta={k:ii.get(k) for k in ['url','descriptionurl','width','height','size','sha1','mime']}
+for k,v in ii.get('extmetadata',{}).items():
+    if k in ['Artist','Credit','LicenseShortName','LicenseUrl','UsageTerms','ImageDescription','DateTimeOriginal','DateTime','Categories']:
+        meta[k]=v.get('value')
+open('m5_41/metadata_selected.json','w',encoding='utf-8').write(json.dumps(meta,ensure_ascii=False,indent=2))
+urllib.request.urlretrieve(ii['url'],'m5_41/Dried_bitter_melon_slices_20240123.jpg')
+PY
+          sha1sum m5_41/Dried_bitter_melon_slices_20240123.jpg | tee m5_41/local_sha1.txt
+          sha256sum m5_41/Dried_bitter_melon_slices_20240123.jpg | tee m5_41/local_sha256.txt
+          file m5_41/Dried_bitter_melon_slices_20240123.jpg | tee m5_41/file.txt
+          wc -c m5_41/Dried_bitter_melon_slices_20240123.jpg | tee m5_41/bytes.txt
+          cat m5_41/metadata_selected.json
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: cmct-tap1-m5-19-exuvia-hash-provenance
-          path: m5_19/
+          name: cmct-tap1-m5-41-dried-bitter-melon
+          path: m5_41/
           compression-level: 0
           retention-days: 7
