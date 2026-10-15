@@ -6,3 +6,5 @@ Purpose: acquire original Wikimedia Commons bytes for controlled Tập 1 image c
 retry: 2026-10-15T10:10+07:00
 
 full-ingest: 2026-10-15T10:12+07:00
+
+fast-ingest: 2026-10-15T10:15+07:00
