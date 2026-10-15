@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE visual/binary acquisition — #103 Tiliacora triandra leaves",
+  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #7 processed Ephedra sinica crude drug",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -9,15 +9,14 @@
       "provenance",
       "author",
       "file_level_license",
-      "original_bytes_hash",
-      "visual_material_role"
+      "original_bytes_hash"
     ]
   },
   "items": [
     {
-      "id": 103,
-      "filename": "m5_103_La_suong_sam.jpg",
-      "commons_title": "File:Lá sương sâm.jpg"
+      "id": 7,
+      "filename": "m5_007_Maou_processed_Ephedra_sinica.jpg",
+      "commons_title": "File:Maou.jpg"
     }
   ]
 }
