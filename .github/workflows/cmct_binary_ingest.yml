@@ -1,0 +1,82 @@
+name: CMCT Binary Ingest
+
+on:
+  push:
+    branches:
+      - binary-ingest-20261015
+
+permissions:
+  contents: read
+
+jobs:
+  fetch-source-bytes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Fetch exact source candidates
+        shell: bash
+        run: |
+          set -u
+          mkdir -p out
+          : > out/INGEST_MANIFEST.txt
+
+          fetch_one () {
+            local id="$1"
+            local fname="$2"
+            local url="$3"
+            echo "===== $id | $fname =====" | tee -a out/INGEST_MANIFEST.txt
+            echo "URL=$url" | tee -a out/INGEST_MANIFEST.txt
+            if curl --fail --show-error --location --retry 3 --retry-delay 2 \
+              --connect-timeout 20 --max-time 180 \
+              -A "Mozilla/5.0 CMCT-source-acquisition/1.0" \
+              "$url" -o "out/$fname"; then
+              echo "FETCH=PASS" | tee -a out/INGEST_MANIFEST.txt
+              stat -c 'BYTES=%s' "out/$fname" | tee -a out/INGEST_MANIFEST.txt
+              file -b --mime-type "out/$fname" | sed 's/^/MIME=/' | tee -a out/INGEST_MANIFEST.txt
+              sha1sum "out/$fname" | awk '{print "SHA1="$1}' | tee -a out/INGEST_MANIFEST.txt
+              sha256sum "out/$fname" | awk '{print "SHA256="$1}' | tee -a out/INGEST_MANIFEST.txt
+            else
+              echo "FETCH=FAIL" | tee -a out/INGEST_MANIFEST.txt
+              rm -f "out/$fname"
+            fi
+            echo | tee -a out/INGEST_MANIFEST.txt
+          }
+
+          fetch_one "#98 M5 Bup Giam" \
+            "98_Dried_roselle.jpg" \
+            "https://commons.wikimedia.org/wiki/Special:Redirect/file/Dried_roselle.jpg"
+
+          fetch_one "#41 M5 Muop Dang" \
+            "41_Sliced_Momordica_charantia_fruits.jpg" \
+            "https://commons.wikimedia.org/wiki/Special:Redirect/file/Sliced%20Momordica%20charantia%20fruits.jpg"
+
+          fetch_one "#78 M5 Ngan Sai Ho" \
+            "78_plants-12-02286-g001.jpg" \
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC10304078/bin/plants-12-02286-g001.jpg"
+
+          fetch_one "#95 M4 Son Dau Can" \
+            "95_Sophora_tonkinensis_Fig1.jpg" \
+            "https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41598-020-69549-z/MediaObjects/41598_2020_69549_Fig1_HTML.jpg"
+
+          fetch_one "#18 M4 Thang Ma" \
+            "18_Actaea_cimicifuga_91443277.jpg" \
+            "https://commons.wikimedia.org/wiki/Special:Redirect/file/Actaea%20cimicifuga%2091443277.jpg"
+
+          fetch_one "#96 M4 Ma Bot" \
+            "96_20190524Calvatia_gigantea1.jpg" \
+            "https://commons.wikimedia.org/wiki/Special:Redirect/file/20190524Calvatia%20gigantea1.jpg"
+
+          fetch_one "#97 M4 Ban Bien Lien" \
+            "97_Lobelia_chinensis_01.jpg" \
+            "https://commons.wikimedia.org/wiki/Special:Redirect/file/Lobelia%20chinensis%2001.jpg"
+
+          echo "FILES:" >> out/INGEST_MANIFEST.txt
+          find out -maxdepth 1 -type f -printf '%f\n' | sort >> out/INGEST_MANIFEST.txt
+
+      - name: Upload source-byte bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: tap1-source-binaries
+          path: out/
+          if-no-files-found: error
+          retention-days: 7
