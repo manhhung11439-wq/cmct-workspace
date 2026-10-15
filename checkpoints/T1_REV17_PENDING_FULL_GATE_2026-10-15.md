@@ -11,6 +11,18 @@ Date: 2026-10-15
 
 ## Newly locked / acquired M5 candidates for one consolidated REV17 batch
 
+
+### #20 Sả — FULL-GATE PASS
+- File: Wikimedia Commons `File:Tallos y hojas de yerba luisa (Cymbopogon citratus).jpg`.
+- Exact identity: `Cymbopogon citratus`.
+- Exact material role: harvested stems/leaves held in the Centro Takiwasi laboratory raw-material store for preparation of natural products.
+- This matches the manuscript medicinal-part scope (leaf/stem; fresh or dried form controlled explicitly as fresh harvested raw material).
+- Provenance: Centro Takiwasi.
+- Author: Kristi Denby/Archivo Centro Takiwasi.
+- License: CC BY-SA 4.0.
+- Original-binary ingest run 38728316791: SUCCESS; artifact 11968741634.
+- Status: FULL-GATE PASS.
+
 ### #2 Tía Tô — FULL-GATE PASS
 - File: Wikimedia Commons `File:Perilla leaves.jpg`.
 - Structured data depicts `Perilla frutescens`; file description identifies detached kkaennip/perilla leaves.
@@ -102,7 +114,7 @@ Exact-variety search remains unresolved. Exact-name results are preserved/herbar
 
 ## Next exact mutation sequence
 When DOCX/runtime access is available:
-1. Rebuild REV17 from REV16 with the consolidated PASS batch (#1 if final identity mapping remains accepted, #2, #11, #13, #28, #50), rather than stacking uncertain PRETOC branches.
+1. Rebuild REV17 from REV16 with the consolidated PASS batch (#1 if final identity mapping remains accepted, #2, #11, #13, #20, #28, #50), rather than stacking uncertain PRETOC branches.
 2. Preserve all existing REV16 M5 upgrades.
 3. Render full artifact.
 4. Derive actual page-map; do not reuse the prior #28-only +1 TOC shift.
