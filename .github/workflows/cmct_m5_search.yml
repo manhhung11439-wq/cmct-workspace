@@ -1,0 +1,20 @@
+name: CMCT M5 Commons systematic search
+on:
+  push:
+    paths:
+      - 'scripts/search_commons_m5_1_25.py'
+      - '.github/workflows/cmct_m5_search.yml'
+  workflow_dispatch:
+jobs:
+  search:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests
+      - run: python scripts/search_commons_m5_1_25.py | tee evidence/m5_t1_1_25_commons/search.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-commons-1-25
+          path: evidence/m5_t1_1_25_commons/
+          if-no-files-found: error
+          retention-days: 30
