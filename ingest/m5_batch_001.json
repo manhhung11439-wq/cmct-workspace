@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #42 medicinal gypsum",
+  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #26 Ocimum basilicum drying herb",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,9 +14,10 @@
   },
   "items": [
     {
-      "id": 42,
-      "filename": "m5_042_herbal_medicine_Gypsum.jpg",
-      "commons_title": "File:A herbal medicine Gypsum.jpg"
+      "id": 26,
+      "filename": "m5_026_Drying_Basil.jpg",
+      "commons_title": "File:Drying Basil.JPG",
+      "expected_sha1": "81e9d9858d505a872c4f35b81e53e06360c1d363"
     }
   ]
 }
