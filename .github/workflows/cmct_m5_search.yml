@@ -11,6 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python -m pip install --quiet requests
+      - run: mkdir -p evidence/m5_t1_1_25_commons
       - run: python scripts/search_commons_m5_1_25.py | tee evidence/m5_t1_1_25_commons/search.log
       - uses: actions/upload-artifact@v4
         with:
