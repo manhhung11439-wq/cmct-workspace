@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #26 Ocimum basilicum drying herb",
+  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #46 Lonicera japonica dried honeysuckle",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,10 +14,9 @@
   },
   "items": [
     {
-      "id": 26,
-      "filename": "m5_026_Drying_Basil.jpg",
-      "commons_title": "File:Drying Basil.JPG",
-      "expected_sha1": "81e9d9858d505a872c4f35b81e53e06360c1d363"
+      "id": 46,
+      "filename": "m5_046_Dried_honeysuckle.jpg",
+      "commons_title": "File:Dried honeysuckle.jpg"
     }
   ]
 }
