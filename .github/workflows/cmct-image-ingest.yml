@@ -1,42 +1,36 @@
-name: CMCT T1 M5-19 evidence extraction
+name: CMCT T1 M5-19 iNaturalist exuvia verify
 on:
   push:
     paths:
       - .cmct-ingest-trigger
 permissions:
-  contents: write
+  contents: read
 jobs:
-  extract:
+  verify:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Install PDF tools
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
-      - name: Extract scientific figure evidence
+      - name: Query photo metadata and exact bytes
         shell: bash
         run: |
-          set -euo pipefail
-          mkdir -p evidence/m5_19/extracted
-          URL="https://mdpi-res.com/d_attachment/insects/insects-11-00168/article_deploy/insects-11-00168-s001.pdf"
-          curl -L --fail --retry 4 --retry-all-errors --retry-delay 3 -A "Mozilla/5.0 CMCT-image-audit/1.0" "$URL"             -o evidence/m5_19/insects-11-00168-s001.pdf
-          pdftoppm -png -r 160 -f 1 -l 1 evidence/m5_19/insects-11-00168-s001.pdf evidence/m5_19/page1
-          pdftoppm -png -r 160 -f 3 -l 3 evidence/m5_19/insects-11-00168-s001.pdf evidence/m5_19/page3
-          pdfimages -f 1 -l 1 -j evidence/m5_19/insects-11-00168-s001.pdf evidence/m5_19/extracted/figS1
-          pdfimages -f 3 -l 3 -j evidence/m5_19/insects-11-00168-s001.pdf evidence/m5_19/extracted/p3
-          sha1sum evidence/m5_19/insects-11-00168-s001.pdf > evidence/m5_19/sha1.txt
-          sha256sum evidence/m5_19/insects-11-00168-s001.pdf > evidence/m5_19/sha256.txt
-          file evidence/m5_19/extracted/* > evidence/m5_19/filetypes.txt
-          ls -lh evidence/m5_19 evidence/m5_19/extracted
-      - name: Commit extracted evidence
-        shell: bash
-        run: |
-          set -euo pipefail
-          git config user.name "CMCT evidence bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add evidence/m5_19
-          if git diff --cached --quiet; then
-            echo "No evidence changes"
-          else
-            git commit -m "Add M5 #19 supplementary figure evidence"
-            git push
-          fi
+          set -u
+          mkdir -p out
+          UA="Mozilla/5.0 CMCT-image-audit/1.0"
+          for u in             "https://api.inaturalist.org/v1/photos/21995070"             "https://www.inaturalist.org/photos/21995070.json"             "https://api.inaturalist.org/v1/observations?photo_id=21995070"             "https://api.inaturalist.org/v1/observations?taxon_id=319989&photos=true&per_page=200&d1=2018-07-26&d2=2018-07-27"
+          do
+            echo "===== $u ====="
+            curl -L -A "$UA" --connect-timeout 15 --max-time 120 -sS "$u" || true
+            echo
+          done | tee out/metadata.txt
+          URL="https://inaturalist-open-data.s3.amazonaws.com/photos/21995070/original.jpg"
+          code=$(curl -L -A "$UA" --retry 3 --retry-all-errors --connect-timeout 15 --max-time 120 -sS -w "%{http_code}" -o out/21995070_original.jpg "$URL" || true)
+          echo "image_http=$code"
+          file out/21995070_original.jpg || true
+          wc -c out/21995070_original.jpg || true
+          sha1sum out/21995070_original.jpg || true
+          sha256sum out/21995070_original.jpg || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-tap1-m5-19-inat-exuvia
+          path: out/
+          compression-level: 0
+          retention-days: 7
