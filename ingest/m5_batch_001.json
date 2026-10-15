@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #46 Lonicera japonica dried honeysuckle",
+  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #110 dried Mangifera indica leaves",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,9 +14,9 @@
   },
   "items": [
     {
-      "id": 46,
-      "filename": "m5_046_Dried_honeysuckle.jpg",
-      "commons_title": "File:Dried honeysuckle.jpg"
+      "id": 110,
+      "filename": "m5_110_Dried_Mango_Leaves.jpg",
+      "commons_title": "File:Dried Mango Leaves.jpg"
     }
   ]
 }
