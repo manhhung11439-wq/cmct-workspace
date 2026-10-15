@@ -1,8 +1,7 @@
 {
-  "batch": "Tập 1 M5 candidate binary acquisition — #1 Wild Pueraria slices",
+  "batch": "Tập 1 M5 FULL-GATE candidate — #13 dried Xanthium strumarium fruits",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
-    "status": "CANDIDATE until botanical-source mapping is locked",
     "require": [
       "identity_material",
       "medicinal_part",
@@ -15,9 +14,9 @@
   },
   "items": [
     {
-      "id": 1,
-      "filename": "m5_001_Wild_Pueraria_slices.jpg",
-      "commons_title": "File:Wild Pueraria slices.jpg"
+      "id": 13,
+      "filename": "m5_013_Xanthium_strumarium_dried_fruits.jpg",
+      "commons_title": "File:Xanthium strumarium MHNT.BOT.2004.0.213.jpg"
     }
   ]
 }
