@@ -1,4 +1,4 @@
-name: CMCT T1 M5-19 iNaturalist provenance ingest
+name: CMCT T1 M5-19 exact-exuvia hash provenance
 on:
   push:
     paths:
@@ -7,22 +7,30 @@ jobs:
   acquire:
     runs-on: ubuntu-latest
     steps:
-      - name: Acquire photo page and original
+      - name: Acquire exact exuvia and search Commons by SHA1
         shell: bash
         run: |
           set -euxo pipefail
           mkdir -p m5_19
-          curl -L --fail --retry 4 --retry-all-errors --retry-delay 2 -A "Mozilla/5.0 CMCT-image-audit/1.0" "https://www.inaturalist.org/photos/21995070" -o m5_19/photo_21995070.html
-          grep -Eio 'CC BY(-NC|-SA|-ND)?[^<"]*|creativecommons.org/licenses/[^"< ]+|license[^<]{0,120}' m5_19/photo_21995070.html | head -50 > m5_19/license_extract.txt || true
+          curl -L --retry 2 --retry-all-errors --retry-delay 2 -A "Mozilla/5.0 CMCT-image-audit/1.0" "https://www.inaturalist.org/photos/21995070" -o m5_19/photo_21995070.html || true
           curl -L --fail --retry 5 --retry-all-errors --retry-delay 3 -A "CMCT-image-audit/1.0" "https://inaturalist-open-data.s3.amazonaws.com/photos/21995070/original.jpg" -o m5_19/Cryptotympana_atrata_exuvia_photo_21995070.jpg
-          sha1sum m5_19/Cryptotympana_atrata_exuvia_photo_21995070.jpg > m5_19/sha1.txt
-          sha256sum m5_19/Cryptotympana_atrata_exuvia_photo_21995070.jpg > m5_19/sha256.txt
-          file m5_19/Cryptotympana_atrata_exuvia_photo_21995070.jpg > m5_19/file.txt
-          wc -c m5_19/Cryptotympana_atrata_exuvia_photo_21995070.jpg > m5_19/bytes.txt
+          sha1sum m5_19/Cryptotympana_atrata_exuvia_photo_21995070.jpg | tee m5_19/sha1.txt
+          sha256sum m5_19/Cryptotympana_atrata_exuvia_photo_21995070.jpg | tee m5_19/sha256.txt
+          file m5_19/Cryptotympana_atrata_exuvia_photo_21995070.jpg | tee m5_19/file.txt
+          wc -c m5_19/Cryptotympana_atrata_exuvia_photo_21995070.jpg | tee m5_19/bytes.txt
+          SHA1=$(cut -d' ' -f1 m5_19/sha1.txt)
+          curl -L --fail --retry 4 --retry-all-errors --retry-delay 2 -G "https://commons.wikimedia.org/w/api.php" \
+            --data-urlencode "action=query" \
+            --data-urlencode "format=json" \
+            --data-urlencode "list=allimages" \
+            --data-urlencode "aisha1=$SHA1" \
+            --data-urlencode "aiprop=url|sha1|size|extmetadata" \
+            -o m5_19/commons_sha1_lookup.json
+          python -c 'import json; print(json.dumps(json.load(open("m5_19/commons_sha1_lookup.json")),ensure_ascii=False,indent=2))'
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: cmct-tap1-m5-19-inat-photo-21995070
+          name: cmct-tap1-m5-19-exuvia-hash-provenance
           path: m5_19/
           compression-level: 0
           retention-days: 7
