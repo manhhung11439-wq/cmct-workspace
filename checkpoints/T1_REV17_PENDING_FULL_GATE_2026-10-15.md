@@ -145,6 +145,20 @@ Date: 2026-10-15
 - Original-binary ingest run 38730483620: SUCCESS.
 - Status: FULL-GATE PASS.
 
+
+### #46 Kim Ngân Hoa — FULL-GATE PASS
+- File: Wikimedia Commons `File:Dried honeysuckle.jpg`.
+- Exact identity: Commons file category `Lonicera japonica`; medicinal-name reconciliation (金銀花 / jinyinhua / Lonicerae Japonicae Flos) maps to `Lonicera japonica`.
+- Exact medicinal part/form: dried honeysuckle flower-bud/early-flower material; manuscript target is flower bud harvested before opening and dried gently.
+- Author: François Nguyen.
+- Provenance/credit: Flickr original https://www.flickr.com/photos/198613871@N06/53484407693/ → Wikimedia Commons; FlickreviewR-reviewed.
+- License: CC BY 2.0.
+- Original size: 2448 × 2448; 1,453,427 bytes.
+- Commons SHA1: f97e0a3e947a13c29ddefe20a40457653d295815.
+- SHA256: 3a249bb77a3d3742aad1b46b1a767acafd1cd0976547283199432e2e715e199a.
+- Original-binary/provenance ingest run 38737270733: SUCCESS; artifact 11973882803.
+- Status: FULL-GATE PASS.
+
 ### #49 Hạ Khô Thảo — FULL-GATE PASS
 - File: Wikimedia Commons `File:HK Chinese Medicine 夏枯草 Prunella Vulgaris 1.JPG`.
 - Exact identity/material: 夏枯草 / `Prunella vulgaris`; categorized as Chinese herbal medicine and `Prunella vulgaris (fruit)`.
@@ -188,7 +202,7 @@ Exact-variety search remains unresolved. Exact-name results are preserved/herbar
 
 ## Next exact mutation sequence
 When DOCX/runtime access is available:
-1. Rebuild REV17 from REV16 with the consolidated PASS batch (#1 if final identity mapping remains accepted, #2, #11, #13, #17, #20, #26, #28, #29, #42, #49, #50, #66, #81), rather than stacking uncertain PRETOC branches.
+1. Rebuild REV17 from REV16 with the consolidated PASS batch (#1 if final identity mapping remains accepted, #2, #11, #13, #17, #20, #26, #28, #29, #42, #46, #49, #50, #66, #81), rather than stacking uncertain PRETOC branches.
 2. Preserve all existing REV16 M5 upgrades.
 3. Render full artifact.
 4. Derive actual page-map; do not reuse the prior #28-only +1 TOC shift.
