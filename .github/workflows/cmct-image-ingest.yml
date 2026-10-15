@@ -9,6 +9,8 @@ jobs:
   render:
     runs-on: ubuntu-latest
     steps:
+      - name: Install PDF tools
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
       - name: Download and render supplementary PDF
         shell: bash
         run: |
