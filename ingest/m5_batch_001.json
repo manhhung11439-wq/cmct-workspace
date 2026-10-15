@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 REV17 consolidated M5 FULL-GATE originals",
+  "batch": "Tập 1 M5 strict verification — #52 Taraxaci herba cum radix",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,84 +14,9 @@
   },
   "items": [
     {
-      "id": 1,
-      "filename": "m5_001_Wild_Pueraria_slices.jpg",
-      "commons_title": "File:Wild Pueraria slices.jpg"
-    },
-    {
-      "id": 2,
-      "filename": "m5_002_Perilla_leaves.jpg",
-      "commons_title": "File:Perilla leaves.jpg"
-    },
-    {
-      "id": 7,
-      "filename": "m5_007_Maou.jpg",
-      "commons_title": "File:Maou.jpg"
-    },
-    {
-      "id": 11,
-      "filename": "m5_011_Dried_angelica_dahurica_slices.jpg",
-      "commons_title": "File:Dried angelica dahurica slices.jpg"
-    },
-    {
-      "id": 13,
-      "filename": "m5_013_Xanthium_strumarium_MHNT.jpg",
-      "commons_title": "File:Xanthium strumarium MHNT.BOT.2004.0.213.jpg"
-    },
-    {
-      "id": 17,
-      "filename": "m5_017_Arctium_lappa_MHNT.jpg",
-      "commons_title": "File:Arctium lappa MHNT.BOT.2004.0.16.jpg"
-    },
-    {
-      "id": 20,
-      "filename": "m5_020_Cymbopogon_citratus_Takiwasi.jpg",
-      "commons_title": "File:Tallos y hojas de yerba luisa (Cymbopogon citratus).jpg"
-    },
-    {
-      "id": 26,
-      "filename": "m5_026_Ocimum_basilicum_dried.jpg",
-      "commons_title": "File:Basilikum (Ocimum basilicum) getrocknet - Josef Schlaghecken.jpg"
-    },
-    {
-      "id": 28,
-      "filename": "m5_028_Allium_fistulosum.jpg",
-      "commons_title": "File:Starr 070730-7902 Allium fistulosum.jpg"
-    },
-    {
-      "id": 29,
-      "filename": "m5_029_Coriandrum_sativum.jpg",
-      "commons_title": "File:Koriander (Coriandrum sativum) Frische Bündel, beim Türken in MA--Josef Schlaghecken.jpg"
-    },
-    {
-      "id": 42,
-      "filename": "m5_042_Gypsum.jpg",
-      "commons_title": "File:A herbal medicine Gypsum.jpg"
-    },
-    {
-      "id": 46,
-      "filename": "m5_046_Dried_honeysuckle.jpg",
-      "commons_title": "File:Dried honeysuckle.jpg"
-    },
-    {
-      "id": 49,
-      "filename": "m5_049_Prunella_vulgaris.jpg",
-      "commons_title": "File:HK Chinese Medicine 夏枯草 Prunella Vulgaris 1.JPG"
-    },
-    {
-      "id": 50,
-      "filename": "m5_050_Dried_reed_root_segments.jpg",
-      "commons_title": "File:Dried reed root segments.jpg"
-    },
-    {
-      "id": 66,
-      "filename": "m5_066_Fresh_purslane.jpg",
-      "commons_title": "File:Fresh purslane.jpg"
-    },
-    {
-      "id": 81,
-      "filename": "m5_081_Centella_asiatica.jpg",
-      "commons_title": "File:Green to cook Centella asiatica.jpg"
+      "id": 52,
+      "filename": "m5_052_Taraxaci_herba_cum_radix_132292.jpg",
+      "commons_title": "File:Taraxaci herba cum radix 132292.jpg"
     }
   ]
 }
