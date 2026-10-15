@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #81 harvested fresh Centella asiatica",
+  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #42 medicinal gypsum",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,9 +14,9 @@
   },
   "items": [
     {
-      "id": 81,
-      "filename": "m5_081_Green_to_cook_Centella_asiatica.jpg",
-      "commons_title": "File:Green to cook Centella asiatica.jpg"
+      "id": 42,
+      "filename": "m5_042_herbal_medicine_Gypsum.jpg",
+      "commons_title": "File:A herbal medicine Gypsum.jpg"
     }
   ]
 }
