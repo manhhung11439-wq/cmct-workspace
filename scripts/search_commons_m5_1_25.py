@@ -42,7 +42,19 @@ for rid,terms in rows.items():
           "prop":"imageinfo","iiprop":"url|size|sha1|extmetadata","iiurlwidth":800,
           "format":"json","formatversion":2
         }
-        r=s.get(api,params=params,timeout=60); r.raise_for_status(); data=r.json()
+        for attempt in range(8):
+            r=s.get(api,params=params,timeout=60)
+            if r.status_code==429:
+                wait=int(r.headers.get("Retry-After") or (5*(attempt+1)))
+                print("RATE_LIMIT", rid, term, "wait", wait, flush=True)
+                time.sleep(wait)
+                continue
+            r.raise_for_status()
+            data=r.json()
+            break
+        else:
+            print("SKIP_RATE_LIMIT", rid, term, flush=True)
+            continue
         qlog.append({"term":term,"count":len(data.get("query",{}).get("pages",[]))})
         for p in data.get("query",{}).get("pages",[]):
             ii=(p.get("imageinfo") or [{}])[0]; em=ii.get("extmetadata") or {}
@@ -60,7 +72,7 @@ for rid,terms in rows.items():
               "credit":val("Credit"),"description":val("ImageDescription"),"object_name":val("ObjectName"),
               "categories":val("Categories"),
             }
-        time.sleep(0.1)
+        time.sleep(1.5)
     vals=list(seen.values())
     # rough relevance score: medicinal terms + permissive license
     def score(x):
