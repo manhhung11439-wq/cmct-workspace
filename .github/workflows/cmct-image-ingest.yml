@@ -1,4 +1,4 @@
-name: CMCT T1 exact image ingest fast
+name: CMCT T1 exact image ingest diagnostic
 on:
   push:
     paths:
@@ -11,22 +11,22 @@ jobs:
         run: |
           mkdir -p images
           python -m pip install --quiet pillow
-      - name: Download exact originals in parallel
+      - name: Download exact originals
         shell: bash
         run: |
           set +e
-          dl () { curl -L --fail --retry 2 --retry-delay 1 --connect-timeout 10 --max-time 60 -A "CMCT-image-audit/1.0" "$1" -o "$2"; echo "$? $2" >> images/download_status.txt; }
-          dl "https://commons.wikimedia.org/wiki/Special:Redirect/file/Cryptotympana_atrata.jpg" "images/19_Cryptotympana_atrata.jpg" &
-          dl "https://commons.wikimedia.org/wiki/Special:Redirect/file/Vernonia_amygdalina_01.jpg" "images/87_Vernonia_amygdalina_01.jpg" &
-          dl "https://commons.wikimedia.org/wiki/Special:Redirect/file/Zingiber_officinale.JPG" "images/3_Zingiber_officinale.JPG" &
-          dl "https://commons.wikimedia.org/wiki/Special:Redirect/file/Momordica_charantia_%28plant%29.jpg" "images/41_Momordica_charantia_plant.jpg" &
-          dl "https://commons.wikimedia.org/wiki/Special:Redirect/file/Gypsum_mineral.jpg" "images/42_Gypsum_mineral.jpg" &
-          dl "https://commons.wikimedia.org/wiki/Special:Redirect/file/Forsythia_suspensa2.jpg" "images/47_Forsythia_suspensa2.jpg" &
-          dl "https://commons.wikimedia.org/wiki/Special:Redirect/file/Andrographis_paniculata.jpg" "images/58_Andrographis_paniculata.jpg" &
-          dl "https://commons.wikimedia.org/wiki/Special:Redirect/file/Lithospermum_erythrorhizon.jpg" "images/77_Lithospermum_erythrorhizon.jpg" &
-          dl "https://commons.wikimedia.org/wiki/Special:Redirect/file/Houttuynia_cordata_C.jpg" "images/82_Houttuynia_cordata_C.jpg" &
-          dl "https://commons.wikimedia.org/wiki/Special:Redirect/file/Commelina_communis.JPG" "images/117_Commelina_communis.JPG" &
-          dl "https://commons.wikimedia.org/wiki/Special:Redirect/file/Scoparia_dulcis_of_Kadavoor.jpg" "images/125_Scoparia_dulcis_of_Kadavoor.jpg" &
+          dl () { curl -L --fail --connect-timeout 5 --max-time 20 -A "CMCT-image-audit/1.0" "$1" -o "$2"; rc=$?; echo "$rc $2" >> images/download_status.txt; }
+          dl "https://upload.wikimedia.org/wikipedia/commons/5/51/Cryptotympana_atrata.jpg" "images/19_Cryptotympana_atrata.jpg" &
+          dl "https://upload.wikimedia.org/wikipedia/commons/0/08/Vernonia_amygdalina_01.jpg" "images/87_Vernonia_amygdalina_01.jpg" &
+          dl "https://upload.wikimedia.org/wikipedia/commons/2/20/Zingiber_officinale.JPG" "images/3_Zingiber_officinale.JPG" &
+          dl "https://upload.wikimedia.org/wikipedia/commons/b/bc/Momordica_charantia_%28plant%29.jpg" "images/41_Momordica_charantia_plant.jpg" &
+          dl "https://upload.wikimedia.org/wikipedia/commons/2/2f/Gypsum_mineral.jpg" "images/42_Gypsum_mineral.jpg" &
+          dl "https://upload.wikimedia.org/wikipedia/commons/c/c6/Forsythia_suspensa2.jpg" "images/47_Forsythia_suspensa2.jpg" &
+          dl "https://upload.wikimedia.org/wikipedia/commons/d/d1/Andrographis_paniculata.jpg" "images/58_Andrographis_paniculata.jpg" &
+          dl "https://upload.wikimedia.org/wikipedia/commons/f/f2/Lithospermum_erythrorhizon.jpg" "images/77_Lithospermum_erythrorhizon.jpg" &
+          dl "https://upload.wikimedia.org/wikipedia/commons/6/6d/Houttuynia_cordata_C.jpg" "images/82_Houttuynia_cordata_C.jpg" &
+          dl "https://upload.wikimedia.org/wikipedia/commons/6/6f/Commelina_communis.JPG" "images/117_Commelina_communis.JPG" &
+          dl "https://upload.wikimedia.org/wikipedia/commons/3/30/Scoparia_dulcis_of_Kadavoor.jpg" "images/125_Scoparia_dulcis_of_Kadavoor.jpg" &
           wait
           cat images/download_status.txt
       - name: Verify byte properties
@@ -56,7 +56,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: cmct-tap1-exact-images-fast
+          name: cmct-tap1-exact-images-diagnostic
           path: images/
           compression-level: 0
           retention-days: 7
