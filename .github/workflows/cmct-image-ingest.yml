@@ -13,7 +13,9 @@ jobs:
       - name: Install dependencies
         run: python -m pip install --quiet requests pillow
       - name: Search exact taxon permissive photos
-        run: python scripts/cmct_search_m5_19.py | tee evidence/m5_19_inat_permissive/search.log
+        run: |
+          mkdir -p evidence/m5_19_inat_permissive
+          python scripts/cmct_search_m5_19.py | tee evidence/m5_19_inat_permissive/search.log
       - name: Commit search evidence
         run: |
           git config user.name "CMCT evidence bot"
