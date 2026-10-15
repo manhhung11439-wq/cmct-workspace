@@ -320,3 +320,12 @@ When DOCX/runtime access is available:
 8. Promote REV17 only if all checks PASS.
 9. Continue systematic acquisition of remaining M5 slots and M4 #78 in parallel.
 10. Defer literal all-page 100%-zoom final visual gate until M4/M5 stabilizes.
+
+
+## M4 #78 parallel state
+Exact-variety search remains unresolved. Expanded strict run 38754995208 checked GBIF plus iNaturalist using the accepted variety and legacy synonyms.
+- GBIF exact-infraspecific media: 15.
+- GBIF strict natural-observation + reusable-license candidates: 0.
+- iNaturalist exact-variety taxa: 0.
+- iNaturalist exact-variety photo candidates: 0.
+Therefore no exact-variety natural photograph satisfies the M4 publication gate. Species-level natural images, preserved/herbarium specimens, and botanical illustrations remain prohibited substitutes.
