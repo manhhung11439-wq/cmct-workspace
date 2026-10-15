@@ -1,4 +1,4 @@
-name: CMCT T1 M5 3 dried ginger ingest
+name: CMCT T1 M5-19 supplementary acquisition
 on:
   push:
     paths:
@@ -7,20 +7,43 @@ jobs:
   acquire:
     runs-on: ubuntu-latest
     steps:
-      - name: Download exact Commons original
+      - name: Acquire and inspect supplementary source
         shell: bash
         run: |
-          set -euo pipefail
-          mkdir -p images
-          curl -L --fail --retry 5 --retry-all-errors --retry-delay 3 --connect-timeout 15 --max-time 180 -A "CMCT-image-audit/1.0" "https://commons.wikimedia.org/wiki/Special:Redirect/file/Dried_ginger_slices.jpg" -o "images/3_M5_Dried_ginger_slices.jpg"
-          wc -c images/3_M5_Dried_ginger_slices.jpg | tee images/bytes.txt
-          sha1sum images/3_M5_Dried_ginger_slices.jpg | tee images/sha1.txt
-          sha256sum images/3_M5_Dried_ginger_slices.jpg | tee images/sha256.txt
-          file images/3_M5_Dried_ginger_slices.jpg | tee images/file.txt
-      - name: Upload exact binary
+          set -u
+          mkdir -p out
+          UA="Mozilla/5.0 CMCT-image-audit/1.0"
+          urls=(
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC7143061/bin/insects-11-00168-s001.pdf"
+            "https://www.mdpi.com/2075-4450/11/3/168/s1"
+            "https://mdpi-res.com/d_attachment/insects/insects-11-00168/article_deploy/insects-11-00168-s001.pdf"
+            "https://www.mdpi.com/article/10.3390/insects11030168/s1"
+          )
+          : > out/attempts.tsv
+          i=0
+          for u in "${urls[@]}"; do
+            i=$((i+1))
+            code=$(curl -L -A "$UA" --retry 3 --retry-all-errors --connect-timeout 15 --max-time 120 -sS -w "%{http_code}" -o "out/candidate_$i" "$u" || true)
+            sz=$(wc -c < "out/candidate_$i" 2>/dev/null || echo 0)
+            typ=$(file -b --mime-type "out/candidate_$i" 2>/dev/null || true)
+            printf "%s\t%s\t%s\t%s\t%s\n" "$i" "$code" "$sz" "$typ" "$u" >> out/attempts.tsv
+          done
+
+          curl -L -A "$UA" --retry 3 --retry-all-errors --connect-timeout 15 --max-time 120 -sS             "https://pmc.ncbi.nlm.nih.gov/articles/PMC7143061/" -o out/pmc_article.html || true
+          grep -Eoi 'href="[^"]*(s001|supp|MOESM|additional)[^"]*"' out/pmc_article.html | head -100 > out/pmc_links.txt || true
+
+          curl -L -A "$UA" --retry 3 --retry-all-errors --connect-timeout 15 --max-time 120 -sS             "https://www.mdpi.com/2075-4450/11/3/168" -o out/mdpi_article.html || true
+          grep -Eoi '(href|src)="[^"]*(s001|supplement|article_deploy)[^"]*"' out/mdpi_article.html | head -100 > out/mdpi_links.txt || true
+
+          sha256sum out/candidate_* > out/sha256.txt 2>/dev/null || true
+          cat out/attempts.tsv
+          cat out/pmc_links.txt || true
+          cat out/mdpi_links.txt || true
+      - name: Upload diagnostic artifact
         uses: actions/upload-artifact@v4
         with:
-          name: cmct-tap1-m5-3-dried-ginger
-          path: images/
+          name: cmct-tap1-m5-19-supplement
+          path: out/
+          if-no-files-found: error
           compression-level: 0
           retention-days: 7
