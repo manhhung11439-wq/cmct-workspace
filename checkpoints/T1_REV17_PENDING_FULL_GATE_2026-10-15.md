@@ -24,6 +24,18 @@ Date: 2026-10-15
 - Original-binary ingest run 38729194115: SUCCESS.
 - Status: FULL-GATE PASS.
 
+
+### #14 Tân Di — FULL-GATE PASS
+- Scientific source: Li S., Jiao G., Ou P., Zhang X., Yu Y., Wang Y., Yao Q., Wang W. (2025), *Phytochemical Characterization, Antioxidant Activity, and Anti-Melanoma Mechanism of Flower Buds of Magnolia biondii Pamp.*, Plants 14, 1725; DOI 10.3390/plants14111725; PMCID PMC12157075.
+- Article license: CC BY 4.0.
+- Exact identity/material: article states that the dried flower buds of `Magnolia biondii` (Flos Magnoliae/Xinyi) are shown in Figure 1; Figure 1 caption identifies flowers on the left and flower buds on the right.
+- Plant-material provenance: flower buds of `Magnolia biondii` collected in Nanzhao County, Nanyang City, Henan Province, China; collection assisted by local field staff for species accuracy.
+- Original Figure 1 binary preserved: 668 × 343; 53,891 bytes; SHA1 83540f537120e354c4942b16dac1b5f2c36240ac; SHA256 50d6e62f7c976ebcc225f1e4fc9d9a51ab271e9f4c6ecafdedf70b241c01823a.
+- Controlled derivative for M5 insertion: right-hand dried-bud panel only; 333 × 343; 41,172 bytes; SHA1 0b56e810a73be6167797249f1aaa30d9ea4024a4; SHA256 fd8443c8228e3374bb9b096d0e6ab631c7438a4256dd02e7ab0d8e853b06a541.
+- Crop is permitted as an adaptation under CC BY 4.0; original Figure 1 bytes are retained for provenance/audit.
+- Required caption attribution: cropped/adapted from Li et al., Plants 2025, Fig. 1; CC BY 4.0.
+- Status: FULL-GATE PASS for dried flower-bud medicinal material.
+
 ### #17 Ngưu Bàng Tử — FULL-GATE PASS
 - File: Wikimedia Commons `File:Arctium lappa MHNT.BOT.2004.0.16.jpg`.
 - Exact identity: `Arctium lappa`.
@@ -293,7 +305,7 @@ Exact-variety search remains unresolved. 2026-10-15 refresh reconfirmed the acce
 
 ## Next exact mutation sequence
 When DOCX/runtime access is available:
-1. Rebuild REV17 from REV16 with the consolidated PASS batch (#1, #2, #7, #11, #13, #17, #20, #26, #28, #29, #42, #46, #49, #50, #66, #81), rather than stacking uncertain PRETOC branches.
+1. Rebuild REV17 from REV16 with the consolidated PASS batch (#1, #2, #7, #11, #13, #14, #17, #20, #26, #28, #29, #42, #46, #49, #50, #66, #81), rather than stacking uncertain PRETOC branches.
 2. Preserve all existing REV16 M5 upgrades.
 3. Render full artifact.
 4. Derive actual page-map; do not reuse the prior #28-only +1 TOC shift.
