@@ -71,6 +71,20 @@ Date: 2026-10-15
 - Original-binary ingest run 38725302371: SUCCESS.
 - Status: FULL-GATE PASS after controlled medicinal-name/botanical-source mapping; NOT a recovery claim for historical CR IDs.
 
+
+### #7 Ma Hoàng — FULL-GATE PASS
+- File: Wikimedia Commons `File:Maou.jpg`.
+- Exact identity: Commons category `Ephedra sinica`.
+- Exact material/role: processed Ephedra herb used as a crude drug in traditional Japanese Kampo/Chinese medicine; matches manuscript target of dried aerial/stem Ephedra material.
+- Author: Hanabishi.
+- Provenance: own work / Wikimedia Commons.
+- License: CC BY-SA 3.0.
+- Original size: 1952 × 3264; 1,071,048 bytes.
+- Commons SHA1: 0613e0a998065c498186f772213909540e9b1d5e.
+- SHA256: 1f7d929c54202ef99a3918a1bdfa5aebb33c3ad4eeb617bae28c74aef19cf739.
+- Original-binary/provenance ingest run 38744256709: SUCCESS.
+- Status: FULL-GATE PASS.
+
 ### #11 Bạch Chỉ — FULL-GATE PASS
 - File: Wikimedia Commons `File:Dried angelica dahurica slices.jpg`.
 - Direct file identity: dried Angelica dahurica slices; structured data depicts Angelica dahurica.
@@ -279,7 +293,7 @@ Exact-variety search remains unresolved. 2026-10-15 refresh reconfirmed the acce
 
 ## Next exact mutation sequence
 When DOCX/runtime access is available:
-1. Rebuild REV17 from REV16 with the consolidated PASS batch (#1, #2, #11, #13, #17, #20, #26, #28, #29, #42, #46, #49, #50, #66, #81), rather than stacking uncertain PRETOC branches.
+1. Rebuild REV17 from REV16 with the consolidated PASS batch (#1, #2, #7, #11, #13, #17, #20, #26, #28, #29, #42, #46, #49, #50, #66, #81), rather than stacking uncertain PRETOC branches.
 2. Preserve all existing REV16 M5 upgrades.
 3. Render full artifact.
 4. Derive actual page-map; do not reuse the prior #28-only +1 TOC shift.
