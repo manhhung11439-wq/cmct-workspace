@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #110 dried Mangifera indica leaves",
+  "batch": "Tập 1 M5 FULL-GATE visual/binary acquisition — #103 Tiliacora triandra leaves",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -9,14 +9,15 @@
       "provenance",
       "author",
       "file_level_license",
-      "original_bytes_hash"
+      "original_bytes_hash",
+      "visual_material_role"
     ]
   },
   "items": [
     {
-      "id": 110,
-      "filename": "m5_110_Dried_Mango_Leaves.jpg",
-      "commons_title": "File:Dried Mango Leaves.jpg"
+      "id": 103,
+      "filename": "m5_103_La_suong_sam.jpg",
+      "commons_title": "File:Lá sương sâm.jpg"
     }
   ]
 }
