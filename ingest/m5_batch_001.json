@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #26 dried Ocimum basilicum",
+  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #66 fresh Portulaca oleracea",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,10 +14,9 @@
   },
   "items": [
     {
-      "id": 26,
-      "filename": "m5_026_Ocimum_basilicum_dried.jpg",
-      "commons_title": "File:Basilikum (Ocimum basilicum) getrocknet - Josef Schlaghecken.jpg",
-      "expected_sha1": "94c75af5512c87be323159a6ed0921b47c2f2de5"
+      "id": 66,
+      "filename": "m5_066_Fresh_purslane_Portulaca_oleracea.jpg",
+      "commons_title": "File:Fresh purslane.jpg"
     }
   ]
 }
