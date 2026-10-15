@@ -1,0 +1,22 @@
+name: CMCT M5 target 51-58 crude drug search
+on:
+  push:
+    paths:
+      - 'scripts/search_commons_m5_target_51_58.py'
+      - '.github/workflows/cmct_m5_target_51_58.yml'
+  workflow_dispatch:
+jobs:
+  search:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests
+      - run: python scripts/search_commons_m5_target_51_58.py | tee search_target_51_58.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-target-51-58
+          path: |
+            evidence/m5_t1_target_51_58/
+            search_target_51_58.log
+          if-no-files-found: error
+          retention-days: 30
