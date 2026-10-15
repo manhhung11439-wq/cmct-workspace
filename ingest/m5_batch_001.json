@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #49 Prunella vulgaris Chinese medicinal material",
+  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #26 dried Ocimum basilicum",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,9 +14,10 @@
   },
   "items": [
     {
-      "id": 49,
-      "filename": "m5_049_Prunella_vulgaris_Xiakucao_Chinese_medicine.jpg",
-      "commons_title": "File:HK Chinese Medicine 夏枯草 Prunella Vulgaris 1.JPG"
+      "id": 26,
+      "filename": "m5_026_Ocimum_basilicum_dried.jpg",
+      "commons_title": "File:Basilikum (Ocimum basilicum) getrocknet - Josef Schlaghecken.jpg",
+      "expected_sha1": "94c75af5512c87be323159a6ed0921b47c2f2de5"
     }
   ]
 }
