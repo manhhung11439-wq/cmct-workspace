@@ -292,6 +292,8 @@ Date: 2026-10-15
 Most hits in these ranges were live plants, catalogue scans, herbarium/illustrations, or PDFs and are NOT promoted to M5.
 
 Specific rejects / HOLD:
+- #114 Zarit-yo candidate: `File:Zarit-yo.jpg` passed harvested-fresh-role, provenance, CC0 and original-byte/hash gates, but file-level description only identifies local “Zarit-yo” and says it is **sometimes compared to Gynura procumbens**; categories list multiple Gynura species. Exact species identity therefore remains unproven → IDENTITY HOLD. Run 38756374124; SHA1 a021845abae4c0bc049a47a90b171b10ffb93a72; SHA256 a2b28ed6c969b503fa871bb7f238c9c1fcabea56144125d6eb9133fd1c3299c2.
+
 - #73 Violae herba candidate: `File:Violae herba 044326.jpg` passed binary/license/provenance, but file-level description explicitly identifies **dried Viola arvensis**, not manuscript `Viola yedoensis` → IDENTITY FAIL / HOLD. Run 38754610477; SHA1 36cb7495a27acd48156536a66b6751141f59c5b8; SHA256 5e9270e47b23953a6fca4b19078f3743db8513b4fd43b0e291b67115499f9b05.
 - #60 Pseuderanthemum candidate: exact species `Pseuderanthemum palatiferum`, author Nguyễn Thanh Quang, CC BY-SA 4.0, binary/hash PASS (run 38754025535), but file-level metadata only establishes green leaves/plant identity and does not establish harvested mature-leaf medicinal material → ROLE/PREPARATION HOLD.
 
