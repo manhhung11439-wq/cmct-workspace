@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE candidate — #13 dried Xanthium strumarium fruits",
+  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #2 Perilla harvested leaves",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,9 +14,10 @@
   },
   "items": [
     {
-      "id": 13,
-      "filename": "m5_013_Xanthium_strumarium_dried_fruits.jpg",
-      "commons_title": "File:Xanthium strumarium MHNT.BOT.2004.0.213.jpg"
+      "id": 2,
+      "filename": "m5_002_Perilla_leaves.jpg",
+      "commons_title": "File:Perilla leaves.jpg",
+      "expected_sha1": "57f55f6f6db99853238253aba56559b0d9118839"
     }
   ]
 }
