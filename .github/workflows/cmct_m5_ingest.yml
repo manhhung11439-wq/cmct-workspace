@@ -17,7 +17,7 @@ jobs:
         run: |
           python -m pip install --quiet pillow requests
           python - <<'PY'
-          import json, hashlib, mimetypes, pathlib, time
+          import json, hashlib, mimetypes, pathlib, time, re, html
           import requests
           from PIL import Image
 
@@ -39,8 +39,18 @@ jobs:
                   return r
               last.raise_for_status()
 
-          lines=["id\tfilename\tresolved_url\tbytes\tsha1\tsha256\tmime\twidth\theight\texpected_sha1\texpected_sha1_match\tcommons_title"]
+          lines=["id\tfilename\tresolved_url\tbytes\tsha1\tsha256\tmime\twidth\theight\texpected_sha1\texpected_sha1_match\tcommons_title\tauthor\tcredit\tlicense\tlicense_url\tdescription\tcategories"]
           resolved=[]
+
+          def clean_meta(v):
+              if isinstance(v,dict):
+                  v=v.get("value") or ""
+              v=html.unescape(str(v or ""))
+              v=re.sub(r"<[^>]+>"," ",v)
+              return " ".join(v.replace("\t"," ").replace("\n"," ").split())
+
+          def emval(em,key):
+              return clean_meta(em.get(key) or "")
           for item in req["items"]:
               fn=item["filename"]
               url=item.get("url")
@@ -56,8 +66,19 @@ jobs:
                   ii=(pages[0].get("imageinfo") or [{}])[0]
                   url=ii.get("url")
                   commons_sha=(ii.get("sha1") or "").lower()
+                  em=ii.get("extmetadata") or {}
+                  meta_fields={
+                      "author":emval(em,"Artist"),
+                      "credit":emval(em,"Credit"),
+                      "license":emval(em,"LicenseShortName"),
+                      "license_url":emval(em,"LicenseUrl"),
+                      "description":emval(em,"ImageDescription"),
+                      "categories":emval(em,"Categories"),
+                  }
                   if not exp: exp=commons_sha
-                  resolved.append({"id":item["id"],"commons_title":title,"url":url,"commons_sha1":commons_sha})
+                  resolved.append({"id":item["id"],"commons_title":title,"url":url,"commons_sha1":commons_sha,**meta_fields})
+              else:
+                  meta_fields={"author":"","credit":"","license":"","license_url":"","description":"","categories":""}
               if not url:
                   raise SystemExit(f"No URL resolved for {fn}")
               r=get_with_retry(url)
@@ -71,7 +92,9 @@ jobs:
               match="NA" if not exp else str(s1.lower()==exp).upper()
               if exp and s1.lower()!=exp:
                   raise SystemExit(f"SHA1 mismatch for {fn}: got {s1}, expected {exp}")
-              lines.append("\t".join(map(str,[item["id"],fn,url,len(data),s1,s256,mime,w,h,exp,match,ctitle])))
+              lines.append("\t".join(map(str,[item["id"],fn,url,len(data),s1,s256,mime,w,h,exp,match,ctitle,
+                  meta_fields.get("author",""),meta_fields.get("credit",""),meta_fields.get("license",""),
+                  meta_fields.get("license_url",""),meta_fields.get("description",""),meta_fields.get("categories","")])))
           (out/"binary_manifest.tsv").write_text("\n".join(lines)+"\n",encoding="utf-8")
           (out/"request.json").write_text(json.dumps(req,ensure_ascii=False,indent=2),encoding="utf-8")
           (out/"resolved_sources.json").write_text(json.dumps(resolved,ensure_ascii=False,indent=2),encoding="utf-8")
