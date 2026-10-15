@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #50 dried Phragmites australis root segments",
+  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #11 dried Angelica dahurica slices",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,9 +14,9 @@
   },
   "items": [
     {
-      "id": 50,
-      "filename": "m5_050_Dried_reed_root_segments.jpg",
-      "commons_title": "File:Dried reed root segments.jpg"
+      "id": 11,
+      "filename": "m5_011_Dried_angelica_dahurica_slices.jpg",
+      "commons_title": "File:Dried angelica dahurica slices.jpg"
     }
   ]
 }
