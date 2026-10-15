@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #91",
+  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #28 harvested Allium fistulosum",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,10 +14,9 @@
   },
   "items": [
     {
-      "id": 91,
-      "filename": "m5_091_Dried_lotus_leaf_tea.jpg",
-      "url": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Dried_lotus_leaf_tea.jpg",
-      "expected_sha1": "e39ac3e5c6462513037c9426dc03b639374a3685"
+      "id": 28,
+      "filename": "m5_028_Allium_fistulosum_in_store.jpg",
+      "commons_title": "File:Starr 070730-7902 Allium fistulosum.jpg"
     }
   ]
 }
