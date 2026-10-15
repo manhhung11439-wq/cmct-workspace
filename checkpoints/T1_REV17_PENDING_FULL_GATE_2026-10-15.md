@@ -117,6 +117,16 @@ Date: 2026-10-15
 - Caption control: describe only as dried Húng Quế material, not as a proprietary medicinal product.
 - Status: FULL-GATE PASS.
 
+
+### #81 Rau Má — FULL-GATE PASS
+- File: Wikimedia Commons `File:Green to cook Centella asiatica.jpg`.
+- Exact identity: category and filename explicitly `Centella asiatica`.
+- Exact material/form: harvested fresh greens set aside for cooking/use; manuscript M5 target permits whole plant fresh or dried.
+- Author: Sengai Podhuvan.
+- License: CC BY-SA 3.0.
+- Original-binary ingest run 38730121549: SUCCESS.
+- Status: FULL-GATE PASS.
+
 ### #66 Rau Sam — FULL-GATE PASS
 - File: Wikimedia Commons `File:Fresh purslane.jpg`.
 - Structured data exact identity: depicts `Portulaca oleracea`.
@@ -169,7 +179,7 @@ Exact-variety search remains unresolved. Exact-name results are preserved/herbar
 
 ## Next exact mutation sequence
 When DOCX/runtime access is available:
-1. Rebuild REV17 from REV16 with the consolidated PASS batch (#1 if final identity mapping remains accepted, #2, #11, #13, #17, #20, #26, #28, #29, #49, #50, #66), rather than stacking uncertain PRETOC branches.
+1. Rebuild REV17 from REV16 with the consolidated PASS batch (#1 if final identity mapping remains accepted, #2, #11, #13, #17, #20, #26, #28, #29, #49, #50, #66, #81), rather than stacking uncertain PRETOC branches.
 2. Preserve all existing REV16 M5 upgrades.
 3. Render full artifact.
 4. Derive actual page-map; do not reuse the prior #28-only +1 TOC shift.
