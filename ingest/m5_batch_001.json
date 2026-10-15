@@ -1,5 +1,5 @@
 {
-  "batch": "M5 systematic 1-25 / binary pass 001",
+  "batch": "M5 systematic 1-25 / binary pass 001-rev2",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -13,14 +13,59 @@
   "items": [
     {
       "id": 3,
-      "filename": "m5_003_Zingiber_officinale_fresh_rhizome.JPG",
-      "url": "https://upload.wikimedia.org/wikipedia/commons/d/db/Zingiber_officinale_fresh_rhizome.JPG",
-      "expected_sha1": "5108b24f06f2f9ca1cc235d2848e128e32debacd"
+      "filename": "m5_003_Ginger_rhizome.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/3d/Ginger_rhizome.jpg",
+      "expected_sha1": "d8288037c55d78e4aea4f7a6c92e6c1fa8a50f5d"
     },
     {
       "id": 25,
       "filename": "m5_025_Douchiphoto.jpg",
       "url": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Douchiphoto.jpg"
+    },
+    {
+      "id": 19,
+      "filename": "m5_019_inat_134585922.jpeg",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/134585922/original.jpeg"
+    },
+    {
+      "id": 19,
+      "filename": "m5_019_inat_134586186.jpeg",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/134586186/original.jpeg"
+    },
+    {
+      "id": 19,
+      "filename": "m5_019_inat_134586716.jpeg",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/134586716/original.jpeg"
+    },
+    {
+      "id": 19,
+      "filename": "m5_019_inat_134586980.jpeg",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/134586980/original.jpeg"
+    },
+    {
+      "id": 19,
+      "filename": "m5_019_inat_134587112.jpeg",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/134587112/original.jpeg"
+    },
+    {
+      "id": 19,
+      "filename": "m5_019_inat_134587226.jpeg",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/134587226/original.jpeg"
+    },
+    {
+      "id": 19,
+      "filename": "m5_019_inat_134639281.jpeg",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/134639281/original.jpeg"
+    },
+    {
+      "id": 19,
+      "filename": "m5_019_inat_134639427.jpeg",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/134639427/original.jpeg"
+    },
+    {
+      "id": 19,
+      "filename": "m5_019_inat_134639437.jpeg",
+      "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/134639437/original.jpeg"
     }
   ]
 }
