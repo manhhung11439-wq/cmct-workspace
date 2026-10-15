@@ -1,0 +1,22 @@
+name: CMCT M5 Commons processed search 76-100
+on:
+  push:
+    paths:
+      - 'scripts/search_commons_m5_76_100.py'
+      - '.github/workflows/cmct_m5_search_76_100.yml'
+  workflow_dispatch:
+jobs:
+  search:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests
+      - run: python scripts/search_commons_m5_76_100.py | tee search_76_100.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-commons-76-100
+          path: |
+            evidence/m5_t1_76_100_commons/
+            search_76_100.log
+          if-no-files-found: error
+          retention-days: 30
