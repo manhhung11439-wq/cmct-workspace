@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 verification — #60 Pseuderanthemum palatiferum fresh-leaf candidate",
+  "batch": "Tập 1 M5 verification — #73 Violae herba candidate",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,9 +14,9 @@
   },
   "items": [
     {
-      "id": 60,
-      "filename": "m5_060_Pseuderanthemum_palatiferum001.JPG",
-      "commons_title": "File:Pseuderanthemum palatiferum001.JPG"
+      "id": 73,
+      "filename": "m5_073_Violae_herba_044326.jpg",
+      "commons_title": "File:Violae herba 044326.jpg"
     }
   ]
 }
