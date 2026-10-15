@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #2 Perilla harvested leaves",
+  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #20 harvested Cymbopogon citratus stems and leaves",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,10 +14,9 @@
   },
   "items": [
     {
-      "id": 2,
-      "filename": "m5_002_Perilla_leaves.jpg",
-      "commons_title": "File:Perilla leaves.jpg",
-      "expected_sha1": "57f55f6f6db99853238253aba56559b0d9118839"
+      "id": 20,
+      "filename": "m5_020_Cymbopogon_citratus_stems_leaves_Takiwasi.jpg",
+      "commons_title": "File:Tallos y hojas de yerba luisa (Cymbopogon citratus).jpg"
     }
   ]
 }
