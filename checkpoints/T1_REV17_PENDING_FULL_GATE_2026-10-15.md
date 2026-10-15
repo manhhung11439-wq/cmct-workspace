@@ -292,6 +292,9 @@ Date: 2026-10-15
 Most hits in these ranges were live plants, catalogue scans, herbarium/illustrations, or PDFs and are NOT promoted to M5.
 
 Specific rejects / HOLD:
+- #73 Violae herba candidate: `File:Violae herba 044326.jpg` passed binary/license/provenance, but file-level description explicitly identifies **dried Viola arvensis**, not manuscript `Viola yedoensis` → IDENTITY FAIL / HOLD. Run 38754610477; SHA1 36cb7495a27acd48156536a66b6751141f59c5b8; SHA256 5e9270e47b23953a6fca4b19078f3743db8513b4fd43b0e291b67115499f9b05.
+- #60 Pseuderanthemum candidate: exact species `Pseuderanthemum palatiferum`, author Nguyễn Thanh Quang, CC BY-SA 4.0, binary/hash PASS (run 38754025535), but file-level metadata only establishes green leaves/plant identity and does not establish harvested mature-leaf medicinal material → ROLE/PREPARATION HOLD.
+
 - #52 Taraxaci candidate: `File:Taraxaci herba cum radix 132292.jpg` passed binary/license/provenance, but file-level description explicitly identifies **dried Taraxacum officinale**, not manuscript `Taraxacum mongolicum` → IDENTITY FAIL / HOLD. Run 38753359218; SHA1 d418c568f9a5068b6f559f26446ade65b389d9f8; SHA256 eb32cf0f5a071edc0c9ae69cc817948fea4e942d4beae8fb7b3d3b827d0b7bf8.
 
 - #70 Sophora flavescens Wellcome hit is a historical woodcut illustration, not a processed crude-drug photograph → reject for M5.
