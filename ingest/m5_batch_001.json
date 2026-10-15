@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 verification — #52 Taraxaci herba cum radix",
+  "batch": "Tập 1 M5 verification — #60 Pseuderanthemum palatiferum fresh-leaf candidate",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,9 +14,9 @@
   },
   "items": [
     {
-      "id": 52,
-      "filename": "m5_052_Taraxaci_herba_cum_radix_132292.jpg",
-      "commons_title": "File:Taraxaci herba cum radix 132292.jpg"
+      "id": 60,
+      "filename": "m5_060_Pseuderanthemum_palatiferum001.JPG",
+      "commons_title": "File:Pseuderanthemum palatiferum001.JPG"
     }
   ]
 }
