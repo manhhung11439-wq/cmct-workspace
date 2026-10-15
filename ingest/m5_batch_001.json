@@ -1,5 +1,5 @@
 {
-  "batch": "M5 systematic 1-25 / binary pass 001-rev2",
+  "batch": "M5 systematic 1-25 / binary pass 001-rev3",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -66,6 +66,12 @@
       "id": 19,
       "filename": "m5_019_inat_134639437.jpeg",
       "url": "https://inaturalist-open-data.s3.amazonaws.com/photos/134639437/original.jpeg"
+    },
+    {
+      "id": 16,
+      "filename": "m5_016_Chrysanthemum_tea_20240131.jpg",
+      "url": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Chrysanthemum%20tea%20%2820240131%29.jpg",
+      "expected_sha1": "d4812e8b7da4a14e4410b3850cdec222d14f1c82"
     }
   ]
 }
