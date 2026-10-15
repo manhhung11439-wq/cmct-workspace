@@ -1,4 +1,4 @@
-name: CMCT T1 M5 19 PMC exuviae ingest
+name: CMCT T1 M5 3 dried ginger ingest
 on:
   push:
     paths:
@@ -7,27 +7,20 @@ jobs:
   acquire:
     runs-on: ubuntu-latest
     steps:
-      - name: Acquire PMC package
+      - name: Download exact Commons original
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p out/pkg
-          curl -L --fail --retry 4 --retry-all-errors --retry-delay 3 "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC7143061" -o out/oa.xml
-          cat out/oa.xml
-          URL=$(grep -o 'href="[^"]*\.tar\.gz"' out/oa.xml | head -1 | sed 's/^href="//; s/"$//')
-          test -n "$URL"
-          URL=$(printf '%s' "$URL" | sed 's#^ftp://ftp.ncbi.nlm.nih.gov/#https://ftp.ncbi.nlm.nih.gov/#')
-          printf '%s\n' "$URL" | tee out/package_url.txt
-          curl -L --fail --retry 4 --retry-all-errors --retry-delay 3 "$URL" -o out/package.tar.gz
-          tar -xzf out/package.tar.gz -C out/pkg
-          find out/pkg -maxdepth 3 -type f -printf '%P\t%s bytes\n' | sort | tee out/filelist.txt
-          find out/pkg -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.gif' -o -iname '*.tif' -o -iname '*.tiff' \) -print0 | sort -z | xargs -0 -r sha1sum > out/sha1.txt
-          find out/pkg -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.gif' -o -iname '*.tif' -o -iname '*.tiff' \) -print0 | sort -z | xargs -0 -r sha256sum > out/sha256.txt
-          grep -R -n -i -E 'fig|graphic|Cryptotympana|exuviae|periostracum' out/pkg --include='*.nxml' > out/nxml_hits.txt || true
-      - name: Upload package artifact
+          mkdir -p images
+          curl -L --fail --retry 5 --retry-all-errors --retry-delay 3 --connect-timeout 15 --max-time 180 -A "CMCT-image-audit/1.0" "https://commons.wikimedia.org/wiki/Special:Redirect/file/Dried_ginger_slices.jpg" -o "images/3_M5_Dried_ginger_slices.jpg"
+          wc -c images/3_M5_Dried_ginger_slices.jpg | tee images/bytes.txt
+          sha1sum images/3_M5_Dried_ginger_slices.jpg | tee images/sha1.txt
+          sha256sum images/3_M5_Dried_ginger_slices.jpg | tee images/sha256.txt
+          file images/3_M5_Dried_ginger_slices.jpg | tee images/file.txt
+      - name: Upload exact binary
         uses: actions/upload-artifact@v4
         with:
-          name: cmct-tap1-m5-19-pmc7143061
-          path: out/
+          name: cmct-tap1-m5-3-dried-ginger
+          path: images/
           compression-level: 0
           retention-days: 7
