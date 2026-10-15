@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #66 fresh Portulaca oleracea",
+  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #81 harvested fresh Centella asiatica",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,9 +14,9 @@
   },
   "items": [
     {
-      "id": 66,
-      "filename": "m5_066_Fresh_purslane_Portulaca_oleracea.jpg",
-      "commons_title": "File:Fresh purslane.jpg"
+      "id": 81,
+      "filename": "m5_081_Green_to_cook_Centella_asiatica.jpg",
+      "commons_title": "File:Green to cook Centella asiatica.jpg"
     }
   ]
 }
