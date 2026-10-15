@@ -12,6 +12,19 @@ Date: 2026-10-15
 ## Newly locked / acquired M5 candidates for one consolidated REV17 batch
 
 
+
+### #17 Ngưu Bàng Tử — FULL-GATE PASS
+- File: Wikimedia Commons `File:Arctium lappa MHNT.BOT.2004.0.16.jpg`.
+- Exact identity: `Arctium lappa`.
+- Exact material: detached fruits and seeds; Commons valued-image classification includes plants — Dried.
+- Medicinal-source control: Arctii Fructus = dried ripe fruit of `Arctium lappa`.
+- Provenance: Muséum de Toulouse, accession MHNT.BOT.2004.0.16; source specimen from Jardin des Plantes, Paris.
+- Photographer: Roger Culos.
+- License: CC BY-SA 3.0.
+- Commons SHA1: c6e1ecd2b9291e545063dd5df2a91503669535a0.
+- Original-binary ingest run 38729033496: SUCCESS; artifact 11969037519.
+- Status: FULL-GATE PASS.
+
 ### #20 Sả — FULL-GATE PASS
 - File: Wikimedia Commons `File:Tallos y hojas de yerba luisa (Cymbopogon citratus).jpg`.
 - Exact identity: `Cymbopogon citratus`.
@@ -114,7 +127,7 @@ Exact-variety search remains unresolved. Exact-name results are preserved/herbar
 
 ## Next exact mutation sequence
 When DOCX/runtime access is available:
-1. Rebuild REV17 from REV16 with the consolidated PASS batch (#1 if final identity mapping remains accepted, #2, #11, #13, #20, #28, #50), rather than stacking uncertain PRETOC branches.
+1. Rebuild REV17 from REV16 with the consolidated PASS batch (#1 if final identity mapping remains accepted, #2, #11, #13, #17, #20, #28, #50), rather than stacking uncertain PRETOC branches.
 2. Preserve all existing REV16 M5 upgrades.
 3. Render full artifact.
 4. Derive actual page-map; do not reuse the prior #28-only +1 TOC shift.
