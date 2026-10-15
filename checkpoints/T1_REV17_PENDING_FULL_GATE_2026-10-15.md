@@ -183,6 +183,17 @@ Date: 2026-10-15
 
 ## Systematic processed-material searches
 
+### Targeted #59–75 follow-up
+- Run 38738501641: SUCCESS.
+- #59–65: no exact harvested/processed medicinal-material photograph returned; results were mostly scans/PDFs or zero-result → HOLD.
+- #67–69: no exact harvested/dried aerial herb or young-leaf material returned → HOLD.
+- #70 Sophora flavescens: exact-taxon Commons photographs returned, but they are living plants/flowers/fruits rather than dried medicinal root slices required by manuscript → HOLD.
+- #71 Dictamnus dasycarpus: no exact dried root-bark photograph returned → HOLD.
+- #72 Fraxinus rhynchophylla: no exact dried branch/trunk-bark photograph returned → HOLD.
+- #73 Viola yedoensis: no exact harvested whole-plant-with-root photograph returned → HOLD.
+- #74 Isatis tinctoria: exact-taxon photograph returned but is live botanical material, not dried medicinal leaves → HOLD.
+- #75 Strobilanthes cusia / Indigo Naturalis: no exact medicinal blue-powder photograph with controlled source linkage returned → HOLD.
+
 ### Targeted #51–58 follow-up
 - Run 38737849024: SUCCESS.
 - #51 Gentiana scabra: no exact dried root/rhizome photo; results were materia-medica scans/PDFs → HOLD.
