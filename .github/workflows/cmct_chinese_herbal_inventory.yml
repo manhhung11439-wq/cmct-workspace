@@ -1,0 +1,23 @@
+name: CMCT Commons Chinese-herbal inventory
+on:
+  push:
+    paths:
+      - 'scripts/inventory_commons_chinese_herbal.py'
+      - '.github/workflows/cmct_chinese_herbal_inventory.yml'
+  workflow_dispatch:
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests
+      - run: python scripts/inventory_commons_chinese_herbal.py | tee chinese_herbal_inventory.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-chinese-herbal-inventory
+          path: |
+            evidence/commons_chinese_herbal_inventory/
+            chinese_herbal_inventory.log
+          if-no-files-found: error
+          retention-days: 30
