@@ -1,0 +1,26 @@
+{
+  "batch": "M5 systematic 1-25 / binary pass 001",
+  "rules": {
+    "historical_correction_ready_ids": "DO NOT GUESS",
+    "require": [
+      "medicinal_part",
+      "preparation",
+      "provenance",
+      "license",
+      "original_bytes"
+    ]
+  },
+  "items": [
+    {
+      "id": 3,
+      "filename": "m5_003_Zingiber_officinale_fresh_rhizome.JPG",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/db/Zingiber_officinale_fresh_rhizome.JPG",
+      "expected_sha1": "5108b24f06f2f9ca1cc235d2848e128e32debacd"
+    },
+    {
+      "id": 25,
+      "filename": "m5_025_Douchiphoto.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Douchiphoto.jpg"
+    }
+  ]
+}
