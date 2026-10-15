@@ -1,38 +1,42 @@
-name: CMCT T1 M5-19 render supplementary
+name: CMCT T1 M5-19 evidence extraction
 on:
   push:
     paths:
       - .cmct-ingest-trigger
 permissions:
-  contents: read
+  contents: write
 jobs:
-  render:
+  extract:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Install PDF tools
         run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
-      - name: Download and render supplementary PDF
+      - name: Extract scientific figure evidence
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p out/pages
+          mkdir -p evidence/m5_19/extracted
           URL="https://mdpi-res.com/d_attachment/insects/insects-11-00168/article_deploy/insects-11-00168-s001.pdf"
-          curl -L --fail --retry 4 --retry-all-errors --retry-delay 3 -A "Mozilla/5.0 CMCT-image-audit/1.0" "$URL" -o out/insects-11-00168-s001.pdf
-          echo "=== PDFINFO ==="
-          pdfinfo out/insects-11-00168-s001.pdf
-          echo "=== PDFTEXT ==="
-          pdftotext -layout out/insects-11-00168-s001.pdf out/supp.txt
-          cat out/supp.txt
-          echo "=== IMAGES ==="
-          pdfimages -list out/insects-11-00168-s001.pdf || true
-          pdftoppm -png -r 144 out/insects-11-00168-s001.pdf out/pages/page
-          sha1sum out/insects-11-00168-s001.pdf > out/sha1.txt
-          sha256sum out/insects-11-00168-s001.pdf > out/sha256.txt
-          find out/pages -type f -printf '%f %s bytes\n'
-      - name: Upload rendered supplementary
-        uses: actions/upload-artifact@v4
-        with:
-          name: cmct-tap1-m5-19-rendered-supplement
-          path: out/
-          compression-level: 0
-          retention-days: 7
+          curl -L --fail --retry 4 --retry-all-errors --retry-delay 3 -A "Mozilla/5.0 CMCT-image-audit/1.0" "$URL"             -o evidence/m5_19/insects-11-00168-s001.pdf
+          pdftoppm -png -r 160 -f 1 -l 1 evidence/m5_19/insects-11-00168-s001.pdf evidence/m5_19/page1
+          pdftoppm -png -r 160 -f 3 -l 3 evidence/m5_19/insects-11-00168-s001.pdf evidence/m5_19/page3
+          pdfimages -f 1 -l 1 -j evidence/m5_19/insects-11-00168-s001.pdf evidence/m5_19/extracted/figS1
+          pdfimages -f 3 -l 3 -j evidence/m5_19/insects-11-00168-s001.pdf evidence/m5_19/extracted/p3
+          sha1sum evidence/m5_19/insects-11-00168-s001.pdf > evidence/m5_19/sha1.txt
+          sha256sum evidence/m5_19/insects-11-00168-s001.pdf > evidence/m5_19/sha256.txt
+          file evidence/m5_19/extracted/* > evidence/m5_19/filetypes.txt
+          ls -lh evidence/m5_19 evidence/m5_19/extracted
+      - name: Commit extracted evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "CMCT evidence bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add evidence/m5_19
+          if git diff --cached --quiet; then
+            echo "No evidence changes"
+          else
+            git commit -m "Add M5 #19 supplementary figure evidence"
+            git push
+          fi
