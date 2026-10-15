@@ -1,74 +1,30 @@
-name: CMCT T1 M5 #19 PMC exuviae ingest
-
+name: CMCT T1 M5 19 PMC exuviae ingest
 on:
   push:
     paths:
       - .cmct-ingest-trigger
-
 jobs:
   acquire:
     runs-on: ubuntu-latest
     steps:
-      - name: Acquire PMC7143061 open-access package
+      - name: Acquire PMC package
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p out
-          curl -L --fail --retry 4 --retry-all-errors --retry-delay 3             "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC7143061"             -o out/oa.xml
-          cat out/oa.xml
-          URL=$(python - <<'PY'
-import xml.etree.ElementTree as ET
-r=ET.parse("out/oa.xml").getroot()
-links=r.findall(".//link")
-href=None
-for link in links:
-    h=link.attrib.get("href","")
-    if link.attrib.get("format")=="tgz" or h.endswith(".tar.gz"):
-        href=h
-        break
-if not href:
-    raise SystemExit("No OA tgz link")
-if href.startswith("ftp://ftp.ncbi.nlm.nih.gov/"):
-    href="https://ftp.ncbi.nlm.nih.gov/"+href[len("ftp://ftp.ncbi.nlm.nih.gov/"):]
-print(href)
-PY
-)
-          echo "$URL" | tee out/package_url.txt
-          curl -L --fail --retry 4 --retry-all-errors --retry-delay 3 "$URL" -o out/package.tar.gz
           mkdir -p out/pkg
+          curl -L --fail --retry 4 --retry-all-errors --retry-delay 3 "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC7143061" -o out/oa.xml
+          cat out/oa.xml
+          URL=$(grep -o 'href="[^"]*\.tar\.gz"' out/oa.xml | head -1 | sed 's/^href="//; s/"$//')
+          test -n "$URL"
+          URL=$(printf '%s' "$URL" | sed 's#^ftp://ftp.ncbi.nlm.nih.gov/#https://ftp.ncbi.nlm.nih.gov/#')
+          printf '%s\n' "$URL" | tee out/package_url.txt
+          curl -L --fail --retry 4 --retry-all-errors --retry-delay 3 "$URL" -o out/package.tar.gz
           tar -xzf out/package.tar.gz -C out/pkg
           find out/pkg -maxdepth 3 -type f -printf '%P\t%s bytes\n' | sort | tee out/filelist.txt
-          python - <<'PY'
-from pathlib import Path
-import hashlib, xml.etree.ElementTree as ET, json
-base=Path("out/pkg")
-nxmls=list(base.rglob("*.nxml"))
-if not nxmls:
-    raise SystemExit("No NXML")
-nxml=nxmls[0]
-tree=ET.parse(nxml)
-root=tree.getroot()
-rows=[]
-for fig in root.findall(".//fig"):
-    label="".join(fig.findtext("label","")).strip()
-    caption=" ".join("".join(fig.find("caption").itertext()).split()) if fig.find("caption") is not None else ""
-    graphic=fig.find(".//graphic")
-    href=""
-    if graphic is not None:
-        href=graphic.attrib.get("{http://www.w3.org/1999/xlink}href","") or graphic.attrib.get("href","")
-    rows.append({"label":label,"caption":caption,"href":href})
-Path("out/figures.json").write_text(json.dumps(rows,ensure_ascii=False,indent=2),encoding="utf-8")
-print(Path("out/figures.json").read_text())
-with open("out/images_manifest.tsv","w",encoding="utf-8") as f:
-    f.write("filename\tbytes\tsha1\tsha256\n")
-    for p in sorted(base.rglob("*")):
-        if p.is_file() and p.suffix.lower() in {".jpg",".jpeg",".png",".gif",".tif",".tiff"}:
-            b=p.read_bytes()
-            f.write(f"{p.name}\t{len(b)}\t{hashlib.sha1(b).hexdigest()}\t{hashlib.sha256(b).hexdigest()}\n")
-print(Path("out/images_manifest.tsv").read_text())
-PY
-
-      - name: Upload PMC package artifact
+          find out/pkg -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.gif' -o -iname '*.tif' -o -iname '*.tiff' \) -print0 | sort -z | xargs -0 -r sha1sum > out/sha1.txt
+          find out/pkg -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.gif' -o -iname '*.tif' -o -iname '*.tiff' \) -print0 | sort -z | xargs -0 -r sha256sum > out/sha256.txt
+          grep -R -n -i -E 'fig|graphic|Cryptotympana|exuviae|periostracum' out/pkg --include='*.nxml' > out/nxml_hits.txt || true
+      - name: Upload package artifact
         uses: actions/upload-artifact@v4
         with:
           name: cmct-tap1-m5-19-pmc7143061
