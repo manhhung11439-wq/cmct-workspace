@@ -13,35 +13,60 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: Acquire PMC OA package and exact Figure 1
+      - name: Acquire exact Figure 1 from publisher/static sources
         shell: bash
         run: |
-          set -euxo pipefail
+          set -u
           mkdir -p out work
-          curl --fail --show-error --location --retry 3 \
-            "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id=PMC10304078" \
-            -o work/oa.xml
-          cat work/oa.xml
-          TGZ_URL=$(grep -o 'href="[^"]*\.tar\.gz"' work/oa.xml | head -1 | sed 's/^href="//;s/"$//')
-          echo "TGZ_URL=$TGZ_URL"
-          test -n "$TGZ_URL"
-          curl --fail --show-error --location --retry 3 "$TGZ_URL" -o work/article.tar.gz
-          tar -xzf work/article.tar.gz -C work
-          find work -type f | sort
-          FIG=$(find work -type f \( -iname 'plants-12-02286-g001.jpg' -o -iname 'plants-12-02286-g001.jpeg' -o -iname 'plants-12-02286-g001.png' \) | head -1)
-          echo "FIG=$FIG"
-          test -n "$FIG"
-          EXT="${FIG##*.}"
-          cp "$FIG" "out/78_plants-12-02286-g001.$EXT"
+          : > out/INGEST_78_ATTEMPTS.txt
+          URLS=(
+            "https://mdpi-res.com/d_attachment/plants/plants-12-02286/article_deploy/html/images/plants-12-02286-g001.png"
+            "https://mdpi-res.com/d_attachment/plants/plants-12-02286/article_deploy/html/images/plants-12-02286-g001.jpg"
+            "https://pmc.ncbi.nlm.nih.gov/articles/instance/10304078/bin/plants-12-02286-g001.jpg"
+            "https://pmc.ncbi.nlm.nih.gov/articles/PMC10304078/bin/plants-12-02286-g001.jpg"
+          )
+          PASSFILE=""
+          PASSURL=""
+          n=0
+          for url in "${URLS[@]}"; do
+            n=$((n+1))
+            f="work/candidate_$n"
+            echo "TRY=$url" >> out/INGEST_78_ATTEMPTS.txt
+            if curl --fail --show-error --location --retry 2 --connect-timeout 20 --max-time 180 \
+              -A "Mozilla/5.0 CMCT-source-acquisition/1.0" "$url" -o "$f"; then
+              mime=$(file -b --mime-type "$f")
+              bytes=$(stat -c %s "$f")
+              echo "HTTP_FETCH=PASS MIME=$mime BYTES=$bytes" >> out/INGEST_78_ATTEMPTS.txt
+              if [[ "$mime" == image/* ]] && [[ "$bytes" -gt 10000 ]]; then
+                PASSFILE="$f"
+                PASSURL="$url"
+                break
+              fi
+            else
+              echo "HTTP_FETCH=FAIL" >> out/INGEST_78_ATTEMPTS.txt
+            fi
+          done
+
+          if [[ -z "$PASSFILE" ]]; then
+            echo "RESULT=NO_IMAGE_SOURCE_FETCHED" >> out/INGEST_78_ATTEMPTS.txt
+            exit 1
+          fi
+          MIME=$(file -b --mime-type "$PASSFILE")
+          case "$MIME" in
+            image/jpeg) EXT=jpg ;;
+            image/png) EXT=png ;;
+            *) EXT=bin ;;
+          esac
+          DEST="out/78_plants-12-02286-g001.$EXT"
+          cp "$PASSFILE" "$DEST"
           {
             echo "ROW=#78 M5 Ngan Sai Ho"
-            echo "PMC=PMC10304078"
-            echo "OA_PACKAGE=$TGZ_URL"
-            stat -c 'BYTES=%s' "$FIG"
-            file -b --mime-type "$FIG" | sed 's/^/MIME=/'
-            file -b "$FIG" | sed 's/^/FILE=/'
-            sha1sum "$FIG" | awk '{print "SHA1="$1}'
-            sha256sum "$FIG" | awk '{print "SHA256="$1}'
+            echo "SOURCE_URL=$PASSURL"
+            stat -c 'BYTES=%s' "$DEST"
+            file -b --mime-type "$DEST" | sed 's/^/MIME=/'
+            file -b "$DEST" | sed 's/^/FILE=/'
+            sha1sum "$DEST" | awk '{print "SHA1="$1}'
+            sha256sum "$DEST" | awk '{print "SHA256="$1}'
           } > out/INGEST_78_MANIFEST.txt
 
       - name: Upload #78 source bytes
