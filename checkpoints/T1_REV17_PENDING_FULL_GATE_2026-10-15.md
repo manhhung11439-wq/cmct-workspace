@@ -292,6 +292,8 @@ Date: 2026-10-15
 Most hits in these ranges were live plants, catalogue scans, herbarium/illustrations, or PDFs and are NOT promoted to M5.
 
 Specific rejects / HOLD:
+- #52 Taraxaci candidate: `File:Taraxaci herba cum radix 132292.jpg` passed binary/license/provenance, but file-level description explicitly identifies **dried Taraxacum officinale**, not manuscript `Taraxacum mongolicum` → IDENTITY FAIL / HOLD. Run 38753359218; SHA1 d418c568f9a5068b6f559f26446ade65b389d9f8; SHA256 eb32cf0f5a071edc0c9ae69cc817948fea4e942d4beae8fb7b3d3b827d0b7bf8.
+
 - #70 Sophora flavescens Wellcome hit is a historical woodcut illustration, not a processed crude-drug photograph → reject for M5.
 - #91 dried lotus-leaf candidate lacks direct file-level species identity → HOLD.
 - #25 douchi image does not distinguish medicinal Dàn Dòu Chǐ from food douchi → HOLD.
