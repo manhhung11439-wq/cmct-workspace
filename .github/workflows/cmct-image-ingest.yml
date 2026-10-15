@@ -1,83 +1,42 @@
-name: CMCT T1 M5 Commons search
+name: CMCT T1 M5-19 iNaturalist provenance ingest
 on:
   push:
     paths:
       - .cmct-ingest-trigger
 jobs:
-  search:
+  acquire:
     runs-on: ubuntu-latest
     steps:
-      - name: Search Commons for exact M5 material
+      - name: Acquire photo metadata and original
+        shell: bash
         run: |
-          mkdir -p results
+          set -euxo pipefail
+          mkdir -p m5_19
+          curl -L --fail --retry 5 --retry-all-errors --retry-delay 3 \
+            -A "CMCT-image-audit/1.0" \
+            "https://api.inaturalist.org/v1/photos/21995070" \
+            -o m5_19/photo_21995070.json
           python - <<'PY'
-          import requests, json, time, re
-          API="https://commons.wikimedia.org/w/api.php"
-          targets={
-            2:["紫苏 饮片","Perilla folium dried"],
-            4:["柴胡 饮片","Bupleurum radix dried"],
-            5:["羌活 饮片","Notopterygium rhizome dried"],
-            6:["防风 饮片","Saposhnikovia radix dried"],
-            7:["麻黄 饮片","Ephedra herb dried Chinese medicine"],
-            8:["桂枝 饮片","Cinnamomum twig dried Chinese medicine"],
-            9:["荆芥 饮片","Schizonepeta herb dried"],
-            10:["薄荷 饮片","Mentha herb dried Chinese medicine"],
-            12:["细辛 饮片","Asarum radix rhizome dried"],
-            13:["苍耳子 饮片","Xanthium fruit Chinese medicine"],
-            14:["辛夷 饮片","Magnolia flower bud Chinese medicine"],
-            15:["桑叶 饮片","Morus leaf dried Chinese medicine"],
-            16:["菊花 饮片","Chrysanthemum dried flowers Chinese medicine"],
-            17:["牛蒡子 饮片","Arctium fruit seed Chinese medicine"],
-            18:["升麻 饮片","Cimicifuga rhizome Chinese medicine"],
-            20:["香茅 干","Cymbopogon citratus dried herb"],
-            21:["香薷 饮片","Elsholtzia herb dried Chinese medicine"],
-            22:["鹅不食草 饮片","Centipeda minima dried herb"],
-            23:["蔓荆子 饮片","Vitex fruit Chinese medicine"],
-            24:["浮萍 饮片","Spirodela dried Chinese medicine"],
-            25:["淡豆豉 饮片","douchi fermented black beans"],
-          }
-          sess=requests.Session(); sess.headers["User-Agent"]="CMCT-image-audit/1.0"
-          out={}
-          for row,queries in targets.items():
-            seen={}
-            for q in queries:
-              params={
-                "action":"query","format":"json","generator":"search",
-                "gsrsearch":q,"gsrnamespace":6,"gsrlimit":10,
-                "prop":"imageinfo","iiprop":"url|size|mime|extmetadata"
-              }
-              try:
-                data=sess.get(API,params=params,timeout=40).json()
-              except Exception as e:
-                seen[f"ERROR:{q}"]={"error":repr(e)}; continue
-              for page in (data.get("query") or {}).get("pages",{}).values():
-                ii=(page.get("imageinfo") or [{}])[0]
-                em=ii.get("extmetadata") or {}
-                title=page.get("title","")
-                rec={
-                  "title":title,
-                  "url":ii.get("url"),"descriptionurl":ii.get("descriptionurl"),
-                  "width":ii.get("width"),"height":ii.get("height"),"size":ii.get("size"),"mime":ii.get("mime"),
-                  "artist":(em.get("Artist") or {}).get("value"),
-                  "license_short":(em.get("LicenseShortName") or {}).get("value"),
-                  "license_url":(em.get("LicenseUrl") or {}).get("value"),
-                  "credit":(em.get("Credit") or {}).get("value"),
-                  "description":(em.get("ImageDescription") or {}).get("value"),
-                  "categories":(em.get("Categories") or {}).get("value"),
-                  "query":q,
-                }
-                seen[title]=rec
-              time.sleep(.15)
-            out[str(row)]=list(seen.values())
-          open("results/commons_m5_search.json","w",encoding="utf-8").write(json.dumps(out,ensure_ascii=False,indent=2))
-          for row,recs in out.items():
-            print("\nROW",row)
-            for r in recs[:8]:
-              print(r.get("title"),"|",r.get("license_short"),"|",r.get("width"),"x",r.get("height"),"|",re.sub("<[^>]+>"," ",r.get("description") or "")[:120])
-          PY
-      - name: Upload search results
+import json
+p=json.load(open("m5_19/photo_21995070.json",encoding="utf-8"))
+print(json.dumps(p, ensure_ascii=False, indent=2))
+PY
+          curl -L --fail --retry 5 --retry-all-errors --retry-delay 3 \
+            -A "CMCT-image-audit/1.0" \
+            "https://inaturalist-open-data.s3.amazonaws.com/photos/21995070/original.jpg" \
+            -o m5_19/Cryptotympana_atrata_exuvia_photo_21995070.jpg
+          sha1sum m5_19/Cryptotympana_atrata_exuvia_photo_21995070.jpg > m5_19/sha1.txt
+          sha256sum m5_19/Cryptotympana_atrata_exuvia_photo_21995070.jpg > m5_19/sha256.txt
+          file m5_19/Cryptotympana_atrata_exuvia_photo_21995070.jpg > m5_19/file.txt
+          python - <<'PY'
+from PIL import Image
+im=Image.open("m5_19/Cryptotympana_atrata_exuvia_photo_21995070.jpg")
+open("m5_19/dimensions.txt","w").write(f"{im.format}\t{im.size[0]}x{im.size[1]}\n")
+PY
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: cmct-tap1-m5-commons-search
-          path: results/
+          name: cmct-tap1-m5-19-inat-photo-21995070
+          path: m5_19/
+          compression-level: 0
           retention-days: 7
