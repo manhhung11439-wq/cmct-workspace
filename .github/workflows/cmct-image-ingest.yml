@@ -1,47 +1,83 @@
-name: CMCT T1 M5 batch exact ingest
+name: CMCT T1 M5 Commons search
 on:
   push:
     paths:
       - .cmct-ingest-trigger
 jobs:
-  acquire:
+  search:
     runs-on: ubuntu-latest
     steps:
-      - name: Prepare
+      - name: Search Commons for exact M5 material
         run: |
-          mkdir -p images
-          python -m pip install --quiet pillow
-      - name: Download exact originals
-        shell: bash
-        run: |
-          set -e
-          curl -L --fail --retry 4 --retry-all-errors -A "CMCT-image-audit/1.0" "https://commons.wikimedia.org/wiki/Special:Redirect/file/Puerariae1.JPG" -o "images/1_M5_Puerariae1.JPG"
-          curl -L --fail --retry 4 --retry-all-errors -A "CMCT-image-audit/1.0" "https://commons.wikimedia.org/wiki/Special:Redirect/file/Fresh_ginger_rhizome_02.jpg" -o "images/3_M5_Fresh_ginger_rhizome_02.jpg"
-          curl -L --fail --retry 4 --retry-all-errors -A "CMCT-image-audit/1.0" "https://commons.wikimedia.org/wiki/Special:Redirect/file/%E7%99%BD%E8%8A%B7%E9%A5%AE%E7%89%87.jpg" -o "images/11_M5_Baizhi_slices.jpg"
-          curl -L --fail --retry 4 --retry-all-errors -A "CMCT-image-audit/1.0" "https://commons.wikimedia.org/wiki/Special:Redirect/file/%E8%9D%89%E8%9C%95%E9%A5%AE%E7%89%87.jpg" -o "images/19_M5_Chantui_exuviae.jpg"
-      - name: Verify byte properties
-        run: |
+          mkdir -p results
           python - <<'PY'
-          from pathlib import Path
-          import hashlib, mimetypes
-          from PIL import Image
-          out=Path("images/manifest.tsv")
-          with out.open("w",encoding="utf-8") as f:
-              f.write("row\tfilename\tbytes\tmime\twidth\theight\tsha1\tsha256\n")
-              for p in sorted(Path("images").glob("*")):
-                  if not p.is_file() or p.name=="manifest.tsv": continue
-                  data=p.read_bytes()
-                  with Image.open(p) as im:
-                      w,h=im.size; fmt=im.format
-                  mime={"JPEG":"image/jpeg","PNG":"image/png"}.get(fmt,mimetypes.guess_type(p.name)[0] or "application/octet-stream")
-                  row=p.name.split("_",1)[0]
-                  f.write(f"{row}\t{p.name}\t{len(data)}\t{mime}\t{w}\t{h}\t{hashlib.sha1(data).hexdigest()}\t{hashlib.sha256(data).hexdigest()}\n")
-          print(out.read_text())
+          import requests, json, time, re
+          API="https://commons.wikimedia.org/w/api.php"
+          targets={
+            2:["紫苏 饮片","Perilla folium dried"],
+            4:["柴胡 饮片","Bupleurum radix dried"],
+            5:["羌活 饮片","Notopterygium rhizome dried"],
+            6:["防风 饮片","Saposhnikovia radix dried"],
+            7:["麻黄 饮片","Ephedra herb dried Chinese medicine"],
+            8:["桂枝 饮片","Cinnamomum twig dried Chinese medicine"],
+            9:["荆芥 饮片","Schizonepeta herb dried"],
+            10:["薄荷 饮片","Mentha herb dried Chinese medicine"],
+            12:["细辛 饮片","Asarum radix rhizome dried"],
+            13:["苍耳子 饮片","Xanthium fruit Chinese medicine"],
+            14:["辛夷 饮片","Magnolia flower bud Chinese medicine"],
+            15:["桑叶 饮片","Morus leaf dried Chinese medicine"],
+            16:["菊花 饮片","Chrysanthemum dried flowers Chinese medicine"],
+            17:["牛蒡子 饮片","Arctium fruit seed Chinese medicine"],
+            18:["升麻 饮片","Cimicifuga rhizome Chinese medicine"],
+            20:["香茅 干","Cymbopogon citratus dried herb"],
+            21:["香薷 饮片","Elsholtzia herb dried Chinese medicine"],
+            22:["鹅不食草 饮片","Centipeda minima dried herb"],
+            23:["蔓荆子 饮片","Vitex fruit Chinese medicine"],
+            24:["浮萍 饮片","Spirodela dried Chinese medicine"],
+            25:["淡豆豉 饮片","douchi fermented black beans"],
+          }
+          sess=requests.Session(); sess.headers["User-Agent"]="CMCT-image-audit/1.0"
+          out={}
+          for row,queries in targets.items():
+            seen={}
+            for q in queries:
+              params={
+                "action":"query","format":"json","generator":"search",
+                "gsrsearch":q,"gsrnamespace":6,"gsrlimit":10,
+                "prop":"imageinfo","iiprop":"url|size|mime|extmetadata"
+              }
+              try:
+                data=sess.get(API,params=params,timeout=40).json()
+              except Exception as e:
+                seen[f"ERROR:{q}"]={"error":repr(e)}; continue
+              for page in (data.get("query") or {}).get("pages",{}).values():
+                ii=(page.get("imageinfo") or [{}])[0]
+                em=ii.get("extmetadata") or {}
+                title=page.get("title","")
+                rec={
+                  "title":title,
+                  "url":ii.get("url"),"descriptionurl":ii.get("descriptionurl"),
+                  "width":ii.get("width"),"height":ii.get("height"),"size":ii.get("size"),"mime":ii.get("mime"),
+                  "artist":(em.get("Artist") or {}).get("value"),
+                  "license_short":(em.get("LicenseShortName") or {}).get("value"),
+                  "license_url":(em.get("LicenseUrl") or {}).get("value"),
+                  "credit":(em.get("Credit") or {}).get("value"),
+                  "description":(em.get("ImageDescription") or {}).get("value"),
+                  "categories":(em.get("Categories") or {}).get("value"),
+                  "query":q,
+                }
+                seen[title]=rec
+              time.sleep(.15)
+            out[str(row)]=list(seen.values())
+          open("results/commons_m5_search.json","w",encoding="utf-8").write(json.dumps(out,ensure_ascii=False,indent=2))
+          for row,recs in out.items():
+            print("\nROW",row)
+            for r in recs[:8]:
+              print(r.get("title"),"|",r.get("license_short"),"|",r.get("width"),"x",r.get("height"),"|",re.sub("<[^>]+>"," ",r.get("description") or "")[:120])
           PY
-      - name: Upload artifact
+      - name: Upload search results
         uses: actions/upload-artifact@v4
         with:
-          name: cmct-tap1-m5-batch1-exact
-          path: images/
-          compression-level: 0
+          name: cmct-tap1-m5-commons-search
+          path: results/
           retention-days: 7
