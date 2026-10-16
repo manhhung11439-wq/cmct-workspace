@@ -74,6 +74,19 @@ Rejected alternate for #121:
 - #101–110: no new FULL-GATE.
 - #111–125 broad Commons pass: #121 promoted to FULL-GATE after exact detached-fruit verification; other rows remain HOLD unless individually re-verified.
 
+
+### #51–58 targeted rerun — NO NEW FULL-GATE
+- Run 38839389552: SUCCESS after manuscript-exact role re-lock.
+- #51 Long Đởm Thảo: search returned materia-medica PDFs/illustrations, not an exact reusable photograph of dried root + rhizome.
+- #52 Bồ Công Anh: top crude-drug file remains `Taraxaci herba cum radix 132292.jpg`, but file-level species is `Taraxacum officinale`, not manuscript-locked `T. mongolicum` → reject for insertion.
+- #53 Bản Lam Căn: exact `Isatis tinctoria` photos found are botanical/live or specimen images, not dried root cut into segments.
+- #54 Xạ Can: no exact reusable dried rhizome photograph recovered.
+- #55 Xích Thược: no exact reusable unpeeled dried-root/sliced `Paeonia lactiflora` photograph recovered.
+- #56 Địa Cốt Bì: no exact reusable dried root-bark photograph recovered.
+- #57 Thanh Hao: no exact reusable shade-dried aerial-herb photograph recovered.
+- #58 Xuyên Tâm Liên: no exact reusable dried/cut aerial-herb photograph recovered.
+- Verdict: 0 new PASS; no manuscript mutation triggered.
+
 ## Next exact action
 1. Continue FULL-GATE acquisition for remaining M5 rows while the exact promoted 583-page REV17 raw source is being recovered/verified.
 2. Queue PASS rows here; do not mutate the 585-page Library variant.
