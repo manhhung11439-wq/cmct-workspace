@@ -1,3 +1,4 @@
+# rerun marker 2026-10-16T09:24+07 — post-REV17 unresolved T1 crude-drug scan
 import json,time,re,html
 from pathlib import Path
 import requests
