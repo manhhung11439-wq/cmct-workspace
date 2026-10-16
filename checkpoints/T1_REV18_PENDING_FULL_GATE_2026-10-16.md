@@ -209,6 +209,16 @@ Rejected alternate for #121:
 - Direct inspection of Supplementary data S2 confirms Figure S2 is **chromatograms for dictamnine and root-bark extract**, not a photograph of the crude root-bark medicinal material.
 - Verdict: scientific evidence supports identity/material context only; M5 IMAGE GATE FAIL → HOLD / DO NOT INSERT.
 
+
+### #73 Tử Hoa Địa Đinh — HOLD due underlying PPBC license
+- Candidate scientific source: *A Comprehensive Review of the Phytochemistry and Therapeutic Efficacy of Viola yedoensis Makino*, Molecules 2025;30(9):1922; DOI 10.3390/molecules30091922.
+- Figure 2 caption explicitly identifies panel D as `dry medicinal parts` of `Viola yedoensis`; material/part/form match is scientifically strong.
+- Direct PDF inspection confirms Figure 2D is the dry medicinal-material panel.
+- However the figure credits Plant Photo Bank of China (PPBC), and the embedded image carries PPBC copyright/watermark.
+- PPBC copyright policy states non-teaching reuse requires written authorization; teaching use is BY-NC-ND, must retain logo/watermark, and images may not be cropped/modified or used for commercial publication.
+- Therefore the article's general CC BY 4.0 status is not sufficient to establish a clean file-level publication/reuse license for this third-party PPBC image.
+- Verdict: LICENSE GATE FAIL/HOLD — DO NOT INSERT; do not crop or reuse the PPBC panel without separate permission.
+
 ### #70 Khổ Sâm — FULL-GATE PASS
 - Manuscript source: `Sophora flavescens Aiton`; medicinal part = root; preparation target = dried/sliced root.
 - Scientific source: *Determination of Antioxidant, Cytotoxicity, and Acetylcholinesterase Inhibitory Activities of Alkaloids Isolated from Sophora flavescens Ait. Grown in Dak Nong, Vietnam*. Pharmaceuticals. 2022;15(11):1384. DOI 10.3390/ph15111384.
