@@ -131,6 +131,26 @@ sheet=Image.new("RGB",(thumb.width,thumb.height+60),"white"); sheet.paste(thumb,
 dr=ImageDraw.Draw(sheet); dr.text((10,10),"Bupleurum Figure 1 original — verify panel C before promotion",fill="black")
 sheet.save(OUT/"m5_004_fig1_review.png")
 
+# Controller-verified exact crop of panel C (Bupleurum chinense roots).
+# Visual review of the authentic 682x228 Figure 1 confirms A and B are the two
+# living-plant panels; C and D share the right-hand root panel. This box isolates
+# label C, the two B. chinense roots and their section pieces, excluding label/panel D.
+if im.size != (682,228):
+    raise RuntimeError(f"Unexpected original Figure 1 size {im.size}; do not apply stale panel-C crop")
+exact_box=(450,0,572,228)
+panel_c=im.crop(exact_box)
+pc_native=OUT/"m5_004_panel_C_bupleurum_chinense_roots_crop.png"
+panel_c.save(pc_native,format="PNG",optimize=False)
+pcb=pc_native.read_bytes(); pcs1,pcs256=hh(pcb)
+exact_derivative={
+ "file":str(pc_native),"source_figure_sha1":src["sha1"],"crop_box":exact_box,
+ "width":panel_c.width,"height":panel_c.height,"bytes":len(pcb),
+ "sha1":pcs1,"sha256":pcs256,
+ "transformation":"crop only from authentic EuropePMC inline Figure 1; isolates panel C and excludes panel D",
+ "visual_controller":"PASS — label C + two B. chinense roots + associated section pieces visible; no D label/root panel retained",
+ "native_resolution_qualifier":"122x228 px; insertion remains subject to changed-page print-quality regression"
+}
+
 manifest={
  "id":4,
  "article":"Yang F et al. BioMed Research International 2017;2017:7597596",
@@ -141,9 +161,10 @@ manifest={
  "target_figure":target,
  "original_figure":src,
  "provisional_quadrants":derivs,
- "controller_note":"Do not promote until exact panel C crop is visually verified; quadrants are review aids only."
+ "controlled_derivative":exact_derivative,
+ "controller_note":"Exact panel C crop visually verified; provisional quadrants are superseded review aids only."
 }
 (OUT/"extract_manifest.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding="utf-8")
-print("M5_004_ORIGINAL="+json.dumps(src,ensure_ascii=False),flush=True)
+print("M5_004_CONTROLLED_DERIVATIVE="+json.dumps(exact_derivative,ensure_ascii=False),flush=True)\nprint("M5_004_ORIGINAL="+json.dumps(src,ensure_ascii=False),flush=True)
 print("M5_004_PROVISIONAL="+json.dumps(derivs,ensure_ascii=False),flush=True)
 print("M5_004_MANIFEST="+json.dumps(manifest,ensure_ascii=False),flush=True)
