@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE verification — #84 Oroxylum indicum candidate set",
+  "batch": "Tập 1 M5 FULL-GATE verification — #114 Gynura procumbens harvested material",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -8,8 +8,9 @@
     ]
   },
   "items": [
-    {"id":84,"filename":"m5_084_Oroxylum_indicum_11.JPG","commons_title":"File:Oroxylum indicum 11.JPG"},
-    {"id":84,"filename":"m5_084_Oroxylum_indicum_12.JPG","commons_title":"File:Oroxylum indicum 12.JPG"},
-    {"id":84,"filename":"m5_084_Oroxylum_indicum_13.JPG","commons_title":"File:Oroxylum indicum 13.JPG"}
+    {"id":114,"filename":"m5_114_Longevity_spinach.jpg","commons_title":"File:Longevity spinach.jpg"},
+    {"id":114,"filename":"m5_114_Zarit_yo.jpg","commons_title":"File:Zarit-yo.jpg"},
+    {"id":114,"filename":"m5_114_Zarit_bud.jpg","commons_title":"File:ဇရစ်ဖူး.jpg"},
+    {"id":114,"filename":"m5_114_Zarit_stem.jpg","commons_title":"File:ဇရစ်ရိုး.jpg"}
   ]
 }
