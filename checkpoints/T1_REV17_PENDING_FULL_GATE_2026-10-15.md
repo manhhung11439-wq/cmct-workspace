@@ -334,3 +334,21 @@ Exact-variety search remains unresolved. Expanded strict run 38754995208 checked
 - iNaturalist exact-variety taxa: 0.
 - iNaturalist exact-variety photo candidates: 0.
 Therefore no exact-variety natural photograph satisfies the M4 publication gate. Species-level natural images, preserved/herbarium specimens, and botanical illustrations remain prohibited substitutes.
+
+
+## Targeted search #51–58 — completed
+- Workflow run 38826884815: SUCCESS.
+- Manuscript gates reconfirmed:
+  - #51 Gentiana scabra: root/rhizome; autumn harvest; washed and dried.
+  - #52 Taraxacum mongolicum: whole plant with root; may be fresh or dried.
+  - #53 Isatis tinctoria: root; autumn harvest; washed, dried, cut.
+  - #54 Iris domestica: rhizome; fine roots removed, washed, dried, sliced.
+  - #55 Paeonia lactiflora / Chi Shao: unpeeled root; dried and sliced; do not substitute Bai Shao processing.
+  - #56 Lycium chinense: root bark; peeled from root, washed and dried.
+  - #57 Artemisia annua: aerial herb; medicinal material search remains unresolved.
+  - #58 Andrographis paniculata: aerial parts near flowering; dried and cut.
+- Search result:
+  - #52 top reusable crude-drug image `Taraxaci herba cum radix 132292.jpg` is explicitly dried `Taraxacum officinale`, not `T. mongolicum`; HOLD / do not insert.
+  - #53 returned many exact `Isatis tinctoria` images, but they are living/botanical material rather than dried root; HOLD.
+  - #51/#54/#55/#56/#57/#58 returned mostly PDFs, illustrations, living plants, or insufficiently role-specific images; no new FULL-GATE PASS.
+- Net new M5 PASS from #51–58: 0.
