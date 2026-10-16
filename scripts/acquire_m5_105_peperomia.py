@@ -2,7 +2,7 @@ import requests,pathlib,json,hashlib,time,tarfile,io,re
 from xml.etree import ElementTree as ET
 OUT=pathlib.Path("evidence/m5_t1_105_peperomia"); OUT.mkdir(parents=True,exist_ok=True)
 pmcid="PMC11637809"
-oa=f"https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id={pmcid}"
+oa=f"https://pmc.ncbi.nlm.nih.gov/utils/oa/oa.fcgi?id={pmcid}"
 s=requests.Session(); s.headers["User-Agent"]="CMCT-image-audit/5.0 PMC OA package Peperomia"
 def get(u):
   last=None
