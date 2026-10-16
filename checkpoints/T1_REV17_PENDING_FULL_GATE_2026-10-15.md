@@ -619,3 +619,12 @@ Therefore no exact-variety natural photograph satisfies the M4 publication gate.
 - #114 Zarit candidate set: harvested/bundled-market role is described, licenses/original bytes PASS, but source metadata explicitly treats identity as uncertain/comparative (“sometimes compared to Gynura procumbens or cutleaf coneflower”) and categories span multiple Gynura taxa plus Rudbeckia → identity gate FAIL/HOLD.
 - #111/#112/#113/#117/#118/#120/#122/#123/#124/#125: no exact processed/harvested medicinal-material photograph promoted from this run.
 - Cross-source identity + role splicing to manufacture a PASS: prohibited and not used.
+
+
+## Targeted rerun #04–15 — 2026-10-16
+- Search workflow run 38874400400: SUCCESS.
+- Result: no new FULL-GATE promotion.
+- #4 top candidate `HK ... 新生堂 ... SS2 18.jpg` underwent binary/provenance verification run 38874812438: original bytes/hash PASS, author Leirus Yat Shung, CC BY-SA 4.0; however file-level categories identify `銀柴胡` (Yin Chai Hu / Ngân Sài Hồ) and `雞血藤`, not `Bupleurum chinense` / 柴胡 → REJECT wrong medicinal identity for #4.
+- #5/#6/#8/#9/#10/#12/#15: search dominated by PDFs/reference works or no exact processed medicinal-material photograph.
+- #7/#14 already have M5 in promoted REV17 and were not replaced.
+- Wrong medicinal-name substitution accepted: 0.
