@@ -563,3 +563,15 @@ Therefore no exact-variety natural photograph satisfies the M4 publication gate.
 - #65 Crinum latifolium: available leaf photos show living/source leaves; manuscript requires sliced/roasted-yellow medicinal preparation for M5 target → HOLD.
 - Unsafe live-plant substitution: 0.
 - Wrong-preparation substitution: 0.
+
+
+## Targeted rerun #67–75 — 2026-10-16
+- Search workflow run 38872948060: SUCCESS.
+- Candidate verification ingest run 38873311618: SUCCESS.
+- Result: no new FULL-GATE promotion.
+- #68 Trúc Diệp candidate `...大竹葉 dried big leaves.jpg`: original bytes/provenance/license PASS (Marakero Nai NOOCRPWEO; CC BY-SA 4.0; SHA1 e954e260ec84cf5ab250310fee7b6e311d5e15cc; SHA256 479d4a5dff451c076609ac4e759986e84754c89dcbfb731a4cb6507bd25f1596), but file-level identity does NOT identify `Phyllostachys nigra`; category is only Hong Kong food shop context → HOLD/REJECT for exact identity.
+- #73 Tử Hoa Địa Đinh candidate `Violae herba 044326.jpg`: original bytes/license PASS, but exact file metadata identifies dried `Viola arvensis`, not manuscript `Viola yedoensis` → REJECT wrong species.
+- #74 top hit is living `Isatis tinctoria`, not dried medicinal leaf → HOLD.
+- #67/#69/#70/#71/#72/#75 yielded PDFs, live plants, or non-exact medicinal material → HOLD.
+- Species substitution accepted: 0.
+- Metadata-only insertion: 0.
