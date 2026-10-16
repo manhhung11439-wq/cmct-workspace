@@ -42,9 +42,23 @@ for k,img in enumerate(page.get_images(full=True),1):
     except Exception:continue
     p=OUT/f"m5_058_fig2_xref{xref}_{k}.{ex['ext']}";p.write_bytes(data)
     s1,s256=hh(data);imgs.append({"xref":xref,"file":str(p),"bytes":len(data),"width":w,"height":h,"format":fmt,"sha1":s1,"sha256":s256})
+# Controlled derivative from the original article PDF render: Figure 2a only.
+# The PDF stores Figure 2 as many thin image strips, so page rendering is the reproducible way to reconstruct the published composite.
+page_im=Image.open(OUT/f"m5_058_fig2_page_{page_idx+1}.png").convert("RGB")
+if page_im.size != (1310,1853):
+    raise RuntimeError(f"Unexpected page render size {page_im.size}; do not apply stale crop coordinates")
+crop_box=(360,500,755,790)
+drug=page_im.crop(crop_box)
+drug_path=OUT/"m5_058_fig2a_dried_aerial_parts_crop.png"
+drug.save(drug_path,format="PNG",optimize=False)
+db=drug_path.read_bytes(); ds1,ds256=hh(db)
+derivative={"file":str(drug_path),"source":"rendered from original article PDF at Matrix(2.2,2.2), then cropped to Fig 2a only",
+"crop_box":crop_box,"width":drug.width,"height":drug.height,"bytes":len(db),"sha1":ds1,"sha256":ds256,
+"transformation":"page render + crop only; excludes powder panel 2b and TLC panel 2c; no content alteration inside panel 2a"}
 manifest={"id":58,"article":"Tabboon P et al. Pharmaceutics 2026;18(1):90","doi":"10.3390/pharmaceutics18010090","license":"CC BY 4.0",
 "resolved_pdf_url":r.url,"pdf_file":str(pp),"pdf_bytes":len(pdf),"pdf_sha1":ps1,"pdf_sha256":ps256,"figure_page":page_idx+1,
-"page_text_excerpt":page_text[:6500],"images":imgs}
+"page_text_excerpt":page_text[:6500],"images":imgs,"controlled_derivative":derivative}
 (OUT/"extract_manifest.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding="utf-8")
 print("M5_058_PAGE",page_idx+1,"IMAGES",json.dumps(imgs),flush=True)
+print("M5_058_DERIVATIVE="+json.dumps(derivative,ensure_ascii=False),flush=True)
 print("M5_058_MANIFEST="+json.dumps(manifest,ensure_ascii=False),flush=True)
