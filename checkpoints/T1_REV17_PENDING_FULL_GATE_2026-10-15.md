@@ -487,3 +487,22 @@ Therefore no exact-variety natural photograph satisfies the M4 publication gate.
 - Status: FULL-GATE PASS with legacy-metadata provenance qualifier.
 - Mutation rule: insert only into the next revision derived from promoted REV17.
 
+
+
+## Targeted rerun #51–58 — 2026-10-16
+- Workflow run 38872257969: SUCCESS.
+- Manuscript role/preparation gate re-locked before search:
+  - #51 Gentiana scabra: root + rhizome, washed and dried.
+  - #52 Taraxacum mongolicum: whole plant with root; fresh or dried accepted.
+  - #53 Isatis tinctoria: root, dried and cut into segments.
+  - #54 Iris domestica: rhizome, dried and sliced.
+  - #55 Paeonia lactiflora: unpeeled root, dried and sliced; do not substitute Bai Shao processing.
+  - #56 Lycium chinense: root bark, dried.
+  - #57 Artemisia annua: aerial herb; exact harvested/dried role required.
+  - #58 Andrographis paniculata: aerial herb harvested near flowering, dried and cut.
+- Result: no new FULL-GATE promotion.
+- #52 best visual candidate `File:Taraxaci herba cum radix 132292.jpg` is dried herb with root, but exact file identity is `Taraxacum officinale`, not manuscript `Taraxacum mongolicum` → REJECT as exact-identity surrogate.
+- #53 high-scoring results are living `Isatis tinctoria` or museum/herbarium material, not dried medicinal root segments → HOLD.
+- #54–58 search results are predominantly PDFs/illustrations, live plants, or wrong medicinal form → HOLD.
+- Historical CORRECTION-READY IDs inferred: 0.
+- Unsafe species substitution: 0.
