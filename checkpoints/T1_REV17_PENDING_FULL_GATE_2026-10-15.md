@@ -609,3 +609,13 @@ Therefore no exact-variety natural photograph satisfies the M4 publication gate.
 - #94 Pulsatilla chinensis, #95 Sophora tonkinensis, #96 Lasiosphaera/Calvatia medicinal Mã Bột scope, #97 Lobelia chinensis: no exact processed crude-drug photograph with full file-level chain.
 - #98/#99 already have M5 in promoted REV17; not replaced.
 - New insertions: 0.
+
+
+## Targeted rerun #111–125 — 2026-10-16
+- Search workflow run 38873758693: SUCCESS.
+- #114 candidate verification ingest run 38874208996: SUCCESS.
+- Result so far: no new FULL-GATE promotion.
+- #114 `Longevity spinach.jpg`: exact `Gynura procumbens`, author Tamilselvi v, CC BY-SA 4.0, authentic original bytes/hash PASS; however file-level description identifies the plant but does not establish harvested leaf/young-stem material → HOLD.
+- #114 Zarit candidate set: harvested/bundled-market role is described, licenses/original bytes PASS, but source metadata explicitly treats identity as uncertain/comparative (“sometimes compared to Gynura procumbens or cutleaf coneflower”) and categories span multiple Gynura taxa plus Rudbeckia → identity gate FAIL/HOLD.
+- #111/#112/#113/#117/#118/#120/#122/#123/#124/#125: no exact processed/harvested medicinal-material photograph promoted from this run.
+- Cross-source identity + role splicing to manufacture a PASS: prohibited and not used.
