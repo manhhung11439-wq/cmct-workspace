@@ -1,0 +1,22 @@
+name: CMCT M5 070 Sophora scientific figure acquisition
+on:
+  push:
+    paths:
+      - 'scripts/acquire_m5_070_sophora.py'
+      - '.github/workflows/cmct_m5_070_sophora.yml'
+  workflow_dispatch:
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pymupdf pillow
+      - run: python scripts/acquire_m5_070_sophora.py | tee m5_070_sophora.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-070-sophora
+          path: |
+            evidence/m5_t1_070_sophora/
+            m5_070_sophora.log
+          if-no-files-found: error
+          retention-days: 30
