@@ -1,0 +1,23 @@
+name: CMCT M5 exact drug-name search 006-018
+on:
+  push:
+    paths:
+      - 'scripts/search_m5_target_006_018_drugnames.py'
+      - '.github/workflows/cmct_m5_target_006_018_drugnames.yml'
+  workflow_dispatch:
+jobs:
+  search:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests
+      - run: set -o pipefail; python scripts/search_m5_target_006_018_drugnames.py | tee search_m5_006_018.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-drugnames-006-018
+          path: |
+            evidence/m5_t1_target_006_018_drugnames/
+            search_m5_006_018.log
+          if-no-files-found: error
+          retention-days: 30
