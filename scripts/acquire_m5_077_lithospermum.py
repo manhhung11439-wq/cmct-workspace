@@ -4,7 +4,7 @@ from io import BytesIO
 OUT=pathlib.Path("evidence/m5_t1_077_lithospermum"); OUT.mkdir(parents=True,exist_ok=True)
 article="https://www.frontiersin.org/journals/pharmacology/articles/10.3389/fphar.2026.1819017/full"
 imgurl="https://www.frontiersin.org/files/Articles/1819017/xml-images/fphar-17-1819017-g001.webp"
-s=requests.Session(); s.headers["User-Agent"]="CMCT-image-audit/6.3 Lithospermum dried root Figure 1"}
+s=requests.Session(); s.headers["User-Agent"]="CMCT-image-audit/6.3 Lithospermum dried root Figure 1"
 html=s.get(article,timeout=180); html.raise_for_status(); hb=html.content; (OUT/"article.html").write_bytes(hb)
 r=s.get(imgurl,timeout=180); r.raise_for_status(); data=r.content; im=Image.open(BytesIO(data)); im.load()
 p=OUT/"figure1_original.webp"; p.write_bytes(data)
