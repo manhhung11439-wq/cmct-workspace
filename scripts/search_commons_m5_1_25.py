@@ -1,3 +1,4 @@
+# resume marker 2026-10-16T15:12+07 — strict early-slot recheck from promoted REV17
 import json, time, re
 from pathlib import Path
 import requests
