@@ -352,3 +352,21 @@ Therefore no exact-variety natural photograph satisfies the M4 publication gate.
   - #53 returned many exact `Isatis tinctoria` images, but they are living/botanical material rather than dried root; HOLD.
   - #51/#54/#55/#56/#57/#58 returned mostly PDFs, illustrations, living plants, or insufficiently role-specific images; no new FULL-GATE PASS.
 - Net new M5 PASS from #51–58: 0.
+
+
+## Targeted search #59–65 — completed
+- Workflow run 38827184159: SUCCESS.
+- Manuscript gates reconfirmed:
+  - #59 Callisia fragrans: stems + leaves; fresh or dried.
+  - #60 Pseuderanthemum palatiferum: mature leaves; fresh or dried.
+  - #61 Helicteres hirsuta: stems/branches/leaves; manuscript requires sao vàng hạ thổ / careful roasting before use.
+  - #62 Paederia lanuginosa: fresh leaf is the principal medicinal form.
+  - #63 Ampelopsis cantoniensis: stems/leaves harvested before flowering; dried; characteristic white powder.
+  - #64 Hedyotis capitellata: stems/leaves; dried or separately controlled extract form.
+  - #65 Crinum latifolium: mature leaves sliced and roasted yellow before use.
+- Search result: no candidate satisfied exact identity + exact medicinal-material role + preparation + reusable license simultaneously.
+  - #59/#60/#61/#62 returned none or literature/catalogue PDFs.
+  - #63 search ranking was polluted by unrelated non-botanical “dried” hits; no exact medicinal material.
+  - #64 similarly produced unrelated false positives.
+  - #65 returned mainly botanical literature/plant material, not sliced/roasted medicinal leaves.
+- Net new M5 PASS from #59–65: 0.
