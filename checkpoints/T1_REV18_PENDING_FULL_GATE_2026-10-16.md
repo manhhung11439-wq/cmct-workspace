@@ -33,6 +33,22 @@ See `checkpoints/T1_REV17_SOURCE_GUARD_2026-10-16.md`.
 - Status: FULL-GATE PASS.
 - Mutation rule: queue for REV18; insert only from the exact promoted 583-page REV17 base.
 
+
+### #51 Long Đởm Thảo — FULL-GATE PASS
+- Manuscript source: `Gentiana scabra Bunge`; medicinal part = root and rhizome; preparation = harvested root/rhizome, washed and dried.
+- Scientific source: Kou B, Jiang Y, Chen Y, Yang J, Sun J, Yan Y, Weng L, Xiao C. *A Study of Gentianae Radix et Rhizoma Class Differences Based on Chemical Composition and Core Efficacy*. Molecules. 2023;28(20):7132. DOI 10.3390/molecules28207132.
+- Article license: CC BY 4.0.
+- Exact identity/material chain: the study defines Gentianae Radix et Rhizoma (GRR) as the dried root and rhizome of `Gentiana scabra Bunge`; Figure 1 compares first-class (GF) and second-class (GS) GRR.
+- Selected material: Figure 1A / GF trait map, visually verified as intact dried root/rhizome material with scale; panel B/GS is excluded.
+- Original article PDF: 6,509,534 bytes; SHA1 `848f7224acef53f2607783a0efb156e4f9fcaac3`; SHA256 `ebef84cc9214452a237c9c60a80463b356c18d31678e95c0d8f019f008292172`.
+- Original embedded Figure 1 JPEG: 4343×1624; 373,732 bytes; SHA1 `f5d3d6e2d7c014f836634e6bb074a0105556dbda`; SHA256 `f71a6c0488c5e789f59b413acfd2c8e77c721b800541e703053df7669d91bd3f`.
+- Controlled insertion derivative: Figure 1A only; crop box `(0,0,2070,1624)`; PNG 2070×1624; 951,426 bytes; SHA1 `b55d4b0920b5edc27d32f49e70f3d14c9dc390c2`; SHA256 `0a6c7aca0d9ea641c186370f03f42722d8c1a64194a3ae834c7ad10d7e96813d`.
+- Transformation: crop only from original embedded Figure 1 JPEG; retains GF material and scale, excludes GS panel; no content alteration inside selected panel.
+- Reproducible acquisition/crop workflow run 38851930020 — SUCCESS; artifact `cmct-m5-051-gentiana`, artifact ID 12025247336.
+- Controlled caption: `Ảnh 5 – Long Đởm Thảo (Gentiana scabra): dược liệu rễ và thân rễ khô, mẫu hạng GF. Nguồn: Kou et al., Molecules 2023, Fig. 1A; CC BY 4.0; ảnh đã crop chỉ panel A.`
+- Status: FULL-GATE PASS.
+- Mutation rule: queue for REV18; insert only from the exact promoted 583-page REV17 base.
+
 ### #53 Bản Lam Căn — FULL-GATE PASS
 - Manuscript source: `Isatis tinctoria L.`; medicinal part = root; final preparation = dried and cut into segments/slices.
 - Controlled identity mapping: the scientific source names the medicinal source as `Isatis indigotica Fort.` / Bei-Ban-Lan-Gen (BBLG); manuscript already preserves `Isatis indigotica` as the medicinal-source synonym context for `Isatis tinctoria`.
@@ -156,14 +172,14 @@ Rejected alternate for #121:
 
 ## Current execution state
 - Promoted manuscript M5 remains 23/125 until a controlled mutation is performed.
-- New FULL-GATE queue after promotion = 8 rows (#43, #53, #55, #57, #58, #109, #111, #121).
-- If/when #43, #53, #55, #57, #58, #109, #111 and #121 are mutated from the exact promoted REV17 base, expected M5 count becomes 31/125, subject to render/TOC/regression PASS.
-- Remaining unfilled M5 slots before mutation = 102/125; after successful #43 + #53 + #55 + #57 + #58 + #109 + #111 + #121 mutation = 94/125.
+- New FULL-GATE queue after promotion = 9 rows (#43, #51, #53, #55, #57, #58, #109, #111, #121).
+- If/when #43, #51, #53, #55, #57, #58, #109, #111 and #121 are mutated from the exact promoted REV17 base, expected M5 count becomes 32/125, subject to render/TOC/regression PASS.
+- Remaining unfilled M5 slots before mutation = 102/125; after successful #43 + #51 + #53 + #55 + #57 + #58 + #109 + #111 + #121 mutation = 93/125.
 - M4 #78 remains unresolved at exact-variety reusable natural-photo level.
 - Two historical CORRECTION-READY IDs in #1–25 remain unrecovered and MUST NOT be inferred.
 
 ## Targeted-search verdicts since REV17 promotion
-- #51–58 broad Commons search: no direct Commons FULL-GATE; subsequent exact scientific-figure acquisition promoted #53, #55, #57 and #58 to FULL-GATE.
+- #51–58 broad Commons search: no direct Commons FULL-GATE; subsequent exact scientific-figure acquisition promoted #51, #53, #55, #57 and #58 to FULL-GATE.
 - #67–75: no new FULL-GATE.
 - #76–85: no new FULL-GATE.
 - #86–97: no new FULL-GATE.
