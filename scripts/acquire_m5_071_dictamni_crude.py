@@ -3,7 +3,7 @@ import requests
 from PIL import Image
 OUT=pathlib.Path("evidence/m5_t1_071_dictamni_crude"); OUT.mkdir(parents=True,exist_ok=True)
 PMC="PMC6720610"; XL="{http://www.w3.org/1999/xlink}href"
-s=requests.Session(); s.headers["User-Agent"]="CMCT-image-audit/6.3 Dictamni Cortex crude Figure 1"}
+s=requests.Session(); s.headers["User-Agent"]="CMCT-image-audit/6.3 Dictamni Cortex crude Figure 1"
 def get(u):
     last=None
     for i in range(8):
