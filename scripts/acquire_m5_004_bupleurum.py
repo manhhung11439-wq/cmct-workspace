@@ -1,90 +1,114 @@
-# CMCT T1 M5 #4 Bupleurum chinense dried root figure acquisition
-import io,json,hashlib,pathlib,time,re
-import requests,fitz
-from PIL import Image
+# CMCT T1 M5 #4 Bupleurum chinense exact root figure acquisition via PMC/EuropePMC
+import io,json,hashlib,pathlib,time,re,xml.etree.ElementTree as ET
+import requests
+from PIL import Image,ImageDraw
 
 OUT=pathlib.Path("evidence/m5_t1_004_bupleurum"); OUT.mkdir(parents=True,exist_ok=True)
-s=requests.Session(); s.headers["User-Agent"]="CMCT-image-audit/4.0 Bupleurum chinense exact dried-root figure extraction"
+s=requests.Session(); s.headers["User-Agent"]="CMCT-image-audit/4.1 exact Bupleurum chinense root figure acquisition"
+PMC="PMC5448051"
+XML_URL=f"https://www.ebi.ac.uk/europepmc/webservices/rest/{PMC}/fullTextXML"
 
-def get(url):
+def get(url,accept=None):
     last=None
+    headers={}
+    if accept: headers["Accept"]=accept
     for i in range(8):
-        r=s.get(url,timeout=180,allow_redirects=True); last=r
+        r=s.get(url,headers=headers,timeout=180,allow_redirects=True); last=r
         if r.status_code in (429,500,502,503,504):
             time.sleep(min(60,2*(2**i))); continue
-        r.raise_for_status(); return r
+        if r.status_code>=400:
+            raise requests.HTTPError(f"{r.status_code} {url}",response=r)
+        return r
     last.raise_for_status()
 
 def hh(data): return hashlib.sha1(data).hexdigest(),hashlib.sha256(data).hexdigest()
 
-pdf_urls=[
- "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5448051/fullTextPDF",
- "https://downloads.hindawi.com/journals/bmri/2017/7597596.pdf"
-]
-r=None
-for u in pdf_urls:
-    try:
-        rr=get(u)
-        if rr.content.startswith(b"%PDF"):
-            r=rr; break
-    except Exception as e:
-        print("PDF_SOURCE_FAIL",u,repr(e),flush=True)
-if r is None: raise RuntimeError("no PDF source succeeded")
-pdf=r.content
-if not pdf.startswith(b"%PDF"): raise RuntimeError("not PDF")
-pp=OUT/"m5_004_article_original.pdf"; pp.write_bytes(pdf)
-ps1,ps256=hh(pdf)
-doc=fitz.open(stream=pdf,filetype="pdf")
-page_idx=None; page_text=""
-for i,p in enumerate(doc):
-    txt=p.get_text("text")
-    low=" ".join(txt.lower().split())
-    if "the whole plant of bupleurum chinense" in low and "roots of bupleurum chinense" in low:
-        page_idx=i; page_text=txt; break
-if page_idx is None: raise RuntimeError("Figure 1 page not found")
-page=doc[page_idx]
-pix=page.get_pixmap(matrix=fitz.Matrix(2.2,2.2),alpha=False)
-pagepng=OUT/f"m5_004_fig1_page_{page_idx+1}.png"; pix.save(str(pagepng))
+xr=get(XML_URL,accept="application/xml")
+xmlb=xr.content
+(OUT/"m5_004_fulltext.xml").write_bytes(xmlb)
+xs1,xs256=hh(xmlb)
+root=ET.fromstring(xmlb)
+ns_xlink="{http://www.w3.org/1999/xlink}href"
+figs=[]
+for fig in root.iter("fig"):
+    label=" ".join("".join(fig.find("label").itertext()).split()) if fig.find("label") is not None else ""
+    capnode=fig.find("caption")
+    caption=" ".join("".join(capnode.itertext()).split()) if capnode is not None else ""
+    hrefs=[]
+    for g in fig.iter("graphic"):
+        href=g.attrib.get(ns_xlink) or g.attrib.get("href") or ""
+        if href: hrefs.append(href)
+    figs.append({"id":fig.attrib.get("id",""),"label":label,"caption":caption,"graphics":hrefs})
+print("M5_004_FIGURES="+json.dumps(figs,ensure_ascii=False),flush=True)
 
-imgs=[]
-for k,img in enumerate(page.get_images(full=True),1):
-    xref=img[0]; ex=doc.extract_image(xref); data=ex["image"]
-    if len(data)<15000: continue
-    try:
-        im=Image.open(io.BytesIO(data)); w,h=im.size; fmt=im.format
-    except Exception: continue
-    p=OUT/f"m5_004_fig1_xref{xref}_{k}.{ex['ext']}"; p.write_bytes(data)
-    s1,s256=hh(data)
-    imgs.append({"xref":xref,"file":str(p),"bytes":len(data),"width":w,"height":h,"format":fmt,"sha1":s1,"sha256":s256})
+target=None
+for f in figs:
+    low=(f["label"]+" "+f["caption"]).lower()
+    if "roots of bupleurum chinense" in low and "roots of bupleurum scorzonerifolium" in low:
+        target=f; break
+if target is None: raise RuntimeError("Target Figure 1 not found in fullTextXML")
+if not target["graphics"]: raise RuntimeError("Target figure has no graphic href")
 
-# Save a contact-sheet of extracted candidate images for controller review.
-thumbs=[]
-for x in imgs:
-    im=Image.open(x["file"]).convert("RGB")
-    im.thumbnail((700,500))
-    thumbs.append((x["xref"],im.copy()))
-if thumbs:
-    W=max(im.width for _,im in thumbs); H=sum(im.height+40 for _,im in thumbs)
-    sheet=Image.new("RGB",(W,H),"white"); y=0
-    from PIL import ImageDraw
-    dr=ImageDraw.Draw(sheet)
-    for xref,im in thumbs:
-        dr.text((5,y+5),f"xref {xref}  {im.width}x{im.height}",fill="black")
-        y+=30; sheet.paste(im,(0,y)); y+=im.height+10
-    sheet.save(OUT/"m5_004_extracted_contact_sheet.png")
+downloaded=[]
+for href in target["graphics"]:
+    names=[href]
+    if not re.search(r"\.(?:jpe?g|png|gif|tiff?)$",href,re.I):
+        names += [href+".jpg",href+".jpeg",href+".png"]
+    for name in names:
+        urls=[
+          f"https://pmc.ncbi.nlm.nih.gov/articles/{PMC}/bin/{name}",
+          f"https://www.ncbi.nlm.nih.gov/pmc/articles/{PMC}/bin/{name}",
+          f"https://europepmc.org/articles/{PMC}/bin/{name}",
+        ]
+        ok=False
+        for u in urls:
+            try:
+                r=get(u)
+                data=r.content
+                im=Image.open(io.BytesIO(data)); im.load()
+                if im.width<200 or im.height<200: continue
+                ext=(im.format or "JPEG").lower().replace("jpeg","jpg")
+                p=OUT/f"m5_004_fig1_original.{ext}"; p.write_bytes(data)
+                s1,s256=hh(data)
+                downloaded.append({"href":href,"resolved_url":r.url,"file":str(p),"bytes":len(data),"width":im.width,"height":im.height,"format":im.format,"sha1":s1,"sha256":s256})
+                ok=True; break
+            except Exception as e:
+                print("FIG_SOURCE_FAIL",u,repr(e),flush=True)
+        if ok: break
+
+if not downloaded: raise RuntimeError("Could not download target figure original")
+src=downloaded[0]
+im=Image.open(src["file"]).convert("RGB")
+
+# Produce a review sheet + four provisional quadrants ONLY for controller inspection.
+# No quadrant is automatically promoted; panel C must be visually confirmed first.
+w,h=im.size
+boxes={"A":(0,0,w//2,h//2),"B":(w//2,0,w,h//2),"C":(0,h//2,w//2,h),"D":(w//2,h//2,w,h)}
+derivs={}
+for label,box in boxes.items():
+    cr=im.crop(box)
+    p=OUT/f"m5_004_provisional_panel_{label}.png"; cr.save(p,format="PNG")
+    data=p.read_bytes(); s1,s256=hh(data)
+    derivs[label]={"file":str(p),"crop_box":box,"width":cr.width,"height":cr.height,"bytes":len(data),"sha1":s1,"sha256":s256,"status":"PROVISIONAL_REVIEW_ONLY"}
+
+thumb=im.copy(); thumb.thumbnail((1200,900))
+sheet=Image.new("RGB",(thumb.width,thumb.height+60),"white"); sheet.paste(thumb,(0,60))
+dr=ImageDraw.Draw(sheet); dr.text((10,10),"Bupleurum Figure 1 original — verify panel C before promotion",fill="black")
+sheet.save(OUT/"m5_004_fig1_review.png")
 
 manifest={
  "id":4,
  "article":"Yang F et al. BioMed Research International 2017;2017:7597596",
  "doi":"10.1155/2017/7597596",
+ "pmcid":PMC,
  "license":"CC BY",
- "figure_caption":"The whole plant of Bupleurum chinense DC. (A); whole plant of B. scorzonerifolium (B); roots of B. chinense (C); roots of B. scorzonerifolium (D).",
- "material_context":"Article states Radix Bupleuri is derived from dried roots of Bupleurum chinense and B. scorzonerifolium; collected, aerial parts/soil removed, and dried.",
- "resolved_pdf_url":r.url,
- "pdf_file":str(pp),"pdf_bytes":len(pdf),"pdf_sha1":ps1,"pdf_sha256":ps256,
- "figure_page":page_idx+1,"page_text_excerpt":page_text[:6000],"images":imgs
+ "xml_url":xr.url,"xml_bytes":len(xmlb),"xml_sha1":xs1,"xml_sha256":xs256,
+ "target_figure":target,
+ "original_figure":src,
+ "provisional_quadrants":derivs,
+ "controller_note":"Do not promote until exact panel C crop is visually verified; quadrants are review aids only."
 }
 (OUT/"extract_manifest.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding="utf-8")
-print("M5_004_PAGE",page_idx+1,flush=True)
-print("M5_004_IMAGES="+json.dumps(imgs,ensure_ascii=False),flush=True)
+print("M5_004_ORIGINAL="+json.dumps(src,ensure_ascii=False),flush=True)
+print("M5_004_PROVISIONAL="+json.dumps(derivs,ensure_ascii=False),flush=True)
 print("M5_004_MANIFEST="+json.dumps(manifest,ensure_ascii=False),flush=True)
