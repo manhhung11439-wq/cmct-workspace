@@ -1,5 +1,5 @@
 # CMCT T1 M5 #4 Bupleurum chinense exact root figure acquisition via PMC/EuropePMC
-import io,json,hashlib,pathlib,time,re,xml.etree.ElementTree as ET
+import io,json,hashlib,pathlib,time,re,zipfile,xml.etree.ElementTree as ET
 import requests
 from PIL import Image,ImageDraw
 
@@ -50,31 +50,66 @@ if target is None: raise RuntimeError("Target Figure 1 not found in fullTextXML"
 if not target["graphics"]: raise RuntimeError("Target figure has no graphic href")
 
 downloaded=[]
-for href in target["graphics"]:
-    names=[href]
-    if not re.search(r"\.(?:jpe?g|png|gif|tiff?)$",href,re.I):
-        names += [href+".jpg",href+".jpeg",href+".png"]
-    for name in names:
-        urls=[
-          f"https://pmc.ncbi.nlm.nih.gov/articles/{PMC}/bin/{name}",
-          f"https://www.ncbi.nlm.nih.gov/pmc/articles/{PMC}/bin/{name}",
-          f"https://europepmc.org/articles/{PMC}/bin/{name}",
-        ]
-        ok=False
-        for u in urls:
+
+# Europe PMC officially exposes OA inline images through supplementaryFiles.
+try:
+    sr=get(f"https://www.ebi.ac.uk/europepmc/webservices/rest/{PMC}/supplementaryFiles?inlineImages=true")
+    zdata=sr.content
+    (OUT/"m5_004_europepmc_inline_files.zip").write_bytes(zdata)
+    if not zipfile.is_zipfile(io.BytesIO(zdata)):
+        raise RuntimeError(f"supplementaryFiles did not return ZIP: {sr.headers.get('content-type')}")
+    with zipfile.ZipFile(io.BytesIO(zdata)) as z:
+        names=z.namelist()
+        print("M5_004_INLINE_ZIP_NAMES="+json.dumps(names,ensure_ascii=False),flush=True)
+        wanted=set()
+        for href in target["graphics"]:
+            wanted.add(pathlib.PurePosixPath(href).name.lower())
+        matches=[n for n in names if pathlib.PurePosixPath(n).name.lower() in wanted]
+        if not matches:
+            # tolerate archive path/extension variants, but require the same Figure 1 stem.
+            matches=[n for n in names if "bmri2017-7597596.001" in pathlib.PurePosixPath(n).name.lower()]
+        for n in matches:
+            data=z.read(n)
             try:
-                r=get(u)
-                data=r.content
                 im=Image.open(io.BytesIO(data)); im.load()
-                if im.width<200 or im.height<200: continue
-                ext=(im.format or "JPEG").lower().replace("jpeg","jpg")
-                p=OUT/f"m5_004_fig1_original.{ext}"; p.write_bytes(data)
-                s1,s256=hh(data)
-                downloaded.append({"href":href,"resolved_url":r.url,"file":str(p),"bytes":len(data),"width":im.width,"height":im.height,"format":im.format,"sha1":s1,"sha256":s256})
-                ok=True; break
-            except Exception as e:
-                print("FIG_SOURCE_FAIL",u,repr(e),flush=True)
-        if ok: break
+            except Exception:
+                continue
+            if im.width<200 or im.height<200: continue
+            ext=(im.format or "JPEG").lower().replace("jpeg","jpg")
+            p=OUT/f"m5_004_fig1_original.{ext}"; p.write_bytes(data)
+            s1,s256=hh(data)
+            downloaded.append({"href":n,"resolved_url":sr.url+"#"+n,"file":str(p),"bytes":len(data),"width":im.width,"height":im.height,"format":im.format,"sha1":s1,"sha256":s256,"source":"EuropePMC supplementaryFiles inline image ZIP"})
+            break
+except Exception as e:
+    print("EUROPEPMC_INLINE_FAIL",repr(e),flush=True)
+
+# Fallback direct asset routes only if the official inline-image ZIP did not yield the figure.
+if not downloaded:
+    for href in target["graphics"]:
+        names=[href]
+        if not re.search(r"\.(?:jpe?g|png|gif|tiff?)$",href,re.I):
+            names += [href+".jpg",href+".jpeg",href+".png"]
+        for name in names:
+            urls=[
+              f"https://pmc.ncbi.nlm.nih.gov/articles/{PMC}/bin/{name}",
+              f"https://www.ncbi.nlm.nih.gov/pmc/articles/{PMC}/bin/{name}",
+              f"https://europepmc.org/articles/{PMC}/bin/{name}",
+            ]
+            ok=False
+            for u in urls:
+                try:
+                    rr=get(u)
+                    data=rr.content
+                    im=Image.open(io.BytesIO(data)); im.load()
+                    if im.width<200 or im.height<200: continue
+                    ext=(im.format or "JPEG").lower().replace("jpeg","jpg")
+                    p=OUT/f"m5_004_fig1_original.{ext}"; p.write_bytes(data)
+                    s1,s256=hh(data)
+                    downloaded.append({"href":href,"resolved_url":rr.url,"file":str(p),"bytes":len(data),"width":im.width,"height":im.height,"format":im.format,"sha1":s1,"sha256":s256,"source":"direct OA asset fallback"})
+                    ok=True; break
+                except Exception as e:
+                    print("FIG_SOURCE_FAIL",u,repr(e),flush=True)
+            if ok: break
 
 if not downloaded: raise RuntimeError("Could not download target figure original")
 src=downloaded[0]
