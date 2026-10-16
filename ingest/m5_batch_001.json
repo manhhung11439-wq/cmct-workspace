@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 #121 Phyllanthus acidus harvested fresh fruit verification",
+  "batch": "Tập 1 M5 #100 Kalanchoe pinnata detached-leaf verification",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -9,19 +9,20 @@
       "provenance",
       "author",
       "file_level_license",
-      "original_bytes_hash"
+      "original_bytes_hash",
+      "visual_detached_material_check"
     ]
   },
   "items": [
     {
-      "id": 121,
-      "filename": "m5_121_Phyllanthus_acidus_supermarket_fruit.jpg",
-      "commons_title": "File:Phyllanthus acidus2.jpg"
+      "id": 100,
+      "filename": "m5_100_Kalanchoe_pinnata_leaf.jpg",
+      "commons_title": "File:Kalanchoe pinnata leaf.jpg"
     },
     {
-      "id": 121,
-      "filename": "m5_121_Phyllanthus_acidus_whole_cross_section.jpg",
-      "commons_title": "File:Phyllanthus acidus - whole and cross section.jpg"
+      "id": 100,
+      "filename": "m5_100_Miracle_leaf.jpg",
+      "commons_title": "File:Miracle leaf.jpg"
     }
   ]
 }
