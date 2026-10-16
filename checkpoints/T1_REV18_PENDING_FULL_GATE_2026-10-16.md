@@ -64,6 +64,22 @@ See `checkpoints/T1_REV17_SOURCE_GUARD_2026-10-16.md`.
 - Status: FULL-GATE PASS.
 - Mutation rule: queue for REV18; insert only from the exact promoted 583-page REV17 source (or a separately controller-approved controlled reconstruction if that raw source remains unavailable).
 
+
+### #57 Thanh Hao — FULL-GATE PASS
+- Manuscript source: `Artemisia annua L.`; medicinal part = aerial herb; preparation target = harvested aerial parts dried under controlled low-heat/shade conditions.
+- Scientific source: Gavarić N, Aćimović M, Kladar N, Hitl M, Drljača Lero J, Milić N, Radovanović K. *Unlocking the Bioactivity of Sweet Wormwood (Artemisia annua L., Asteraceae) Ethanolic Extract: Phenolics, Antioxidants, and Cytotoxic Effects*. Pharmaceutics. 2025;17(7):890. DOI 10.3390/pharmaceutics17070890.
+- Article license: CC BY 4.0.
+- Exact identity/material chain: Methods state aerial parts of `Artemisia annua L.` were collected at full flowering; botanical identity was confirmed and voucher No. 2-1513 deposited.
+- Exact preparation chain: after collection the plant material was air-dried in the shade to constant weight and stored dry; Figure 1b is explicitly captioned as the herbal drug prepared for extraction, consisting of fragmented inflorescence, leaves and stems.
+- Original article PDF: 2,157,394 bytes; SHA1 `a5e9eeaf01d83a6a6d47cd42cda0586a6c4b3674`; SHA256 `b0628a2bb601c20a1e5d367a4d67ff2dc0da88322795af11c310f4af11b180aa`.
+- Original embedded Fig. 1 composite: JPEG 748×413; 76,612 bytes; SHA1 `66cf8c4813ac4321abb632767d0be07e911fd0d2`; SHA256 `3d1ff7c1daec57a83709d66935f03031414c0d4170e992af8463c2073e7976e3`.
+- Controlled insertion derivative: Fig. 1b only, crop box `(236,0,748,413)`; PNG 512×413; 426,668 bytes; SHA1 `78360c7ed885be9887830180d42825f0fee3dfc0`; SHA256 `f8adc8e512fb23f1c0266f2b7c1ecb508c5acc7fc81cf17bda3b8bbb4caf0673`.
+- Transformation: crop only; removes panel 1a living leaves and retains only panel 1b herbal-drug material; lossless PNG derivative.
+- Reproducible acquisition/crop workflow: run 38850944643 — SUCCESS; artifact `cmct-m5-057-artemisia`, artifact ID 12025435751.
+- Controlled caption: `Ảnh 5 – Thanh Hao (Artemisia annua): phần trên mặt đất thu ở giai đoạn ra hoa, phơi âm can đến khối lượng không đổi; hình dược liệu gồm cụm hoa, lá và thân đã phân mảnh. Nguồn: Gavarić et al., Pharmaceutics 2025, Fig. 1b; CC BY 4.0; ảnh đã crop chỉ phần dược liệu.`
+- Status: FULL-GATE PASS.
+- Mutation rule: queue for REV18; insert only from the exact promoted 583-page REV17 base.
+
 ### #109 Lá Bàng — FULL-GATE PASS
 Selected file:
 - Wikimedia Commons: `File:444Talisay leaves camote slices 01.jpg`
@@ -124,14 +140,14 @@ Rejected alternate for #121:
 
 ## Current execution state
 - Promoted manuscript M5 remains 23/125 until a controlled mutation is performed.
-- New FULL-GATE queue after promotion = 6 rows (#43, #53, #55, #109, #111, #121).
-- If/when #43, #53, #55, #109, #111 and #121 are mutated from the exact promoted REV17 base, expected M5 count becomes 29/125, subject to render/TOC/regression PASS.
-- Remaining unfilled M5 slots before mutation = 102/125; after successful #43 + #53 + #55 + #109 + #111 + #121 mutation = 96/125.
+- New FULL-GATE queue after promotion = 7 rows (#43, #53, #55, #57, #109, #111, #121).
+- If/when #43, #53, #55, #57, #109, #111 and #121 are mutated from the exact promoted REV17 base, expected M5 count becomes 30/125, subject to render/TOC/regression PASS.
+- Remaining unfilled M5 slots before mutation = 102/125; after successful #43 + #53 + #55 + #57 + #109 + #111 + #121 mutation = 95/125.
 - M4 #78 remains unresolved at exact-variety reusable natural-photo level.
 - Two historical CORRECTION-READY IDs in #1–25 remain unrecovered and MUST NOT be inferred.
 
 ## Targeted-search verdicts since REV17 promotion
-- #51–58: no new FULL-GATE.
+- #51–58 broad Commons search: no direct Commons FULL-GATE; subsequent exact scientific-figure acquisition promoted #53, #55 and #57 to FULL-GATE.
 - #67–75: no new FULL-GATE.
 - #76–85: no new FULL-GATE.
 - #86–97: no new FULL-GATE.
@@ -139,7 +155,7 @@ Rejected alternate for #121:
 - #111–125 broad Commons pass: #121 promoted to FULL-GATE after exact detached-fruit verification; other rows remain HOLD unless individually re-verified.
 
 
-### #51–58 targeted rerun — NO NEW FULL-GATE
+### #51–58 broad targeted Commons rerun — NO DIRECT COMMONS FULL-GATE (later scientific-source passes recorded above)
 - Run 38839389552: SUCCESS after manuscript-exact role re-lock.
 - #51 Long Đởm Thảo: search returned materia-medica PDFs/illustrations, not an exact reusable photograph of dried root + rhizome.
 - #52 Bồ Công Anh: top crude-drug file remains `Taraxaci herba cum radix 132292.jpg`, but file-level species is `Taraxacum officinale`, not manuscript-locked `T. mongolicum` → reject for insertion.
