@@ -1,17 +1,23 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE verification — #110 dried Mangifera indica leaves",
+  "batch": "Tập 1 M5 strict verification — #30 Citrus aurantiifolia leaves",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
-      "identity_material","medicinal_part","preparation_form",
-      "provenance","author","file_level_license","original_bytes_hash"
+      "identity_material",
+      "medicinal_part",
+      "preparation_form",
+      "provenance",
+      "author",
+      "file_level_license",
+      "original_bytes_hash"
     ]
   },
   "items": [
     {
-      "id": 110,
-      "filename": "m5_110_Dried_Mango_Leaves.jpg",
-      "commons_title": "File:Dried Mango Leaves.jpg"
+      "id": 30,
+      "filename": "m5_030_Citrus_aurantifolia_leaves.jpg",
+      "commons_title": "File:Citrus aurantifolia leaves.jpg",
+      "expected_sha1": "45349373b6dafdcb10e8e405f5acac299ef40345"
     }
   ]
 }
