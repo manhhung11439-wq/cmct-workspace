@@ -293,6 +293,12 @@ Most hits in these ranges were live plants, catalogue scans, herbarium/illustrat
 
 Specific rejects / HOLD:
 
+- #67–75 targeted rerun: no new FULL-GATE file.
+- #68 dried-big-leaf market candidate lacks file-level botanical identity to `Phyllostachys nigra` → HOLD.
+- #73 `Violae herba 044326.jpg` is explicitly dried `Viola arvensis`, not manuscript `Viola yedoensis` → REJECT.
+- #74 top Commons hits are live `Isatis tinctoria` plants/leaves rather than dried cut Folium Isatidis → HOLD.
+- #75 no reusable file-level medicinal Indigo Naturalis / 青黛 powder candidate with exact source/preparation chain → HOLD.
+
 - #52 Taraxaci herba cum radix candidate rejected after file-level verification: Commons identifies it as dried `Taraxacum officinale` herb with root, while the Tập 1 manuscript locks `Taraxacum mongolicum`; correct material/form but wrong source-species → HOLD/REJECT for insertion.
 - #51/#53–58 targeted exact crude-drug search rerun produced no new exact-species FULL-GATE file; live plants, generic materia-medica scans, or species-ambiguous drug names are not promoted.
 - #114 Longevity spinach candidate: `File:Longevity spinach.jpg` has exact file-level identity `Gynura procumbens`, author Tamilselvi v, CC BY-SA 4.0 and original-byte/hash PASS, but description only documents the living edible vine/leaf morphology and does not establish harvested fresh leaves + young stems as medicinal material → ROLE/PREPARATION HOLD. Run 38756756131; SHA1 e049c1420b32dfa7360660984a95f86ce002d59f; SHA256 62bdfd46935daf489ace73dee95bc77a263fb514a3f05de69cd19ac01cc11f95.
