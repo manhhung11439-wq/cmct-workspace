@@ -1,4 +1,4 @@
-# rerun marker 2026-10-16 — criteria unchanged; trigger targeted acquisition
+# rerun marker 2026-10-16T07:43+07 — manuscript roles re-locked; criteria unchanged
 import json,time,re,html
 from pathlib import Path
 import requests
