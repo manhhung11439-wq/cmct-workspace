@@ -260,11 +260,56 @@ Rejected alternate for #121:
 - Status: FULL-GATE PASS.
 - Mutation rule: queue for REV18; DO NOT mutate from the 585-page Library variant; insert only after the exact promoted 583-page REV17 raw DOCX (SHA-256 `2a6e0ade56225686bca38bd95155425e70c8ab52df9be58cbacab6a69ff5c5cc`) is recovered/verified.
 
+
+## PD-atlas controller promotion — M5 #6/#8/#9/#10 — 2026-10-16
+
+Source for all four rows:
+- Wikimedia Commons: `File:NLC416-08jh015896-38387 中國藥物標本圖影.pdf`
+- National Library of China scan; source metadata creator/editor: 中國醫藥研究社編輯.
+- License: Public domain.
+- Original PDF: 20,699,714 bytes; SHA1 `1aef378d7c63ab41a2ddd116b492da98e63cae75`; SHA256 `88f39462dedfcfa9475764f7693132abc5de5b6c041cd1038c9f73ea0e4ea61e`.
+- Controlled acquisition run 38895440927: SUCCESS; artifact 12043876564 (`cmct-m5-atlas-pass-006-008-009-010`).
+- Controller rule: atlas drug-label evidence is paired with modern pharmacopoeial/scientific source-species and medicinal-part mapping; no OCR-derived identity inference was used. All derivatives are render-and-crop only.
+
+### #6 Phòng Phong — FULL-GATE PASS
+- Manuscript identity: `Saposhnikovia divaricata (Turcz.) Schischk.`; medicinal part = dried root.
+- Atlas plate drug label: `防風` (Fangfeng), page 61; crop visibly contains the drug label and root material.
+- Modern mapping cross-check: Fangfeng/Saposhnikoviae Radix = dried root of `Saposhnikovia divaricata`.
+- Controlled crop: 405×345 PNG; SHA256 `62bf89d30c084f983442aa5b8b8edc704bc03462fdf3b214499ef596d758a519`.
+- Controlled caption: `Ảnh 5 – Phòng Phong (Saposhnikovia divaricata): dược liệu rễ khô (防風). Nguồn: 中國藥物標本圖影, National Library of China scan, p.61; Public Domain; ảnh đã crop chỉ vùng dược liệu/nhãn.`
+- Status: FULL-GATE PASS.
+
+### #8 Quế Chi — FULL-GATE PASS
+- Manuscript identity: `Cinnamomum cassia (L.) J.Presl`; medicinal part = dried young twig/branch.
+- Atlas plate drug label: `桂枝` (Guizhi), page 201; crop visibly separates `桂枝` from `桂花子` and points to twig material.
+- Modern mapping cross-check: Cinnamomi Ramulus/Guizhi = dried twigs of `Cinnamomum cassia`.
+- Controlled crop: 430×320 PNG; SHA256 `80076583f15ce4940d67a820468b7df4818458e40d7fcd7d55304fdc20f85e67`.
+- Controlled caption: `Ảnh 5 – Quế Chi (Cinnamomum cassia): dược liệu cành non khô (桂枝). Nguồn: 中國藥物標本圖影, National Library of China scan, p.201; Public Domain; ảnh đã crop vùng 桂枝.`
+- Status: FULL-GATE PASS.
+
+### #9 Kinh Giới — FULL-GATE PASS
+- Manuscript identity: `Schizonepeta tenuifolia Briq.` (modern synonym context `Nepeta tenuifolia`); medicinal part = dried aerial parts.
+- Atlas plate drug label: `荊芥` (Jingjie), page 75; crop shows aerial-herb material and cut material on the labeled plate.
+- Modern mapping cross-check: Jingjie/Schizonepetae Herba = dried aerial parts of `Schizonepeta tenuifolia` / `Nepeta tenuifolia`.
+- Controlled crop: 600×470 PNG; SHA256 `8cc9c5ca33967d1467a00145d8234d3959ff2a99891ccc683987b647ec3750a7`.
+- Controlled caption: `Ảnh 5 – Kinh Giới (Schizonepeta tenuifolia): dược liệu phần trên mặt đất khô (荊芥), gồm mẫu nguyên/cắt. Nguồn: 中國藥物標本圖影, National Library of China scan, p.75; Public Domain; ảnh đã crop vùng dược liệu.`
+- Status: FULL-GATE PASS.
+
+### #10 Bạc Hà — FULL-GATE PASS
+- Manuscript identity: `Mentha canadensis L.`; medicinal part = dried aerial parts.
+- Atlas plate drug label: `薄荷` (Bohe), page 79; crop shows dried/cut herb on the labeled plate.
+- Modern mapping cross-check: Bohe/Menthae Haplocalycis Herba is pharmacopoeially mapped to the dried aerial parts of `Mentha canadensis` (legacy name `M. haplocalyx` occurs in older literature).
+- Controlled crop: 350×360 PNG; SHA256 `d48a42852fe5a5b226d5bfefd9160343a3a079344803f5bdef393e68795c1e2f`.
+- Controlled caption: `Ảnh 5 – Bạc Hà (Mentha canadensis): dược liệu phần trên mặt đất khô/cắt (薄荷). Nguồn: 中國藥物標本圖影, National Library of China scan, p.79; Public Domain; ảnh đã crop vùng dược liệu.`
+- Status: FULL-GATE PASS.
+
+Mutation rule for all four: queue for REV18; insert only from the exact promoted 583-page REV17 base/recovered controlled equivalent after source-guard reconciliation.
+
 ## Current execution state
 - Promoted manuscript M5 remains 23/125 until a controlled mutation is performed.
-- New FULL-GATE queue after promotion = 17 rows (#4, #5, #43, #44, #47, #48, #51, #53, #54, #55, #57, #58, #70, #95, #109, #111, #121).
-- If/when #4, #5, #43, #44, #47, #48, #51, #53, #54, #55, #57, #58, #70, #95, #109, #111 and #121 are mutated from the exact promoted REV17 base, expected M5 count becomes 40/125, subject to render/TOC/regression PASS.
-- Remaining unfilled M5 slots before mutation = 102/125; after successful #4 + #5 + #43 + #44 + #47 + #48 + #51 + #53 + #54 + #55 + #57 + #58 + #70 + #95 + #109 + #111 + #121 mutation = 85/125.
+- New FULL-GATE queue after promotion = 21 rows (#4, #5, #6, #8, #9, #10, #43, #44, #47, #48, #51, #53, #54, #55, #57, #58, #70, #95, #109, #111, #121).
+- If/when the 21 queued rows (#4, #5, #6, #8, #9, #10, #43, #44, #47, #48, #51, #53, #54, #55, #57, #58, #70, #95, #109, #111, #121) are mutated from the exact promoted REV17 base, expected M5 count becomes 44/125, subject to render/TOC/regression PASS.
+- Remaining unfilled M5 slots before mutation = 102/125; after successful mutation of the 21-row FULL-GATE queue = 81/125.
 - M4 #78 remains unresolved at exact-variety reusable natural-photo level.
 - Two historical CORRECTION-READY IDs in #1–25 remain unrecovered and MUST NOT be inferred.
 
