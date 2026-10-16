@@ -47,24 +47,42 @@ for g in graphics:
     for key in ("xlink:href","href"):
         if g.get(key): hrefs.append(g.get(key))
 if not hrefs: raise RuntimeError("Frontiers Figure 1 has no graphic href: "+str(fig53)[:1500])
-# try href variants and keep largest valid image
+# Resolve current Frontiers HTML/CDN path plus legacy static paths.
+article_html=get("https://www.frontiersin.org/journals/pharmacology/articles/10.3389/fphar.2021.685575/full").text
+hs=BeautifulSoup(article_html,"html.parser")
+html_urls=[]
+for tag in hs.find_all(["img","source"]):
+    vals=[]
+    for key in ("src","data-src","srcset","data-srcset"):
+        if tag.get(key): vals.append(tag.get(key))
+    for val in vals:
+        for part in str(val).split(","):
+            u=part.strip().split()[0]
+            if "685575" in u or "g001" in u:
+                html_urls.append(urljoin("https://www.frontiersin.org/",u))
+print("FRONTIERS_HTML_MATCHES",html_urls,flush=True)
+stem="fphar-12-685575-g001"
+legacy=[
+ f"https://www.frontiersin.org/files/Articles/685575/fphar-12-685575-HTML/image_m/{stem}.jpg",
+ f"https://www.frontiersin.org/files/Articles/685575/fphar-12-685575-HTML/image_l/{stem}.jpg",
+ f"https://www.frontiersin.org/files/Articles/685575/fphar-12-685575-HTML/image_n/{stem}.jpg",
+ f"https://www.frontiersin.org/files/Articles/685575/fphar-12-685575-HTML/image_t/{stem}.jpg",
+ f"https://www.frontiersin.org/files/Articles/685575/fphar-12-685575-HTML/image_m/{stem}.tif",
+ f"https://www.frontiersin.org/files/Articles/685575/fphar-12-685575-HTML/image_l/{stem}.tif",
+]
 cands=[]
-for href in hrefs:
-    bases=[
-      urljoin(xml_url,href),
-      urljoin("https://www.frontiersin.org/",href),
-      href if href.startswith("http") else ""
-    ]
-    for u in dict.fromkeys(x for x in bases if x):
-        try:
-            rr=get(u); data=rr.content
-            with Image.open(io.BytesIO(data)) as im: wh=(im.width,im.height,im.format)
-            cands.append((len(data),u,data,wh))
-        except Exception:
-            pass
+test_urls=list(dict.fromkeys(html_urls+legacy+[urljoin(xml_url,h) for h in hrefs]))
+for u in test_urls:
+    try:
+        rr=get(u); data=rr.content
+        with Image.open(io.BytesIO(data)) as im: wh=(im.width,im.height,im.format)
+        print("FRONTIERS_IMAGE_OK",u,len(data),wh,flush=True)
+        cands.append((im.width*im.height,len(data),u,data,wh))
+    except Exception as e:
+        print("FRONTIERS_IMAGE_FAIL",u,type(e).__name__,str(e)[:200],flush=True)
 if not cands:
-    raise RuntimeError("Could not download Frontiers Figure 1 hrefs="+repr(hrefs))
-_,u53,data53,_=max(cands,key=lambda x:x[0])
+    raise RuntimeError("Could not download Frontiers Figure 1; tested="+repr(test_urls[:50]))
+_,_,u53,data53,_=max(cands,key=lambda x:(x[0],x[1]))
 p,w,h,fmt,s1,s256=save_img(data53,"m5_053_frontiers_fig1_original")
 manifest.append({"id":53,"figure":"Figure 1","article":"https://doi.org/10.3389/fphar.2021.685575",
  "asset_url":u53,"caption":cap53,"file":str(p),"bytes":len(data53),"width":w,"height":h,
