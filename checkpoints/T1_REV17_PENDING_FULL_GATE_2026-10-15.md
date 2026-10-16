@@ -293,6 +293,9 @@ Most hits in these ranges were live plants, catalogue scans, herbarium/illustrat
 
 Specific rejects / HOLD:
 
+- #76–85 targeted search: no new FULL-GATE file.
+- #84 exact-species Commons files `Oroxylum indicum 11/12/13.JPG` passed original-byte/hash + author/license verification (Satheesan.vn, CC BY-SA 3.0), but file-level descriptions only say `Oroxylum indicum in Thrissur` and do not prove the represented material is dried stem bark or dried mature seed as required by the manuscript → HOLD, no insertion.
+
 - #67–75 targeted rerun: no new FULL-GATE file.
 - #68 dried-big-leaf market candidate lacks file-level botanical identity to `Phyllostachys nigra` → HOLD.
 - #73 `Violae herba 044326.jpg` is explicitly dried `Viola arvensis`, not manuscript `Viola yedoensis` → REJECT.
