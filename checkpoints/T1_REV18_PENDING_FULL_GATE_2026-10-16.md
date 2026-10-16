@@ -197,11 +197,29 @@ Selected file:
 Rejected alternate for #121:
 - `File:Phyllanthus acidus2.jpg` is exact detached/market fruit and Public Domain, but its source/author are only machine-assumed from legacy Commons metadata. It passed binary/hash but is not selected because the CC BY-SA 4.0 own-work candidate above has a cleaner provenance chain.
 
+
+### #95 Sơn Đậu Căn — FULL-GATE PASS
+- Manuscript source: `Sophora tonkinensis Gagnep.`; medicinal part = root and rhizome; preparation = wash, slice and dry.
+- Medicinal-name control: Kew MPNS maps `山豆根 / Shandougen / Sophorae Tonkinensis Radix et Rhizoma` to accepted `Sophora tonkinensis Gagnep.`; Pharmacopoeia of China and Taiwan Herbal Pharmacopoeia specify dried root and rhizome.
+- Selected file: Wikimedia Commons `File:HK 金鐘 Admiralty 德立街 Drake Street 海富中心商場 Admiralty Centre mall shop 新生堂 June 2020 SS2 11.jpg`.
+- Exact material-role visual verification: original photograph shows a separate bowl explicitly labeled `山豆根（有毒）`, containing sliced dried root/rhizome pieces. Neighboring bowls are different drugs and are excluded from the controlled insertion crop.
+- Author: Leirus Yat Shung.
+- Provenance: own work → Wikimedia Commons; photographed in a Chinese herbal-medicine shop.
+- License: CC BY-SA 4.0.
+- Original dimensions: 4128 × 3096; original bytes: 3,036,900.
+- Commons SHA1: `a163e3b054d8837d351436b57e9814ca608c67da`.
+- SHA256: `75057c5c7dac348d8dd6dfb5e726025625f13c7be3eebb6b3a9b6bd7a2a45fc5`.
+- Original-binary/provenance ingest run 38865185693: SUCCESS; artifact 12029864867.
+- Controlled insertion derivative prepared locally: crop isolates the `山豆根（有毒）` bowl/label; crop/padding only, no medicinal-material content alteration. Attribution must state that the image was cropped/adapted.
+- Controlled caption: `Ảnh 5 – Dược liệu Sơn Đậu Căn (Sophora tonkinensis): rễ/thân rễ khô thái phiến; ảnh cắt từ khay dược liệu có nhãn “山豆根（有毒）”. Nguồn: Wikimedia Commons; tác giả Leirus Yat Shung; CC BY-SA 4.0; ảnh đã crop để cô lập đúng dược liệu.`
+- Status: FULL-GATE PASS.
+- Mutation rule: queue for REV18; DO NOT mutate from the 585-page Library variant; insert only after the exact promoted 583-page REV17 raw DOCX (SHA-256 `2a6e0ade56225686bca38bd95155425e70c8ab52df9be58cbacab6a69ff5c5cc`) is recovered/verified.
+
 ## Current execution state
 - Promoted manuscript M5 remains 23/125 until a controlled mutation is performed.
-- New FULL-GATE queue after promotion = 13 rows (#43, #44, #47, #48, #51, #53, #54, #55, #57, #58, #109, #111, #121).
-- If/when #43, #44, #47, #48, #51, #53, #54, #55, #57, #58, #109, #111 and #121 are mutated from the exact promoted REV17 base, expected M5 count becomes 36/125, subject to render/TOC/regression PASS.
-- Remaining unfilled M5 slots before mutation = 102/125; after successful #43 + #44 + #47 + #48 + #51 + #53 + #54 + #55 + #57 + #58 + #109 + #111 + #121 mutation = 89/125.
+- New FULL-GATE queue after promotion = 14 rows (#43, #44, #47, #48, #51, #53, #54, #55, #57, #58, #95, #109, #111, #121).
+- If/when #43, #44, #47, #48, #51, #53, #54, #55, #57, #58, #95, #109, #111 and #121 are mutated from the exact promoted REV17 base, expected M5 count becomes 37/125, subject to render/TOC/regression PASS.
+- Remaining unfilled M5 slots before mutation = 102/125; after successful #43 + #44 + #47 + #48 + #51 + #53 + #54 + #55 + #57 + #58 + #95 + #109 + #111 + #121 mutation = 88/125.
 - M4 #78 remains unresolved at exact-variety reusable natural-photo level.
 - Two historical CORRECTION-READY IDs in #1–25 remain unrecovered and MUST NOT be inferred.
 
@@ -232,6 +250,12 @@ Rejected alternate for #121:
 - #100 Cây Lá Bỏng: both verified original candidates (`Kalanchoe pinnata leaf.jpg`, `Miracle leaf.jpg`) show leaves attached to living plants; detached fresh-leaf material gate = HOLD.
 - #103 Sương Sâm: `Lá sương sâm.jpg` has exact `Tiliacora triandra`, Bùi Thụy Đào Nguyên, CC BY-SA 3.0 and original-byte/hash PASS, but direct original-image inspection shows a living vine with attached leaves. M5 harvested-leaf gate = HOLD.
 - #110 Lá Xoài: candidate originals have reusable licenses and authentic bytes, but one shows mango foliage/branch being handled outdoors and the ritual image uses mango leaves decoratively; the complete exact `Mangifera indica` + harvested medicinal-leaf chain is not cleanly established at file level. Status = HOLD.
+
+### #91–100 targeted Commons rerun — #95 PROMOTED, others HOLD
+- Run 38864713394: SUCCESS.
+- #91, #92, #93, #94, #96, #97 and #100: no exact crude-drug/harvested photograph satisfying all gates.
+- #95 Sơn Đậu Căn: candidate category/label `山豆根` was followed through authentic original-byte acquisition and direct visual review; exact drug bowl + sliced dried material verified; promoted to FULL-GATE PASS above.
+- No surrogate insertion performed.
 
 ## Next exact action
 1. Continue FULL-GATE acquisition for remaining M5 rows while the exact promoted 583-page REV17 raw source is being recovered/verified.
