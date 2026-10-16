@@ -471,3 +471,19 @@ Therefore no exact-variety natural photograph satisfies the M4 publication gate.
 - File metadata does not yet unambiguously establish that the leaves are detached/harvested medicinal material rather than incidental plant material.
 - Keep HOLD until material state is directly verified.
 
+
+
+### #121 Chùm Ruột — FULL-GATE PASS
+- Manuscript source-of-truth: `Phyllanthus acidus (L.) Skeels`; medicinal/food material includes fruit; fresh form is explicitly permitted.
+- File: Wikimedia Commons `File:Phyllanthus acidus2.jpg`.
+- Exact identity: structured data depicts `Phyllanthus acidus`; category = `Phyllanthus acidus (fruit)`.
+- Exact material role: harvested fresh fruit; file description/history says the fruit was bought at a Surinam tropical supermarket in Rotterdam.
+- Provenance/creator resolution: legacy file lacks a machine-readable author field, but file history shows uploader `Hans B.~commonswiki`; the file page carries a first-person PD-self declaration (“I, the copyright holder…”), establishing uploader/copyright-holder provenance. No attribution is legally required under the public-domain dedication, but the creator/provenance chain is retained in the controller record.
+- License: Public domain / PD-self.
+- Original dimensions: 2592 × 1944; 365,848 bytes.
+- Original SHA1: `e82d90fce8fbb6dffaad433a13b3e322ac3b811c`.
+- SHA256: `00dcfc811f81aa8fe0ce0376cd0fcb6824efce7d7de8d15122c1494101efdccc`.
+- Binary/provenance ingest run 38837571311: SUCCESS.
+- Status: FULL-GATE PASS with legacy-metadata provenance qualifier.
+- Mutation rule: insert only into the next revision derived from promoted REV17.
+
