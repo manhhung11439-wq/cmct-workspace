@@ -1,3 +1,4 @@
+# resume marker 2026-10-16T15:12+07 — rerun exact-variety natural search from REV17 checkpoint
 # resume marker 2026-10-16T14:37+07 — parallel exact-variety natural-photo acquisition
 import json, requests, time
 from pathlib import Path
