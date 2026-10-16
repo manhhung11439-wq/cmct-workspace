@@ -292,6 +292,9 @@ Date: 2026-10-15
 Most hits in these ranges were live plants, catalogue scans, herbarium/illustrations, or PDFs and are NOT promoted to M5.
 
 Specific rejects / HOLD:
+
+- #52 Taraxaci herba cum radix candidate rejected after file-level verification: Commons identifies it as dried `Taraxacum officinale` herb with root, while the Tập 1 manuscript locks `Taraxacum mongolicum`; correct material/form but wrong source-species → HOLD/REJECT for insertion.
+- #51/#53–58 targeted exact crude-drug search rerun produced no new exact-species FULL-GATE file; live plants, generic materia-medica scans, or species-ambiguous drug names are not promoted.
 - #114 Longevity spinach candidate: `File:Longevity spinach.jpg` has exact file-level identity `Gynura procumbens`, author Tamilselvi v, CC BY-SA 4.0 and original-byte/hash PASS, but description only documents the living edible vine/leaf morphology and does not establish harvested fresh leaves + young stems as medicinal material → ROLE/PREPARATION HOLD. Run 38756756131; SHA1 e049c1420b32dfa7360660984a95f86ce002d59f; SHA256 62bdfd46935daf489ace73dee95bc77a263fb514a3f05de69cd19ac01cc11f95.
 - #4 Bupleurum shop candidate: file-level categories identify `銀柴胡` (Ngân Sài Hồ) and `雞血藤`, not manuscript #4 Sài Hồ / `Bupleurum chinense` → WRONG-DRUG IDENTITY HOLD. Run 38756631836; SHA1 c843ab69de61c1b3dcf9425674398762ba4ce669; SHA256 907c0c23e92ca39c7af03be481ac91944b8cab85e44119f7ed355f34e9a3a5ef.
 
