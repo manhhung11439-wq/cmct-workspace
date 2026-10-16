@@ -33,16 +33,21 @@ See `checkpoints/T1_REV17_SOURCE_GUARD_2026-10-16.md`.
 - Status: FULL-GATE PASS.
 - Mutation rule: queue for REV18; insert only from the exact promoted 583-page REV17 base.
 
-### #53 Bản Lam Căn — HOLD / PREPARATION-GATE NOT EXACT
-- Manuscript source: `Isatis tinctoria L.`; medicinal part = root; preparation explicitly = autumn-harvested root, washed, dried, **cut into segments**.
-- Scientific source: Nie L-X et al. (2021), Frontiers in Pharmacology 12:685575, Fig. 1A; CC BY 4.0.
-- Identity/part/material evidence: study directly analyzes dried root of `Isatis tinctoria` / medicinal synonym context `Isatis indigotica`; material was authenticated and sourced from documented Chinese habitats.
-- Original article PDF: 3,906,531 bytes; SHA1 `01acc82f12bf2ba95c69a32c285b44dd05862a72`; SHA256 `ac83139ffe5934bf21016a6904d2e90d4fc11a1f4ba77a3ce6ea9ca32a0c9d8f`.
-- Original embedded Fig. 1 composite: 981×308; 74,769 bytes; SHA1 `9798c528a7f155a7cf77bbdfab44c6ff9f54e9f0`; SHA256 `c0db8a54b3e631ce886ed43f3b9e370c690de1100b95a01a63d0e8fdf144b40d`.
-- Controlled panel-A crop: 640×308; 138,455 bytes; SHA1 `733e87f9c87bce2400a5b684c95b2a0e2d823aa9`; SHA256 `44c6149837c6688757eb03a1ba91a93a810c4f90fb422fd1a5a9ca6e329cf7b2`.
-- The figure shows **whole dried roots**, not the manuscript-locked final form “phơi khô, cắt đoạn”.
-- Verdict: identity + medicinal part + provenance + authorship + CC BY + authentic PDF/figure bytes PASS; exact preparation/form FAIL/HOLD. DO NOT INSERT yet.
-- Do not lower the gate merely because the article is authoritative/open access.
+### #53 Bản Lam Căn — FULL-GATE PASS
+- Manuscript source: `Isatis tinctoria L.`; medicinal part = root; final preparation = dried and cut into segments/slices.
+- Controlled identity mapping: the scientific source names the medicinal source as `Isatis indigotica Fort.` / Bei-Ban-Lan-Gen (BBLG); manuscript already preserves `Isatis indigotica` as the medicinal-source synonym context for `Isatis tinctoria`.
+- Scientific source: Li Y, Yu Q-X, Yau L-F, Huang G-K, Lu J-G, Liu X-X, Jiang Z-H, Wang J-R. *Chinese Medicine* 2023;18:65. DOI 10.1186/s13020-023-00777-x. Fig. 3d.
+- Article methods identify the BBLG samples as roots of `Isatis indigotica`; Fig. 3d is explicitly labeled `Isatidis Radix (BBLG)`.
+- Preparation/form chain: pharmacopoeial/Frontiers medicinal-material context defines Isatidis Radix as dried root; the exact Fig. 3d photograph visibly shows the root material already cut into slices/segments, matching manuscript `phơi khô, cắt đoạn`.
+- Article license: CC BY 4.0; the article states its images are included in the CC BY license unless a separate credit line says otherwise; Fig. 3 has no contrary third-party credit.
+- Original article PDF: 5,631,510 bytes; SHA1 `eaa1cbf3d721df47b62b6c511b1e5bbac55b2aa0`; SHA256 `b61cf353d6c3b2ea2574945dde0cdf5ce8c0efd5ee1aa9a221226282e612363d`.
+- Original embedded Fig. 3 composite: 1866×1875; 1,530,426 bytes; SHA1 `bdb6ccaca356c037736702a141931c0ec67cddab`; SHA256 `dc4805e93b988b207f7ccae0dc8bdc734ebf8b5eb5eb2845948cfe810a2654ca`.
+- Controlled derivative: crop box (75,1480,470,1840), Fig. 3d drug photograph only; PNG 395×360; 189,166 bytes; SHA1 `b3a8004aa4ef8017a3e8d109e2f29be48d379e5a`; SHA256 `ecc3804720db62672da697767a7705f696c4f65c66ada2a5e66f60fb1edf34ca`.
+- Transformation: crop only; excludes chromatogram and unrelated panels; no content addition/removal inside the selected drug photograph; lossless PNG derivative.
+- Reproducible workflow: run 38848567614 — SUCCESS; artifact `cmct-fullgate-m5-053-bmc`, artifact ID 12023922845.
+- Controlled insertion caption: `Ảnh 5 – Bản Lam Căn (Isatidis Radix): rễ khô đã cắt lát/đoạn. Nguồn: Li et al., Chinese Medicine 2023, Fig. 3d; CC BY 4.0; ảnh đã crop chỉ phần dược liệu.`
+- Status: FULL-GATE PASS.
+- Mutation rule: queue for REV18; insert only from the exact promoted 583-page REV17 source.
 
 
 ### #109 Lá Bàng — FULL-GATE PASS
@@ -105,9 +110,9 @@ Rejected alternate for #121:
 
 ## Current execution state
 - Promoted manuscript M5 remains 23/125 until a controlled mutation is performed.
-- New FULL-GATE queue after promotion = 4 rows (#43, #109, #111, #121).
-- If/when #43, #109, #111 and #121 are mutated from the exact promoted REV17 base, expected M5 count becomes 27/125, subject to render/TOC/regression PASS.
-- Remaining unfilled M5 slots before mutation = 102/125; after successful #43 + #109 + #111 + #121 mutation = 98/125.
+- New FULL-GATE queue after promotion = 5 rows (#43, #53, #109, #111, #121).
+- If/when #43, #53, #109, #111 and #121 are mutated from the exact promoted REV17 base, expected M5 count becomes 28/125, subject to render/TOC/regression PASS.
+- Remaining unfilled M5 slots before mutation = 102/125; after successful #43 + #53 + #109 + #111 + #121 mutation = 97/125.
 - M4 #78 remains unresolved at exact-variety reusable natural-photo level.
 - Two historical CORRECTION-READY IDs in #1–25 remain unrecovered and MUST NOT be inferred.
 
