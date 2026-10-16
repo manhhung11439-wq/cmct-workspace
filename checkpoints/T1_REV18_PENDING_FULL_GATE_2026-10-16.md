@@ -19,6 +19,32 @@ See `checkpoints/T1_REV17_SOURCE_GUARD_2026-10-16.md`.
 
 ## New post-REV17 FULL-GATE queue
 
+### #43 Hoàng Cầm — FULL-GATE PASS
+- Manuscript source: `Scutellaria baicalensis Georgi`; medicinal part = root; preparation = dried root, cut/sliced.
+- Scientific source: Zhao Q, Chen X-Y, Martin C. (2016), *Scutellaria baicalensis, the golden herb from the garden of Chinese medicinal plants*, Science Bulletin 61:1391–1398, Fig. 1b; DOI 10.1007/s11434-016-1136-5.
+- Article license: CC BY 4.0.
+- Exact identity/material: Fig. 1b is explicitly captioned as the dried root of `Scutellaria baicalensis` used in traditional Chinese medicine; selected panel visibly shows dried sliced root material.
+- Original article PDF: 976,671 bytes; SHA1 `35c4d22e053a7f9fd7d1104de5ea052f3a13f010`; SHA256 `7bdabcf28fc321a8b4e02f046e945df1879919b3c76b1bd6f9f4ff9438d96012`.
+- Original embedded Fig. 1 composite: 969×766; 226,707 bytes; SHA1 `e0100def6b1a56c04962efd60c9e1e0ed0917e66`; SHA256 `108ffff43a7de0e9c94ee8007e7e837011773af8e69684382a28a32d95e9767d`.
+- Controlled insertion derivative: crop box (670,0,969,330), Fig. 1b only; PNG 299×330; 163,626 bytes; SHA1 `383e2287b7bafee1ec6e03d3dcce26c410ea37ed`; SHA256 `1d0acc5759ff7d4e9557e1700acfb3824ec2722f0954cfa9e81e06d7d510aba7`.
+- Transformation: crop only; no content addition/removal inside selected medicinal-material panel; lossless PNG derivative. Original PDF and embedded composite are retained for audit/provenance.
+- Reproducible acquisition/crop workflow run: 38848023779 — SUCCESS; artifact `cmct-fullgate-scifig-43-53` / artifact ID 12024122567.
+- Required caption attribution: cropped/adapted from Zhao, Chen & Martin, Science Bulletin 2016, Fig. 1b; CC BY 4.0; modification = cropped to dried-root panel only.
+- Status: FULL-GATE PASS.
+- Mutation rule: queue for REV18; insert only from the exact promoted 583-page REV17 base.
+
+### #53 Bản Lam Căn — HOLD / PREPARATION-GATE NOT EXACT
+- Manuscript source: `Isatis tinctoria L.`; medicinal part = root; preparation explicitly = autumn-harvested root, washed, dried, **cut into segments**.
+- Scientific source: Nie L-X et al. (2021), Frontiers in Pharmacology 12:685575, Fig. 1A; CC BY 4.0.
+- Identity/part/material evidence: study directly analyzes dried root of `Isatis tinctoria` / medicinal synonym context `Isatis indigotica`; material was authenticated and sourced from documented Chinese habitats.
+- Original article PDF: 3,906,531 bytes; SHA1 `01acc82f12bf2ba95c69a32c285b44dd05862a72`; SHA256 `ac83139ffe5934bf21016a6904d2e90d4fc11a1f4ba77a3ce6ea9ca32a0c9d8f`.
+- Original embedded Fig. 1 composite: 981×308; 74,769 bytes; SHA1 `9798c528a7f155a7cf77bbdfab44c6ff9f54e9f0`; SHA256 `c0db8a54b3e631ce886ed43f3b9e370c690de1100b95a01a63d0e8fdf144b40d`.
+- Controlled panel-A crop: 640×308; 138,455 bytes; SHA1 `733e87f9c87bce2400a5b684c95b2a0e2d823aa9`; SHA256 `44c6149837c6688757eb03a1ba91a93a810c4f90fb422fd1a5a9ca6e329cf7b2`.
+- The figure shows **whole dried roots**, not the manuscript-locked final form “phơi khô, cắt đoạn”.
+- Verdict: identity + medicinal part + provenance + authorship + CC BY + authentic PDF/figure bytes PASS; exact preparation/form FAIL/HOLD. DO NOT INSERT yet.
+- Do not lower the gate merely because the article is authoritative/open access.
+
+
 ### #109 Lá Bàng — FULL-GATE PASS
 Selected file:
 - Wikimedia Commons: `File:444Talisay leaves camote slices 01.jpg`
@@ -79,9 +105,9 @@ Rejected alternate for #121:
 
 ## Current execution state
 - Promoted manuscript M5 remains 23/125 until a controlled mutation is performed.
-- New FULL-GATE queue after promotion = 3 rows (#109, #111, #121).
-- If/when #109, #111 and #121 are mutated from the exact promoted REV17 base, expected M5 count becomes 26/125, subject to render/TOC/regression PASS.
-- Remaining unfilled M5 slots before mutation = 102/125; after successful #109 + #111 + #121 mutation = 99/125.
+- New FULL-GATE queue after promotion = 4 rows (#43, #109, #111, #121).
+- If/when #43, #109, #111 and #121 are mutated from the exact promoted REV17 base, expected M5 count becomes 27/125, subject to render/TOC/regression PASS.
+- Remaining unfilled M5 slots before mutation = 102/125; after successful #43 + #109 + #111 + #121 mutation = 98/125.
 - M4 #78 remains unresolved at exact-variety reusable natural-photo level.
 - Two historical CORRECTION-READY IDs in #1–25 remain unrecovered and MUST NOT be inferred.
 
