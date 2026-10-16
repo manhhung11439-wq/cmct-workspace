@@ -1,0 +1,23 @@
+name: CMCT M5 047 Forsythia figure
+on:
+  push:
+    paths:
+      - 'scripts/acquire_m5_047_forsythia.py'
+      - '.github/workflows/cmct_m5_047_forsythia.yml'
+  workflow_dispatch:
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests
+      - run: set -o pipefail; python scripts/acquire_m5_047_forsythia.py | tee m5_047_forsythia.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-047-forsythia
+          path: |
+            evidence/m5_t1_047_forsythia/
+            m5_047_forsythia.log
+          if-no-files-found: error
+          retention-days: 30
