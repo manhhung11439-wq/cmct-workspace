@@ -443,3 +443,31 @@ Therefore no exact-variety natural photograph satisfies the M4 publication gate.
 - Any new PASS batch: mutate from promoted REV17 -> render -> actual page-map -> TOC sync -> full structural/raster QA -> changed-page visual regression.
 - Do not run final literal all-page 100%-zoom gate until M4/M5 completion stabilizes.
 - Tập 1 Final Controller remains NOT PASS; publication-image completion remains NOT READY.
+
+
+## POST-REV17 acquisition — next mutation batch
+
+### #111 Mãng Cầu Xiêm — FULL-GATE PASS
+- Manuscript source-of-truth: `Annona muricata L.`; principal medicinal part = leaf; both fresh and gently dried forms are permitted.
+- File: Wikimedia Commons `File:Soursop leaves.jpg`.
+- Exact identity: Commons structured data explicitly depicts `Annona muricata`.
+- Exact material role: detached/harvested leaves; file description = “Soursop leaves in a bag”.
+- Author: Zenyrgarden.
+- Provenance: own work → Wikimedia Commons.
+- License: CC BY-SA 4.0.
+- Original dimensions: 2448 × 3264; 1,417,626 bytes.
+- Commons/original SHA1: `59ad698ea6726b28b821a562c9a97ceec0f421d7`.
+- SHA256: `c09c42e0345d112a2f617860b0e0c9ac565747d7b704fc74db4bc7d7a9d16392`.
+- Binary/provenance ingest run 38837326929: SUCCESS.
+- Status: FULL-GATE PASS.
+- Mutation rule: insert only into the next revision derived from promoted REV17; do not retroactively modify the promoted REV17 checkpoint.
+
+### #110 Lá Xoài — HOLD
+- Two candidates passed original-binary/license checks but file-level identity remained generic “mango leaves/Mango trees” rather than explicit `Mangifera indica`.
+- No species inference is permitted; do not insert.
+
+### #109 Lá Bàng — HOLD pending material-state proof
+- Candidate `File:444Talisay leaves camote slices 01.jpg` has exact `Terminalia catappa` identity/category, CC0, exact original binary/hash.
+- File metadata does not yet unambiguously establish that the leaves are detached/harvested medicinal material rather than incidental plant material.
+- Keep HOLD until material state is directly verified.
+
