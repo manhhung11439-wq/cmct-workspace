@@ -1,0 +1,22 @@
+name: CMCT scientific figures M5 43 53
+on:
+  push:
+    paths:
+      - 'scripts/acquire_scientific_figures_43_53.py'
+      - '.github/workflows/cmct_scifig_43_53.yml'
+  workflow_dispatch:
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests beautifulsoup4 pillow lxml
+      - run: python scripts/acquire_scientific_figures_43_53.py | tee scifig_43_53.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-scifig-43-53
+          path: |
+            evidence/m5_t1_scientific_figures_43_53/
+            scifig_43_53.log
+          if-no-files-found: error
+          retention-days: 30
