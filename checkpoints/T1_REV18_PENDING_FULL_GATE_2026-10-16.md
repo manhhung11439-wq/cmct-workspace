@@ -372,3 +372,22 @@ Candidate B:
 - Existing public-domain atlas image labeled `地骨皮` is not promoted because the pharmacopoeial drug scope can include both `Lycium chinense` and `L. barbarum`; manuscript is locked specifically to `L. chinense`.
 - Verdict: no new FULL-GATE row from this scout; no mutation.
 
+
+
+## Exact drug-name / PD-atlas rerun #6–18 — 2026-10-16
+- Exact drug-name Commons workflow run 38892998587: SUCCESS.
+- Artifact: 12042926105 (`cmct-m5-drugnames-006-018`).
+- Target rows: #6 Phòng Phong, #8 Quế Chi, #9 Kinh Giới, #10 Bạc Hà, #12 Tế Tân, #15 Tang Diệp, #18 Thăng Ma.
+- Direct Commons result: no newly verified crude-drug photograph met the complete FULL-GATE. Top results were predominantly public-domain books/PDF scans, historical illustrations, living-plant imagery, or wrong-species material.
+- No row is promoted from this search alone.
+
+- Public-domain Chinese drug-atlas scout run 38893529770: SUCCESS.
+- Artifact: 12042558115 (`cmct-m5-atlas-006-018`).
+- Source file: Wikimedia Commons `File:NLC416-08jh015896-38387 中國藥物標本圖影.pdf`.
+- Original PDF: 20,699,714 bytes; 262 pages.
+- Commons/original SHA1: `1aef378d7c63ab41a2ddd116b492da98e63cae75`.
+- SHA256: `88f39462dedfcfa9475764f7693132abc5de5b6c041cd1038c9f73ea0e4ea61e`.
+- Automated PDF-text lookup for 防風/防风, 桂枝, 荊芥/荆芥, 薄荷, 細辛/细辛, 桑葉/桑叶, 升麻 returned zero hits because the atlas scan has no usable text layer for these plate labels.
+- Interpretation: zero text hits are NOT evidence that the plates are absent.
+- Controller action: continue by visual page-scout/render inspection of the original atlas; do not use OCR-derived guesses and do not promote a row until the exact plate, material form, modern drug-name/source-species mapping, public-domain provenance, and controlled crop/hash are all verified.
+- Current verdict from these two completed runs: 0 new FULL-GATE rows; no manuscript mutation triggered.
