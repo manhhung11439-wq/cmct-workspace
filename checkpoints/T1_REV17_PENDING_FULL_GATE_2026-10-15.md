@@ -628,3 +628,29 @@ Therefore no exact-variety natural photograph satisfies the M4 publication gate.
 - #5/#6/#8/#9/#10/#12/#15: search dominated by PDFs/reference works or no exact processed medicinal-material photograph.
 - #7/#14 already have M5 in promoted REV17 and were not replaced.
 - Wrong medicinal-name substitution accepted: 0.
+
+
+## Targeted rerun #30–40 — 2026-10-16
+- Workflow run 38874606106: SUCCESS.
+- Result: no new FULL-GATE promotion.
+- #30 Citrus aurantiifolia: top hit `Rainy lime leaves.jpg` is source/living leaf imagery, not harvested fresh medicinal leaf material → HOLD.
+- #33 Paeonia suffruticosa: no exact dried root-bark/Moutan Cortex photograph; search dominated by PDFs/reference works → HOLD.
+- #34/#35/#36/#38/#39: no exact harvested/processed material with full file-level role chain.
+- #37 Gymnema sylvestre: top hit `Kaeng phak siangda.jpg` is a cooked food dish, not dried medicinal leaf material → REJECT preparation mismatch.
+- #40 Senna tora: top seed photo is explicitly `Senna pendula`, wrong species; no exact `Senna tora` dried mature-seed package → REJECT/HOLD.
+- Living-source substitution accepted: 0.
+- Food-dish substitution accepted: 0.
+- Wrong-species seed substitution accepted: 0.
+
+
+## Gap-fill #101–125 — 2026-10-16
+- Workflow run 38874147760: SUCCESS.
+- Purpose: explicitly cover rows omitted by smaller sub-batches (#106, #107, #115, #116, #119, #121) and recheck 101–125.
+- #106 Glinus oppositifolius: top hit is `Rau Dang stir fried with Sambal Belacan.jpg`, a cooked dish, not raw/fresh or dried medicinal whole plant → REJECT preparation mismatch.
+- #107 Hibiscus rosa-sinensis: no exact harvested medicinal part photo.
+- #115 Clerodendrum chinense: no strict hit.
+- #116 Acanthus ilicifolius: historical reference PDFs only, no dried medicinal root photograph.
+- #119 Breynia fruticosa: documents/specimen references only.
+- #121 Phyllanthus acidus: no exact harvested medicinal-part package promoted.
+- #110 `Dried Mango Leaves.jpg` underwent binary/provenance check run 38875023567: author Useendk, CC BY-SA 4.0, original SHA1 418a0d978340f80a48a082318d8975a5f97a0538, SHA256 8dcf6e0042c1d64f42ca7bece438215bef81f01d2c4ca1e78a19f47215cbeb20; however Commons categories identify `Unidentified Mangifera`, not `Mangifera indica` → identity gate FAIL/HOLD.
+- Cross-species or cooked-food promotion: 0.
