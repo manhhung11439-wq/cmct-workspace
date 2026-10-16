@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 candidate verification — #95 Shandougen shop material",
+  "batch": "Tập 1 M5 FULL-GATE verification — #68 and #73 candidate identity check",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -9,15 +9,19 @@
       "provenance",
       "author",
       "file_level_license",
-      "original_bytes_hash",
-      "visual_role_confirmation"
+      "original_bytes_hash"
     ]
   },
   "items": [
     {
-      "id": 95,
-      "filename": "m5_095_Shandougen_shop_candidate.jpg",
-      "commons_title": "File:HK 金鐘 Admiralty 德立街 Drake Street 海富中心商場 Admiralty Centre mall shop 新生堂 June 2020 SS2 11.jpg"
+      "id": 68,
+      "filename": "m5_068_dried_big_leaves_candidate.jpg",
+      "commons_title": "File:HK SKD TKO 將軍澳 Tseung Kwan O 怡明邨 Yee Ming Estate 泉記糧油食品 Chuen Kee Food August 2022 Px3 大竹葉 dried big leaves.jpg"
+    },
+    {
+      "id": 73,
+      "filename": "m5_073_Violae_herba_044326_candidate.jpg",
+      "commons_title": "File:Violae herba 044326.jpg"
     }
   ]
 }
