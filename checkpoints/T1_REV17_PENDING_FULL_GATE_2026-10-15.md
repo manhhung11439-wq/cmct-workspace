@@ -654,3 +654,16 @@ Therefore no exact-variety natural photograph satisfies the M4 publication gate.
 - #121 Phyllanthus acidus: no exact harvested medicinal-part package promoted.
 - #110 `Dried Mango Leaves.jpg` underwent binary/provenance check run 38875023567: author Useendk, CC BY-SA 4.0, original SHA1 418a0d978340f80a48a082318d8975a5f97a0538, SHA256 8dcf6e0042c1d64f42ca7bece438215bef81f01d2c4ca1e78a19f47215cbeb20; however Commons categories identify `Unidentified Mangifera`, not `Mangifera indica` → identity gate FAIL/HOLD.
 - Cross-species or cooked-food promotion: 0.
+
+
+## Broad rerun #1–25 — 2026-10-16
+- Systematic run 38874475851: SUCCESS.
+- Targeted medicinal-material run 38874475875: SUCCESS.
+- Result: no new FULL-GATE promotion for rows missing from promoted REV17.
+- #18 Cimicifuga/Actaea rhizome: search yielded materia-medica/reference documents, not reusable processed-rhizome photograph.
+- #19 Cryptotympana atrata exuviae: no isolated empty-exuviae image with exact file-level identity/role chain; existing moulting-sequence evidence remains HOLD.
+- #21 Elsholtzia ciliata / #22 Centipeda minima: no exact dried medicinal-herb photograph.
+- #23 Vitex trifolia: no exact dried medicinal fruit photograph.
+- #24 Spirodela polyrhiza: documents/aquatic-plant references, not dried medicinal herb.
+- #25 Sojae Semen Praeparatum / 淡豆豉: no exact medicinal fermented-soybean photo distinguishing drug preparation from food douchi.
+- Two historical #1–25 CORRECTION-READY IDs inferred: 0.
