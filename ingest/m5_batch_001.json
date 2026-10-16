@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #40 Senna tora / Cassia tora seeds",
+  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #40 roasted Senna/Cassia tora seed tea",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -15,8 +15,8 @@
   "items": [
     {
       "id": 40,
-      "filename": "m5_040_Cassia_tora_seeds.jpg",
-      "commons_title": "File:Cassia Tora (the seeds).JPG"
+      "filename": "m5_040_Gyeolmyeongja_cha.jpg",
+      "commons_title": "File:Gyeolmyeongja-cha.jpg"
     }
   ]
 }
