@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE verification — #4 Bupleurum shop candidate",
+  "batch": "Tập 1 M5 FULL-GATE verification — #110 dried Mangifera indica leaves",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -9,9 +9,9 @@
   },
   "items": [
     {
-      "id": 4,
-      "filename": "m5_004_Bupleurum_shop_candidate.jpg",
-      "commons_title": "File:HK 金鐘 Admiralty 德立街 Drake Street 海富中心商場 Admiralty Centre mall shop 新生堂 June 2020 SS2 18.jpg"
+      "id": 110,
+      "filename": "m5_110_Dried_Mango_Leaves.jpg",
+      "commons_title": "File:Dried Mango Leaves.jpg"
     }
   ]
 }
