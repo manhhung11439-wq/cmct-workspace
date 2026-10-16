@@ -586,3 +586,14 @@ Therefore no exact-variety natural photograph satisfies the M4 publication gate.
 - #76/#79/#80/#82/#83/#85: PDFs, living plants, wrong taxon hits, or no exact harvested/processed material → HOLD.
 - #78 and #81 already have M5 in promoted REV17 and were not replaced.
 - Unsafe exact-species-but-wrong-role insertion: 0.
+
+
+## Targeted rerun #101–110 — 2026-10-16
+- Workflow run 38873678738: SUCCESS.
+- Result: no new FULL-GATE promotion.
+- #101 Paris polyphylla: strict search returned historical PDFs rather than dried medicinal rhizome photograph.
+- #102 Premna serratifolia / #103 Tiliacora triandra / #104 Platostoma palustre: no exact harvested medicinal-material hit.
+- #105 Peperomia pellucida: only reference-book hit, not fresh harvested whole plant photograph.
+- #108 Blumea lacera: irrelevant/historical document hits.
+- #109 Terminalia catappa and #110 Mangifera indica: search results are mainly documents/archives; no file-level proof of harvested leaf material matching manuscript.
+- Living-source or document surrogate inserted: 0.
