@@ -1,0 +1,23 @@
+name: CMCT M5 045 PCC raw processed scout
+on:
+  push:
+    paths:
+      - 'scripts/scout_m5_045_pcc_raw_processed.py'
+      - '.github/workflows/cmct_m5_045_pcc_raw_processed.yml'
+  workflow_dispatch:
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pillow
+      - run: set -o pipefail; python scripts/scout_m5_045_pcc_raw_processed.py | tee scout_m5_045_pcc_raw_processed.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-045-pcc-raw-processed
+          path: |
+            evidence/m5_t1_045_pcc_raw_processed/
+            scout_m5_045_pcc_raw_processed.log
+          if-no-files-found: error
+          retention-days: 30
