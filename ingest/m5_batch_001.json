@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 strict identity/material check — #110 Mango leaf candidates",
+  "batch": "Tập 1 M5 strict material-state check — #109 Terminalia catappa leaves",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,14 +14,10 @@
   },
   "items": [
     {
-      "id": 110,
-      "filename": "m5_110_MANGO_LEAVES.jpg",
-      "commons_title": "File:MANGO LEAVES.jpg"
-    },
-    {
-      "id": 110,
-      "filename": "m5_110_Gowri_Habba_mango_leaves.jpg",
-      "commons_title": "File:Gowri Habba Swarna Gowri.jpg"
+      "id": 109,
+      "filename": "m5_109_Terminalia_catappa_Talisay_leaves.jpg",
+      "commons_title": "File:444Talisay leaves camote slices 01.jpg",
+      "expected_sha1": "a58e812ec4a54684557c087662555e446580f467"
     }
   ]
 }
