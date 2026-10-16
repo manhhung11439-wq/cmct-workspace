@@ -575,3 +575,14 @@ Therefore no exact-variety natural photograph satisfies the M4 publication gate.
 - #67/#69/#70/#71/#72/#75 yielded PDFs, live plants, or non-exact medicinal material → HOLD.
 - Species substitution accepted: 0.
 - Metadata-only insertion: 0.
+
+
+## Targeted rerun #76–85 — 2026-10-16
+- Search workflow run 38873444420: SUCCESS.
+- #84 candidate verification ingest run 38873865848: SUCCESS.
+- Result: no new FULL-GATE promotion.
+- #84 Oroxylum indicum files 11/12/13: exact species + author Satheesan.vn + CC BY-SA 3.0 + authentic original bytes/hashes PASS, but file metadata only identifies living/source `Oroxylum indicum` in Kerala and generic “Medicinal plants”; it does not establish dried stem bark or dried seed as the represented material → HOLD.
+- #77 search returned exact-species live/flower images and unrelated high-scoring files, not dried root slices → HOLD.
+- #76/#79/#80/#82/#83/#85: PDFs, living plants, wrong taxon hits, or no exact harvested/processed material → HOLD.
+- #78 and #81 already have M5 in promoted REV17 and were not replaced.
+- Unsafe exact-species-but-wrong-role insertion: 0.
