@@ -1,0 +1,19 @@
+name: CMCT M5 071 Dictamni crude figure
+on:
+  push:
+    paths:
+      - 'scripts/acquire_m5_071_dictamni_crude.py'
+      - '.github/workflows/cmct_m5_071_dictamni_crude.yml'
+  workflow_dispatch:
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pillow
+      - run: python scripts/acquire_m5_071_dictamni_crude.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-071-dictamni-crude
+          path: evidence/m5_t1_071_dictamni_crude/
+          retention-days: 30
