@@ -1,27 +1,15 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE verification — #68 and #73 candidate identity check",
+  "batch": "Tập 1 M5 FULL-GATE verification — #84 Oroxylum indicum candidate set",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
-      "identity_material",
-      "medicinal_part",
-      "preparation_form",
-      "provenance",
-      "author",
-      "file_level_license",
-      "original_bytes_hash"
+      "identity_material","medicinal_part","preparation_form",
+      "provenance","author","file_level_license","original_bytes_hash"
     ]
   },
   "items": [
-    {
-      "id": 68,
-      "filename": "m5_068_dried_big_leaves_candidate.jpg",
-      "commons_title": "File:HK SKD TKO 將軍澳 Tseung Kwan O 怡明邨 Yee Ming Estate 泉記糧油食品 Chuen Kee Food August 2022 Px3 大竹葉 dried big leaves.jpg"
-    },
-    {
-      "id": 73,
-      "filename": "m5_073_Violae_herba_044326_candidate.jpg",
-      "commons_title": "File:Violae herba 044326.jpg"
-    }
+    {"id":84,"filename":"m5_084_Oroxylum_indicum_11.JPG","commons_title":"File:Oroxylum indicum 11.JPG"},
+    {"id":84,"filename":"m5_084_Oroxylum_indicum_12.JPG","commons_title":"File:Oroxylum indicum 12.JPG"},
+    {"id":84,"filename":"m5_084_Oroxylum_indicum_13.JPG","commons_title":"File:Oroxylum indicum 13.JPG"}
   ]
 }
