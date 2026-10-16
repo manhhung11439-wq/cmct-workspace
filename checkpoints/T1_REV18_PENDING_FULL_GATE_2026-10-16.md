@@ -50,6 +50,20 @@ See `checkpoints/T1_REV17_SOURCE_GUARD_2026-10-16.md`.
 - Mutation rule: queue for REV18; insert only from the exact promoted 583-page REV17 source.
 
 
+### #55 Xích Thược — FULL-GATE PASS
+- Manuscript source: `Paeonia lactiflora Pall.`; medicinal part = root; preparation = leave bark intact, dry directly, slice; explicitly distinct from Bạch Thược boiling/peeling processing.
+- Scientific source: Tan Y-Q, Chen H-W, Li J, Wu Q-J. *Efficacy, Chemical Constituents, and Pharmacological Actions of Radix Paeoniae Rubra and Radix Paeoniae Alba*. Frontiers in Pharmacology 2020;11:1054. DOI 10.3389/fphar.2020.01054.
+- Article license: CC BY 4.0.
+- Identity/source control: article states Radix Paeoniae Rubra (RPR) is the dried root of `Paeonia lactiflora Pall.`; Figure 1A is explicitly `Characteristics of RPR`.
+- Exact preparation/form: article states RPR is dried directly; surface tan/rough with integument retained; medicinal slices differ from RPA. This matches manuscript `rễ nguyên vỏ, phơi khô, thái phiến`.
+- Original article PDF: 1,396,253 bytes; SHA1 `e515f57ce90c4f5ba020e8543aa140c266365237`; SHA256 `c7bd7cc5f34469e22981e2e7210e077e6ecd93f705f96923f7ad2c2e225b8e83`.
+- Exact embedded Figure 1A image stream (not a screenshot/thumbnail): JPEG 965×724; 150,291 bytes; SHA1 `6707bc34743ece4c9df203c725e88742a99a6c6e`; SHA256 `bfb2d74d1bdb94af1160c6146b5fb7ca22039c10c2dc693e595b972e4ce127e9`.
+- Visual controller: PDF page 2 confirms xref27 is panel A/RPR; xref28 is panel B/RPA and is excluded.
+- Reproducible acquisition run: 38849091170 — SUCCESS; artifact `cmct-m5-055-rpr`, artifact ID 12023998382.
+- Controlled insertion caption: `Ảnh 5 – Xích Thược (Radix Paeoniae Rubra): rễ Paeonia lactiflora phơi khô trực tiếp, còn vỏ và thái phiến. Nguồn: Tan et al., Frontiers in Pharmacology 2020, Fig. 1A; CC BY 4.0.`
+- Status: FULL-GATE PASS.
+- Mutation rule: queue for REV18; insert only from the exact promoted 583-page REV17 source (or a separately controller-approved controlled reconstruction if that raw source remains unavailable).
+
 ### #109 Lá Bàng — FULL-GATE PASS
 Selected file:
 - Wikimedia Commons: `File:444Talisay leaves camote slices 01.jpg`
@@ -110,9 +124,9 @@ Rejected alternate for #121:
 
 ## Current execution state
 - Promoted manuscript M5 remains 23/125 until a controlled mutation is performed.
-- New FULL-GATE queue after promotion = 5 rows (#43, #53, #109, #111, #121).
-- If/when #43, #53, #109, #111 and #121 are mutated from the exact promoted REV17 base, expected M5 count becomes 28/125, subject to render/TOC/regression PASS.
-- Remaining unfilled M5 slots before mutation = 102/125; after successful #43 + #53 + #109 + #111 + #121 mutation = 97/125.
+- New FULL-GATE queue after promotion = 6 rows (#43, #53, #55, #109, #111, #121).
+- If/when #43, #53, #55, #109, #111 and #121 are mutated from the exact promoted REV17 base, expected M5 count becomes 29/125, subject to render/TOC/regression PASS.
+- Remaining unfilled M5 slots before mutation = 102/125; after successful #43 + #53 + #55 + #109 + #111 + #121 mutation = 96/125.
 - M4 #78 remains unresolved at exact-variety reusable natural-photo level.
 - Two historical CORRECTION-READY IDs in #1–25 remain unrecovered and MUST NOT be inferred.
 
