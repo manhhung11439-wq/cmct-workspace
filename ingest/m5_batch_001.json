@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE verification — #19 Cryptotympana atrata cicada molt/exuviae candidate",
+  "batch": "Tập 1 M5 strict verification — #90 Sauropus androgynus medicinal-leaf candidate",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,9 +14,10 @@
   },
   "items": [
     {
-      "id": 19,
-      "filename": "m5_019_Cicada_molt.jpg",
-      "commons_title": "File:Cicada molt.jpg"
+      "id": 90,
+      "filename": "m5_090_Sauropus_androgynus_Vitamin_leaf.jpg",
+      "commons_title": "File:Sauropus androgynus (Vitamin leaf).jpg",
+      "expected_sha1": "f61d7732004b108a5073f66dac9f2d5d2d6f2b05"
     }
   ]
 }
