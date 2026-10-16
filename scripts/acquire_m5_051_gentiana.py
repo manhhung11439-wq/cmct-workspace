@@ -42,9 +42,25 @@ for k,img in enumerate(page.get_images(full=True),1):
     except Exception:continue
     p=OUT/f"m5_051_fig1_xref{xref}_{k}.{ex['ext']}";p.write_bytes(data)
     s1,s256=hh(data);imgs.append({"xref":xref,"file":str(p),"bytes":len(data),"width":w,"height":h,"format":fmt,"sha1":s1,"sha256":s256})
+# Controlled derivative: Figure 1A (GF first-class Gentianae Radix et Rhizoma) only.
+if len(imgs)!=1:
+    raise RuntimeError(f"Expected one embedded Figure 1 image, got {len(imgs)}")
+src_path=pathlib.Path(imgs[0]["file"])
+im=Image.open(src_path).convert("RGB")
+if im.size != (4343,1624):
+    raise RuntimeError(f"Unexpected Figure 1 size {im.size}; do not apply stale crop")
+crop_box=(0,0,2070,1624)
+drug=im.crop(crop_box)
+drug_path=OUT/"m5_051_fig1a_GF_dried_root_rhizome_crop.png"
+drug.save(drug_path,format="PNG",optimize=False)
+db=drug_path.read_bytes();ds1,ds256=hh(db)
+derivative={"file":str(drug_path),"source_image_sha1":imgs[0]["sha1"],"crop_box":crop_box,
+"width":drug.width,"height":drug.height,"bytes":len(db),"sha1":ds1,"sha256":ds256,
+"transformation":"crop only from original embedded Figure 1 JPEG; retains panel A/GF including scale; excludes panel B/GS"}
 manifest={"id":51,"article":"Kou B et al. Molecules 2023;28(20):7132","doi":"10.3390/molecules28207132","license":"CC BY 4.0",
 "resolved_pdf_url":r.url,"pdf_file":str(pp),"pdf_bytes":len(pdf),"pdf_sha1":ps1,"pdf_sha256":ps256,"figure_page":page_idx+1,
-"page_text_excerpt":page_text[:7500],"images":imgs}
+"page_text_excerpt":page_text[:7500],"images":imgs,"controlled_derivative":derivative}
 (OUT/"extract_manifest.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding="utf-8")
 print("M5_051_PAGE",page_idx+1,"IMAGES",json.dumps(imgs),flush=True)
+print("M5_051_DERIVATIVE="+json.dumps(derivative,ensure_ascii=False),flush=True)
 print("M5_051_MANIFEST="+json.dumps(manifest,ensure_ascii=False),flush=True)
