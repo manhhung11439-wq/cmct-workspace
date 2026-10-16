@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 #100 Kalanchoe pinnata detached-leaf verification",
+  "batch": "Tập 1 M5 strict identity check — #52 Taraxaci herba cum radix candidate",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -9,20 +9,14 @@
       "provenance",
       "author",
       "file_level_license",
-      "original_bytes_hash",
-      "visual_detached_material_check"
+      "original_bytes_hash"
     ]
   },
   "items": [
     {
-      "id": 100,
-      "filename": "m5_100_Kalanchoe_pinnata_leaf.jpg",
-      "commons_title": "File:Kalanchoe pinnata leaf.jpg"
-    },
-    {
-      "id": 100,
-      "filename": "m5_100_Miracle_leaf.jpg",
-      "commons_title": "File:Miracle leaf.jpg"
+      "id": 52,
+      "filename": "m5_052_Taraxaci_herba_cum_radix_132292.jpg",
+      "commons_title": "File:Taraxaci herba cum radix 132292.jpg"
     }
   ]
 }
