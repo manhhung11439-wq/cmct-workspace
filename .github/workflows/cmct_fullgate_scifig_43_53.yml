@@ -1,0 +1,22 @@
+name: CMCT fullgate scifig crops M5 43 53
+on:
+  push:
+    paths:
+      - 'scripts/build_fullgate_scifig_43_53.py'
+      - '.github/workflows/cmct_fullgate_scifig_43_53.yml'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pymupdf pillow
+      - run: set -o pipefail; python scripts/build_fullgate_scifig_43_53.py | tee fullgate_scifig_43_53.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-fullgate-scifig-43-53
+          path: |
+            evidence/m5_t1_fullgate_scifig_43_53/
+            fullgate_scifig_43_53.log
+          if-no-files-found: error
+          retention-days: 30
