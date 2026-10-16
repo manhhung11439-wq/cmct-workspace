@@ -667,3 +667,14 @@ Therefore no exact-variety natural photograph satisfies the M4 publication gate.
 - #24 Spirodela polyrhiza: documents/aquatic-plant references, not dried medicinal herb.
 - #25 Sojae Semen Praeparatum / 淡豆豉: no exact medicinal fermented-soybean photo distinguishing drug preparation from food douchi.
 - Two historical #1–25 CORRECTION-READY IDs inferred: 0.
+
+
+## M4 #78 rerun — 2026-10-16
+- Exact-natural workflow run 38875228265: SUCCESS.
+- Names queried: Mesostemma dichotomum var. lanceolatum; Stellaria dichotoma var. lanceolata; related historical exact-variety combinations.
+- GBIF exact-name media records found: 15.
+- GBIF STRICT natural + reusable-license candidates: 0.
+- iNaturalist exact-variety taxa: 0.
+- iNaturalist exact-variety photo candidates: 0.
+- M4 #78 remains UNRESOLVED/HOLD.
+- Species-level photos, herbarium sheets, and botanical illustrations remain prohibited substitutes.
