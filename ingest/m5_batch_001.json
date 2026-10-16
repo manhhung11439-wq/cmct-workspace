@@ -1,11 +1,10 @@
 {
-  "batch": "Tập 1 M5 strict verification — #30 Citrus aurantiifolia leaves",
+  "batch": "Tập 1 M4 correction — #121 exact-natural Phyllanthus acidus",
   "rules": {
-    "historical_correction_ready_ids": "DO NOT GUESS",
+    "purpose": "Replace herbarium/non-natural M4 #121 with exact-species natural photograph",
     "require": [
-      "identity_material",
-      "medicinal_part",
-      "preparation_form",
+      "exact_species_identity",
+      "natural_living_context",
       "provenance",
       "author",
       "file_level_license",
@@ -14,10 +13,10 @@
   },
   "items": [
     {
-      "id": 30,
-      "filename": "m5_030_Citrus_aurantifolia_leaves.jpg",
-      "commons_title": "File:Citrus aurantifolia leaves.jpg",
-      "expected_sha1": "45349373b6dafdcb10e8e405f5acac299ef40345"
+      "id": "M4-121",
+      "filename": "m4_121_Phyllanthus_acidus_1.jpg",
+      "commons_title": "File:Phyllanthus acidus 1.jpg",
+      "expected_sha1": "5b2adc3aa1418c491dd8be6eb81dccd7afe7f128"
     }
   ]
 }
