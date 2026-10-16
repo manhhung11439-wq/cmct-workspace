@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 strict verification — #90 Sauropus androgynus medicinal-leaf candidate",
+  "batch": "Tập 1 M5 candidate verification — #95 Shandougen shop material",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -9,15 +9,15 @@
       "provenance",
       "author",
       "file_level_license",
-      "original_bytes_hash"
+      "original_bytes_hash",
+      "visual_role_confirmation"
     ]
   },
   "items": [
     {
-      "id": 90,
-      "filename": "m5_090_Sauropus_androgynus_Vitamin_leaf.jpg",
-      "commons_title": "File:Sauropus androgynus (Vitamin leaf).jpg",
-      "expected_sha1": "f61d7732004b108a5073f66dac9f2d5d2d6f2b05"
+      "id": 95,
+      "filename": "m5_095_Shandougen_shop_candidate.jpg",
+      "commons_title": "File:HK 金鐘 Admiralty 德立街 Drake Street 海富中心商場 Admiralty Centre mall shop 新生堂 June 2020 SS2 11.jpg"
     }
   ]
 }
