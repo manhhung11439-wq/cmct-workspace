@@ -1,0 +1,22 @@
+name: CMCT fullgate M5 053 BMC crop
+on:
+  push:
+    paths:
+      - 'scripts/build_fullgate_m5_053_bmc.py'
+      - '.github/workflows/cmct_fullgate_m5_053_bmc.yml'
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pymupdf pillow
+      - run: set -o pipefail; python scripts/build_fullgate_m5_053_bmc.py | tee fullgate_m5_053_bmc.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-fullgate-m5-053-bmc
+          path: |
+            evidence/m5_t1_fullgate_053_bmc/
+            fullgate_m5_053_bmc.log
+          if-no-files-found: error
+          retention-days: 30
