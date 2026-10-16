@@ -34,6 +34,20 @@ See `checkpoints/T1_REV17_SOURCE_GUARD_2026-10-16.md`.
 - Mutation rule: queue for REV18; insert only from the exact promoted 583-page REV17 base.
 
 
+
+### #44 Hoàng Liên — FULL-GATE PASS
+- Manuscript source: `Coptis chinensis Franch.`; medicinal part = rhizome; preparation = dried rhizome.
+- Scientific source: Xiang K-L, Wu S-D, Yu S-X, Liu Y, Jabbour F, Erst AS, et al. (2016), *The First Comprehensive Phylogeny of Coptis (Ranunculaceae) and Its Implications for Character Evolution and Classification*, PLOS ONE 11(4): e0153127; DOI 10.1371/journal.pone.0153127.
+- Article license: CC BY 4.0.
+- Exact identity/material: Fig. 1 is captioned `Coptis chinensis`; panel B is explicitly `dried rhizome (Rhizoma Coptidis)`. Article text states C. chinensis rhizomes are used/exported as Rhizoma Coptidis.
+- Original Fig. 1 PNG: 1996×1651; 2,717,045 bytes; SHA1 `717446b96d1b0d8b54858541a39902f9bf900773`; SHA256 `6086639a98d4d7f1c2fa172d3bb2c6299764831095100a94aa2be970de333797`.
+- Controlled insertion derivative: crop box `(1235,0,1996,870)`, panel B only; PNG 761×870; 363,357 bytes; SHA1 `69aa49964ce134d325aa40489e6453d6a9a05671`; SHA256 `81dcfb87c9153c0e04b226831a1738fafaa122c542d1d0e709d5ae6181deef2c`.
+- Transformation: crop only; excludes living-plant panel A and carpels panel C; no content alteration inside panel B.
+- Reproducible acquisition/crop workflow run 38855923179 — SUCCESS; artifact `cmct-m5-044-coptis`, artifact ID 12027271724.
+- Controlled caption: `Ảnh 5 – Hoàng Liên (Coptis chinensis): thân rễ khô (Rhizoma Coptidis). Nguồn: Xiang et al., PLOS ONE 2016, Fig. 1B; CC BY 4.0; ảnh đã crop chỉ panel B.`
+- Status: FULL-GATE PASS.
+- Mutation rule: queue for REV18; insert only from exact promoted 583-page REV17 base.
+
 ### #51 Long Đởm Thảo — FULL-GATE PASS
 - Manuscript source: `Gentiana scabra Bunge`; medicinal part = root and rhizome; preparation = harvested root/rhizome, washed and dried.
 - Scientific source: Kou B, Jiang Y, Chen Y, Yang J, Sun J, Yan Y, Weng L, Xiao C. *A Study of Gentianae Radix et Rhizoma Class Differences Based on Chemical Composition and Core Efficacy*. Molecules. 2023;28(20):7132. DOI 10.3390/molecules28207132.
@@ -185,9 +199,9 @@ Rejected alternate for #121:
 
 ## Current execution state
 - Promoted manuscript M5 remains 23/125 until a controlled mutation is performed.
-- New FULL-GATE queue after promotion = 10 rows (#43, #51, #53, #54, #55, #57, #58, #109, #111, #121).
-- If/when #43, #51, #53, #54, #55, #57, #58, #109, #111 and #121 are mutated from the exact promoted REV17 base, expected M5 count becomes 33/125, subject to render/TOC/regression PASS.
-- Remaining unfilled M5 slots before mutation = 102/125; after successful #43 + #51 + #53 + #54 + #55 + #57 + #58 + #109 + #111 + #121 mutation = 92/125.
+- New FULL-GATE queue after promotion = 11 rows (#43, #44, #51, #53, #54, #55, #57, #58, #109, #111, #121).
+- If/when #43, #44, #51, #53, #54, #55, #57, #58, #109, #111 and #121 are mutated from the exact promoted REV17 base, expected M5 count becomes 34/125, subject to render/TOC/regression PASS.
+- Remaining unfilled M5 slots before mutation = 102/125; after successful #43 + #44 + #51 + #53 + #54 + #55 + #57 + #58 + #109 + #111 + #121 mutation = 91/125.
 - M4 #78 remains unresolved at exact-variety reusable natural-photo level.
 - Two historical CORRECTION-READY IDs in #1–25 remain unrecovered and MUST NOT be inferred.
 
