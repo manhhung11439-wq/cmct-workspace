@@ -265,3 +265,18 @@ Candidate B:
 - Fails material-role gate: finished brewed tea, not the dried/roasted seed drug itself.
 - Verdict for both: HOLD / DO NOT INSERT.
 
+
+
+### #90 Rau Ngót — HOLD (new 2026 Commons candidate)
+- Candidate: Wikimedia Commons `File:Sauropus androgynus (Vitamin leaf).jpg`.
+- Exact identity: `Sauropus androgynus`.
+- Author: Shreesha Sharma.
+- Provenance: own work → Wikimedia Commons; Wiki Loves Medicinal Plants 2026.
+- License: CC BY-SA 4.0.
+- Original size: 4240×2832; original binary/hash gate PASS.
+- Commons SHA1: `f61d7732004b108a5073f66dac9f2d5d2d6f2b05`.
+- Binary/provenance ingest run 38855231207: SUCCESS; artifact 12026887594.
+- Direct visual material-state verification: leaves remain attached to living branches/plant; this is not harvested leaf material.
+- Manuscript M5 requires medicinal leaf material in a harvested fresh/dried role.
+- Verdict: MATERIAL-ROLE FAIL → HOLD / DO NOT INSERT.
+
