@@ -1,0 +1,23 @@
+name: CMCT M5 054 Shegan atlas
+on:
+  push:
+    paths:
+      - 'scripts/acquire_m5_054_shegan_atlas.py'
+      - '.github/workflows/cmct_m5_054_shegan_atlas.yml'
+  workflow_dispatch:
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pymupdf pillow
+      - run: set -o pipefail; python scripts/acquire_m5_054_shegan_atlas.py | tee m5_054_shegan.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-054-shegan
+          path: |
+            evidence/m5_t1_054_shegan_atlas/
+            m5_054_shegan.log
+          if-no-files-found: error
+          retention-days: 30
