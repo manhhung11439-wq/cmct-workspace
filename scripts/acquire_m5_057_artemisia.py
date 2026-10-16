@@ -23,9 +23,19 @@ doc=fitz.open(stream=pdf,filetype="pdf")
 page_idx=None;page_text=""
 for i,p in enumerate(doc):
     txt=p.get_text("text")
-    if "herbal drug prepared for the extraction" in txt and "fragmented inflorescence" in txt:
+    low=" ".join(txt.lower().split())
+    if ("plant material" in low and "artemisia annua" in low and ("figure 1" in low or "fig. 1" in low or "fig 1" in low)):
         page_idx=i;page_text=txt;break
-if page_idx is None:raise RuntimeError("Figure 1 page not found")
+if page_idx is None:
+    for i,p in enumerate(doc):
+        txt=p.get_text("text"); low=" ".join(txt.lower().split())
+        if "artemisia annua" in low and "fragmented" in low and ("inflorescence" in low or "inﬂorescence" in low):
+            page_idx=i;page_text=txt;break
+if page_idx is None:
+    for i,p in enumerate(doc):
+        txt=p.get_text("text")
+        print("M5_057_TEXT_PAGE",i+1,txt[:500].replace("\n"," | "),flush=True)
+    raise RuntimeError("Figure 1 page not found after fuzzy validation")
 page=doc[page_idx]
 pix=page.get_pixmap(matrix=fitz.Matrix(2.5,2.5),alpha=False)
 pagepng=OUT/f"m5_057_fig1_page_{page_idx+1}.png";pix.save(str(pagepng))
