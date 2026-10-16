@@ -1,0 +1,22 @@
+name: CMCT M5 071 Dictamnus supplementary scout
+on:
+  push:
+    paths:
+      - 'scripts/acquire_m5_071_dictamnus.py'
+      - '.github/workflows/cmct_m5_071_dictamnus.yml'
+  workflow_dispatch:
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pymupdf pillow
+      - run: python scripts/acquire_m5_071_dictamnus.py | tee m5_071_dictamnus.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-071-dictamnus
+          path: |
+            evidence/m5_t1_071_dictamnus/
+            m5_071_dictamnus.log
+          if-no-files-found: error
+          retention-days: 30
