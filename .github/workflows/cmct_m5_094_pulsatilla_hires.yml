@@ -1,0 +1,22 @@
+name: CMCT M5 094 Pulsatilla hi-res
+on:
+  push:
+    paths:
+      - 'scripts/probe_m5_094_pulsatilla_hires.py'
+      - '.github/workflows/cmct_m5_094_pulsatilla_hires.yml'
+  workflow_dispatch:
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pillow
+      - run: python scripts/probe_m5_094_pulsatilla_hires.py | tee probe_m5_094_pulsatilla_hires.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-094-pulsatilla-hires
+          path: |
+            evidence/m5_t1_094_pulsatilla_hires/
+            probe_m5_094_pulsatilla_hires.log
+          if-no-files-found: error
+          retention-days: 30
