@@ -17,8 +17,20 @@ def get(url):
 
 def hh(data): return hashlib.sha1(data).hexdigest(),hashlib.sha256(data).hexdigest()
 
-pdf_url="https://downloads.hindawi.com/journals/bmri/2017/7597596.pdf"
-r=get(pdf_url); pdf=r.content
+pdf_urls=[
+ "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5448051/fullTextPDF",
+ "https://downloads.hindawi.com/journals/bmri/2017/7597596.pdf"
+]
+r=None
+for u in pdf_urls:
+    try:
+        rr=get(u)
+        if rr.content.startswith(b"%PDF"):
+            r=rr; break
+    except Exception as e:
+        print("PDF_SOURCE_FAIL",u,repr(e),flush=True)
+if r is None: raise RuntimeError("no PDF source succeeded")
+pdf=r.content
 if not pdf.startswith(b"%PDF"): raise RuntimeError("not PDF")
 pp=OUT/"m5_004_article_original.pdf"; pp.write_bytes(pdf)
 ps1,ps256=hh(pdf)
