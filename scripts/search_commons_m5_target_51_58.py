@@ -1,3 +1,4 @@
+# resume marker 2026-10-16T15:12+07 — continue exact crude-drug acquisition
 # resume marker 2026-10-16T14:37+07 — continue exact crude-drug acquisition
 # rerun marker 2026-10-16T09:13+07 — manuscript roles re-locked exactly; targeted acquisition resumed
 import json,time,re,html
