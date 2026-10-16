@@ -1,0 +1,23 @@
+name: CMCT M5 095 Sophora tonkinensis STR
+on:
+  push:
+    paths:
+      - 'scripts/acquire_m5_095_sophora_tonkinensis.py'
+      - '.github/workflows/cmct_m5_095_sophora_tonkinensis.yml'
+  workflow_dispatch:
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pillow
+      - run: set -o pipefail; python scripts/acquire_m5_095_sophora_tonkinensis.py | tee acquire_m5_095_sophora_tonkinensis.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-095-sophora-tonkinensis
+          path: |
+            evidence/m5_t1_095_sophora_tonkinensis/
+            acquire_m5_095_sophora_tonkinensis.log
+          if-no-files-found: error
+          retention-days: 30
