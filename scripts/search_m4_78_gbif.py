@@ -1,3 +1,4 @@
+# resume marker 2026-10-16T14:37+07 — parallel exact-variety natural-photo acquisition
 import json, requests, time
 from pathlib import Path
 OUT=Path("evidence/m4_78_exact_natural"); OUT.mkdir(parents=True,exist_ok=True)
