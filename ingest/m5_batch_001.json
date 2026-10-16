@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE check — #111 Annona muricata detached leaves",
+  "batch": "Tập 1 M5 FULL-GATE check — #121 harvested Phyllanthus acidus fruit",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,10 +14,9 @@
   },
   "items": [
     {
-      "id": 111,
-      "filename": "m5_111_Soursop_leaves.jpg",
-      "commons_title": "File:Soursop leaves.jpg",
-      "expected_sha1": "59ad698ea6726b28b821a562c9a97ceec0f421d7"
+      "id": 121,
+      "filename": "m5_121_Phyllanthus_acidus2.jpg",
+      "commons_title": "File:Phyllanthus acidus2.jpg"
     }
   ]
 }
