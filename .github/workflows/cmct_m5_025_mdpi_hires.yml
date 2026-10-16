@@ -1,0 +1,22 @@
+name: CMCT M5 025 MDPI hi-res probe
+on:
+  push:
+    paths:
+      - 'scripts/probe_m5_025_mdpi_hires.py'
+      - '.github/workflows/cmct_m5_025_mdpi_hires.yml'
+  workflow_dispatch:
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pillow
+      - run: python scripts/probe_m5_025_mdpi_hires.py | tee probe_m5_025_mdpi_hires.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-025-mdpi-hires
+          path: |
+            evidence/m5_t1_025_ssp_mdpi_hi_res/
+            probe_m5_025_mdpi_hires.log
+          if-no-files-found: error
+          retention-days: 30
