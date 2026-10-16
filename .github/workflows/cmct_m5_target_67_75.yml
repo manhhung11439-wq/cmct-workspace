@@ -1,4 +1,4 @@
-name: CMCT M5 target 67-75 search
+name: CMCT M5 target 67-75 medicinal material search
 on:
   push:
     paths:
