@@ -1,118 +1,133 @@
-# CMCT T1 scientific-figure acquisition for M5 #43 and #53
-import io, os, re, json, tarfile, hashlib, pathlib, time
+# CMCT T1 scientific-figure acquisition v2 for M5 #43 and #53
+import io, re, json, hashlib, pathlib, time
 from urllib.parse import urljoin
 import requests
 from bs4 import BeautifulSoup
 from PIL import Image
 
-OUT=pathlib.Path("evidence/m5_t1_scientific_figures_43_53")
-OUT.mkdir(parents=True, exist_ok=True)
-s=requests.Session()
-s.headers["User-Agent"]="CMCT-image-audit/2.5 scientific figure original acquisition"
+OUT=pathlib.Path("evidence/m5_t1_scientific_figures_43_53_v2")
+OUT.mkdir(parents=True,exist_ok=True)
+s=requests.Session(); s.headers["User-Agent"]="CMCT-image-audit/2.6 exact JATS figure acquisition"
 
-def get(url, **kw):
+def get(url,**kw):
     last=None
     for i in range(8):
-        r=s.get(url, timeout=120, allow_redirects=True, **kw)
-        last=r
+        r=s.get(url,timeout=120,allow_redirects=True,**kw); last=r
         if r.status_code in (429,500,502,503,504):
-            time.sleep(min(60, 2*(2**i))); continue
+            time.sleep(min(60,2*(2**i))); continue
         r.raise_for_status(); return r
     last.raise_for_status()
 
-def hashes(data):
-    return hashlib.sha1(data).hexdigest(), hashlib.sha256(data).hexdigest()
-
-def image_info(data):
+def save_img(data,stem):
     with Image.open(io.BytesIO(data)) as im:
-        return im.width, im.height, im.format
+        w,h,fmt=im.width,im.height,im.format
+    ext={"JPEG":".jpg","PNG":".png","TIFF":".tif","GIF":".gif"}.get(fmt,".img")
+    p=OUT/(stem+ext);p.write_bytes(data)
+    return p,w,h,fmt,hashlib.sha1(data).hexdigest(),hashlib.sha256(data).hexdigest()
 
 manifest=[]
 
-# ---- #53 Frontiers Figure 1 original
-article53="https://www.frontiersin.org/journals/pharmacology/articles/10.3389/fphar.2021.685575/full"
-html53=get(article53).text
-soup=BeautifulSoup(html53,"html.parser")
+# #53 — use Frontiers JATS/XML only
+xml_url="https://www.frontiersin.org/journals/pharmacology/articles/10.3389/fphar.2021.685575/xml"
+xml=get(xml_url).text
+(OUT/"frontiers_685575.xml").write_text(xml,encoding="utf-8")
+xs=BeautifulSoup(xml,"xml")
 fig53=None
-# Find figure whose text/caption mentions FIGURE 1 and dried root
-for fig in soup.find_all(["figure","div"]):
-    txt=" ".join(fig.stripped_strings)
-    if ("FIGURE 1" in txt.upper() or "FIGURE 1" in txt) and ("dried root" in txt.lower() or "Isatis" in txt):
-        img=fig.find("img")
-        if img and (img.get("src") or img.get("data-src")):
-            fig53=(fig,img,txt); break
-if not fig53:
-    # fallback: inspect all images and nearby text/alt
-    for img in soup.find_all("img"):
-        alt=(img.get("alt") or "")
-        src=img.get("src") or img.get("data-src")
-        if src and ("figure 1" in alt.lower() or "dried root" in alt.lower()):
-            fig53=(img.parent,img,alt); break
-if not fig53:
-    # XML fallback
-    xml=get("https://www.frontiersin.org/journals/pharmacology/articles/10.3389/fphar.2021.685575/xml").text
-    xs=BeautifulSoup(xml,"xml")
-    f=xs.find("fig", {"id": re.compile("1",re.I)}) or xs.find("fig")
-    g=f.find("graphic") if f else None
-    href=(g.get("xlink:href") or g.get("href")) if g else None
-    if not href: raise RuntimeError("Could not resolve Frontiers Figure 1")
-    src53=urljoin(article53,href)
-    caption53=" ".join(f.stripped_strings)
-else:
-    _,img53,caption53=fig53
-    src53=urljoin(article53,img53.get("src") or img53.get("data-src"))
-# Prefer largest/original variant when URL has resize params
-src53=src53.replace("/w/","/").replace("/f/","/")
-r53=get(src53)
-data53=r53.content
-w,h,fmt=image_info(data53)
-ext={"JPEG":".jpg","PNG":".png","TIFF":".tif"}.get(fmt,".img")
-p53=OUT/("m5_053_frontiers_fig1_original"+ext); p53.write_bytes(data53)
-sha1,sha256=hashes(data53)
-manifest.append({"id":53,"article":article53,"figure":"Figure 1","source_url":src53,"file":str(p53),
- "bytes":len(data53),"width":w,"height":h,"format":fmt,"sha1":sha1,"sha256":sha256,
- "caption":caption53[:1500],"license":"CC BY","authors":"Nie et al. 2021"})
+for f53 in xs.find_all("fig"):
+    label=" ".join(f53.find("label").stripped_strings) if f53.find("label") else ""
+    cap=" ".join(f53.find("caption").stripped_strings) if f53.find("caption") else ""
+    if (re.search(r"\b(FIGURE|FIG\.?)[ ]*1\b",label,re.I) or
+        ("dried root" in cap.lower() and "transverse" in cap.lower())):
+        fig53=f53;break
+if fig53 is None: raise RuntimeError("Frontiers exact Figure 1 not found in XML")
+cap53=" ".join(fig53.find("caption").stripped_strings) if fig53.find("caption") else ""
+graphics=fig53.find_all(["graphic","media"])
+hrefs=[]
+for g in graphics:
+    for key in ("xlink:href","href"):
+        if g.get(key): hrefs.append(g.get(key))
+if not hrefs: raise RuntimeError("Frontiers Figure 1 has no graphic href: "+str(fig53)[:1500])
+# try href variants and keep largest valid image
+cands=[]
+for href in hrefs:
+    bases=[
+      urljoin(xml_url,href),
+      urljoin("https://www.frontiersin.org/",href),
+      href if href.startswith("http") else ""
+    ]
+    for u in dict.fromkeys(x for x in bases if x):
+        try:
+            rr=get(u); data=rr.content
+            with Image.open(io.BytesIO(data)) as im: wh=(im.width,im.height,im.format)
+            cands.append((len(data),u,data,wh))
+        except Exception:
+            pass
+if not cands:
+    raise RuntimeError("Could not download Frontiers Figure 1 hrefs="+repr(hrefs))
+_,u53,data53,_=max(cands,key=lambda x:x[0])
+p,w,h,fmt,s1,s256=save_img(data53,"m5_053_frontiers_fig1_original")
+manifest.append({"id":53,"figure":"Figure 1","article":"https://doi.org/10.3389/fphar.2021.685575",
+ "asset_url":u53,"caption":cap53,"file":str(p),"bytes":len(data53),"width":w,"height":h,
+ "format":fmt,"sha1":s1,"sha256":s256,"license":"CC BY","authors":"Nie et al. 2021"})
 
-# ---- #43 PMC OA package, locate Fig 1 asset
-pmcid="PMC5031759"
-oa=get(f"https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id={pmcid}").text
-m=re.search(r'href="([^"]+\.tar\.gz)"',oa)
-if not m: raise RuntimeError("No PMC OA tar.gz link")
-tar_url=m.group(1).replace("ftp://","https://")
-tar_data=get(tar_url).content
-(OUT/"PMC5031759_oa_package.tar.gz").write_bytes(tar_data)
-tf=tarfile.open(fileobj=io.BytesIO(tar_data),mode="r:gz")
-names=tf.getnames()
-nxml_name=next(n for n in names if n.endswith(".nxml"))
-nxml=tf.extractfile(nxml_name).read()
-xs=BeautifulSoup(nxml,"xml")
-fig=None
-for f in xs.find_all("fig"):
-    label=" ".join((f.find("label").stripped_strings if f.find("label") else []))
-    cap=" ".join((f.find("caption").stripped_strings if f.find("caption") else []))
-    if ("Fig. 1" in label or label.strip() in ("Fig. 1","Figure 1","Fig 1")) or ("dried root" in cap.lower() and "Scutellaria" in cap):
-        fig=f; break
-if fig is None: raise RuntimeError("PMC Fig 1 not found")
-g=fig.find("graphic")
-href=(g.get("xlink:href") or g.get("href")) if g else None
-if not href: raise RuntimeError("PMC Fig 1 graphic href missing")
-# resolve asset inside tar, allowing extension variants
-base_dir=str(pathlib.PurePosixPath(nxml_name).parent)
-candidates=[n for n in names if pathlib.PurePosixPath(n).stem==pathlib.PurePosixPath(href).stem]
-if not candidates:
-    candidates=[n for n in names if href in n]
-if not candidates: raise RuntimeError(f"PMC figure asset not found for {href}; names sample={names[:20]}")
-asset_name=max(candidates,key=lambda n: tf.getmember(n).size)
-data43=tf.extractfile(asset_name).read()
-w,h,fmt=image_info(data43)
-ext={"JPEG":".jpg","PNG":".png","TIFF":".tif"}.get(fmt,pathlib.Path(asset_name).suffix or ".img")
-p43=OUT/("m5_043_pmc5031759_fig1_original"+ext); p43.write_bytes(data43)
-sha1,sha256=hashes(data43)
-caption43=" ".join(fig.find("caption").stripped_strings) if fig.find("caption") else ""
-manifest.append({"id":43,"article":"https://pmc.ncbi.nlm.nih.gov/articles/PMC5031759/","figure":"Figure 1",
- "source_url":tar_url+" :: "+asset_name,"file":str(p43),"bytes":len(data43),"width":w,"height":h,"format":fmt,
- "sha1":sha1,"sha256":sha256,"caption":caption43[:1500],"license":"CC BY 4.0",
- "authors":"Zhao Q, Chen X-Y, Martin C. 2016"})
+# #43 — parse Springer exact figure caption, then full-size media source
+article43="https://link.springer.com/article/10.1007/s11434-016-1136-5"
+html43=get(article43).text
+(OUT/"springer_1136_5.html").write_text(html43,encoding="utf-8")
+sp=BeautifulSoup(html43,"html.parser")
+fig43=None
+for fg in sp.find_all(["figure","div"]):
+    txt=" ".join(fg.stripped_strings)
+    if "dried root" in txt.lower() and "scutellaria" in txt.lower():
+        # require local figure-ish structure
+        img=fg.find("img")
+        if img:
+            fig43=(fg,img,txt);break
+if fig43 is None:
+    for img in sp.find_all("img"):
+        alt=" ".join([img.get("alt") or "",img.get("title") or ""])
+        if "fig" in alt.lower() and ("scutellaria" in alt.lower() or "medicinal" in alt.lower()):
+            fig43=(img.parent,img,alt);break
+if fig43 is None: raise RuntimeError("Springer Fig 1 container not resolved")
+fg,img43,txt43=fig43
+urls=[]
+for attr in ("src","data-src","data-original"):
+    if img43.get(attr): urls.append(img43.get(attr))
+for attr in ("srcset","data-srcset"):
+    val=img43.get(attr)
+    if val:
+        for part in val.split(","):
+            urls.append(part.strip().split()[0])
+pic=img43.find_parent("picture")
+if pic:
+    for src in pic.find_all("source"):
+        val=src.get("srcset") or src.get("data-srcset")
+        if val:
+            for part in val.split(","): urls.append(part.strip().split()[0])
+# transform Springer media URLs to original/full when possible
+more=[]
+for u in urls:
+    if not u: continue
+    absu=urljoin(article43,u)
+    more.extend([absu,
+      absu.replace("/small/","/full/").replace("/medium/","/full/"),
+      absu.replace("springer-static/image/","springer-static/image/")])
+urls=list(dict.fromkeys(more))
+cands=[]
+for u in urls:
+    try:
+        rr=get(u); data=rr.content
+        with Image.open(io.BytesIO(data)) as im: wh=(im.width,im.height,im.format)
+        cands.append((im.width*im.height,len(data),u,data,wh))
+    except Exception:
+        pass
+if not cands: raise RuntimeError("No downloadable Springer figure image URLs: "+repr(urls[:20]))
+_,_,u43,data43,_=max(cands,key=lambda x:(x[0],x[1]))
+p,w,h,fmt,s1,s256=save_img(data43,"m5_043_springer_fig1_original")
+manifest.append({"id":43,"figure":"Figure 1","article":"https://doi.org/10.1007/s11434-016-1136-5",
+ "asset_url":u43,"caption":txt43[:2000],"file":str(p),"bytes":len(data43),"width":w,"height":h,
+ "format":fmt,"sha1":s1,"sha256":s256,"license":"CC BY 4.0",
+ "authors":"Zhao, Chen & Martin 2016"})
 
 (OUT/"manifest.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding="utf-8")
 print("CMCT_SCI_FIG_MANIFEST="+json.dumps(manifest,ensure_ascii=False))
