@@ -1,0 +1,22 @@
+name: CMCT M5 055 RPR Frontiers
+on:
+  push:
+    paths:
+      - 'scripts/acquire_m5_055_rpr.py'
+      - '.github/workflows/cmct_m5_055_rpr.yml'
+  workflow_dispatch:
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pymupdf pillow
+      - run: set -o pipefail; python scripts/acquire_m5_055_rpr.py | tee m5_055_rpr.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-055-rpr
+          path: |
+            evidence/m5_t1_055_rpr_frontiers/
+            m5_055_rpr.log
+          if-no-files-found: error
+          retention-days: 30
