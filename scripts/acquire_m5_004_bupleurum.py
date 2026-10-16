@@ -165,6 +165,7 @@ manifest={
  "controller_note":"Exact panel C crop visually verified; provisional quadrants are superseded review aids only."
 }
 (OUT/"extract_manifest.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding="utf-8")
-print("M5_004_CONTROLLED_DERIVATIVE="+json.dumps(exact_derivative,ensure_ascii=False),flush=True)\nprint("M5_004_ORIGINAL="+json.dumps(src,ensure_ascii=False),flush=True)
+print("M5_004_CONTROLLED_DERIVATIVE="+json.dumps(exact_derivative,ensure_ascii=False),flush=True)
+print("M5_004_ORIGINAL="+json.dumps(src,ensure_ascii=False),flush=True)
 print("M5_004_PROVISIONAL="+json.dumps(derivs,ensure_ascii=False),flush=True)
 print("M5_004_MANIFEST="+json.dumps(manifest,ensure_ascii=False),flush=True)
