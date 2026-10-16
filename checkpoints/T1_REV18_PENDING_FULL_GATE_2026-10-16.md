@@ -280,3 +280,12 @@ Candidate B:
 - Manuscript M5 requires medicinal leaf material in a harvested fresh/dried role.
 - Verdict: MATERIAL-ROLE FAIL → HOLD / DO NOT INSERT.
 
+
+
+### #52 / #56 CC-BY scientific-figure scout — NO IMAGE PASS
+- Reproducible scout run 38855492170: SUCCESS.
+- #52 Bồ Công Anh: Huang, Li & Chen, Antioxidants 2026 (PMC13295379) explicitly authenticates dried whole `Taraxacum mongolicum` material (root/stem/leaf/flower), but all 13 article figures are extraction schemes, compound structures, assays, signaling/docking figures; no photograph of the authenticated dried medicinal material is present. Evidence strengthens identity/preparation only; M5 image remains HOLD.
+- #56 Địa Cốt Bì: Yang et al., Antioxidants 2024 (PMC11590933), CC BY 4.0, studies root bark of `Lycium chinense`, but all 10 figures are cell/animal assay, dental/histology or graph figures; no photograph of the exact root-bark medicinal material is present. Evidence strengthens exact-species material context only; M5 image remains HOLD.
+- Existing public-domain atlas image labeled `地骨皮` is not promoted because the pharmacopoeial drug scope can include both `Lycium chinense` and `L. barbarum`; manuscript is locked specifically to `L. chinense`.
+- Verdict: no new FULL-GATE row from this scout; no mutation.
+
