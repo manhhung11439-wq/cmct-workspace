@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #40 roasted Senna/Cassia tora seed tea",
+  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #15 Morus alba dried leaf tea",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,9 +14,9 @@
   },
   "items": [
     {
-      "id": 40,
-      "filename": "m5_040_Gyeolmyeongja_cha.jpg",
-      "commons_title": "File:Gyeolmyeongja-cha.jpg"
+      "id": 15,
+      "filename": "m5_015_Ppongnip_cha.jpg",
+      "commons_title": "File:Ppongnip-cha.jpg"
     }
   ]
 }
