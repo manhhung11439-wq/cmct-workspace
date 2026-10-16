@@ -23,12 +23,12 @@ page_idx=None;page_text=""
 for i,p in enumerate(doc):
     txt=p.get_text("text")
     low=" ".join(txt.lower().split())
-    if "differences in traits between gf and gs" in low and "figure 1" in low:
+    if "figure 1. differences in traits between gf and gs" in low:
         page_idx=i;page_text=txt;break
 if page_idx is None:
     for i,p in enumerate(doc):
         txt=p.get_text("text"); low=" ".join(txt.lower().split())
-        if "grr-first class" in low and "grr-second class" in low and "figure 1" in low:
+        if "gf trait map" in low and "gs trait map" in low:
             page_idx=i;page_text=txt;break
 if page_idx is None: raise RuntimeError("Figure 1 page not found")
 page=doc[page_idx]
