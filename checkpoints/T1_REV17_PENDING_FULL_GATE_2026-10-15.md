@@ -293,6 +293,9 @@ Most hits in these ranges were live plants, catalogue scans, herbarium/illustrat
 
 Specific rejects / HOLD:
 
+- #86–97 targeted medicinal-material search completed: no new FULL-GATE file. #86–90/#92–97 returned PDFs, live/botanical images, or no exact harvested/processed material; #91 remains species-identity blocked at file level.
+- #101–110 targeted search completed: no new FULL-GATE file. #101 is dominated by materia-medica PDFs; #102–105/#108–110 do not provide exact harvested/processed material with a complete file-level chain.
+
 - #76–85 targeted search: no new FULL-GATE file.
 - #84 exact-species Commons files `Oroxylum indicum 11/12/13.JPG` passed original-byte/hash + author/license verification (Satheesan.vn, CC BY-SA 3.0), but file-level descriptions only say `Oroxylum indicum in Thrissur` and do not prove the represented material is dried stem bark or dried mature seed as required by the manuscript → HOLD, no insertion.
 
