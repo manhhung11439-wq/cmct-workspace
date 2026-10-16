@@ -1,0 +1,23 @@
+name: CMCT M5 004 Bupleurum figure
+on:
+  push:
+    paths:
+      - 'scripts/acquire_m5_004_bupleurum.py'
+      - '.github/workflows/cmct_m5_004_bupleurum.yml'
+  workflow_dispatch:
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pymupdf pillow
+      - run: set -o pipefail; python scripts/acquire_m5_004_bupleurum.py | tee m5_004_bupleurum.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-004-bupleurum
+          path: |
+            evidence/m5_t1_004_bupleurum/
+            m5_004_bupleurum.log
+          if-no-files-found: error
+          retention-days: 30
