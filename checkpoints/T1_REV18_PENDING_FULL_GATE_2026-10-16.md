@@ -198,6 +198,21 @@ Rejected alternate for #121:
 - `File:Phyllanthus acidus2.jpg` is exact detached/market fruit and Public Domain, but its source/author are only machine-assumed from legacy Commons metadata. It passed binary/hash but is not selected because the CC BY-SA 4.0 own-work candidate above has a cleaner provenance chain.
 
 
+
+### #70 Khổ Sâm — FULL-GATE PASS
+- Manuscript source: `Sophora flavescens Aiton`; medicinal part = root; preparation target = dried/sliced root.
+- Scientific source: *Determination of Antioxidant, Cytotoxicity, and Acetylcholinesterase Inhibitory Activities of Alkaloids Isolated from Sophora flavescens Ait. Grown in Dak Nong, Vietnam*. Pharmaceuticals. 2022;15(11):1384. DOI 10.3390/ph15111384.
+- Article license: CC BY 4.0.
+- Exact identity/material chain: study identifies the Vietnamese material as `Sophora flavescens`; DNA sequencing matched reference sequence AB127037.1 at 99%, 1025/1025 nucleotide similarity; Figure 1 caption explicitly labels panel D as `dried root`.
+- Original article PDF: 14,263,464 bytes; SHA1 `ce4848deb56e8e73778907c54834de86e22fef7f`; SHA256 `b472973580f5e181d6bfaac761cbea41b5db58d1f7620dd228785e6ba0e1e8e7`.
+- Original embedded Figure 1 composite selected for audit: PNG 3183×663; 4,235,252 bytes; SHA1 `c3f736177310c7e6b694a4205acfcd32dd6e436d`; SHA256 `f04f1c1d0486d06ed7eb0372539bdbd429e782f3593ab9d20f77cc80e5bc6c1e`.
+- Controlled insertion derivative: Figure 1D only; crop box `(1629,0,2390,663)`; PNG 761×663; 457,928 bytes; SHA1 `81fc9c3a1ccec99b97e765c6fab3251917d6064b`; SHA256 `9450f5a8906cba23f7e8c0c9ee7551f8c1e82d09962f51071e900d026cc5e5f9`.
+- Transformation: crop only; retains the panel explicitly captioned `dried root`; excludes living plant, fresh-root and cross-section panels; no content alteration inside panel D.
+- Reproducible acquisition/crop workflow run 38878773779 — SUCCESS; artifact `cmct-m5-070-sophora`, artifact ID 12036452266.
+- Controlled caption: `Ảnh 5 – Khổ Sâm (Sophora flavescens): rễ đã làm khô. Nguồn: Pharmaceuticals 2022, Fig. 1D; CC BY 4.0; ảnh đã crop chỉ panel D.`
+- Status: FULL-GATE PASS.
+- Mutation rule: queue for REV18; insert only from the exact promoted 583-page REV17 base.
+
 ### #95 Sơn Đậu Căn — FULL-GATE PASS
 - Manuscript source: `Sophora tonkinensis Gagnep.`; medicinal part = root and rhizome; preparation = wash, slice and dry.
 - Medicinal-name control: Kew MPNS maps `山豆根 / Shandougen / Sophorae Tonkinensis Radix et Rhizoma` to accepted `Sophora tonkinensis Gagnep.`; Pharmacopoeia of China and Taiwan Herbal Pharmacopoeia specify dried root and rhizome.
@@ -217,9 +232,9 @@ Rejected alternate for #121:
 
 ## Current execution state
 - Promoted manuscript M5 remains 23/125 until a controlled mutation is performed.
-- New FULL-GATE queue after promotion = 14 rows (#43, #44, #47, #48, #51, #53, #54, #55, #57, #58, #95, #109, #111, #121).
-- If/when #43, #44, #47, #48, #51, #53, #54, #55, #57, #58, #95, #109, #111 and #121 are mutated from the exact promoted REV17 base, expected M5 count becomes 37/125, subject to render/TOC/regression PASS.
-- Remaining unfilled M5 slots before mutation = 102/125; after successful #43 + #44 + #47 + #48 + #51 + #53 + #54 + #55 + #57 + #58 + #95 + #109 + #111 + #121 mutation = 88/125.
+- New FULL-GATE queue after promotion = 15 rows (#43, #44, #47, #48, #51, #53, #54, #55, #57, #58, #70, #95, #109, #111, #121).
+- If/when #43, #44, #47, #48, #51, #53, #54, #55, #57, #58, #70, #95, #109, #111 and #121 are mutated from the exact promoted REV17 base, expected M5 count becomes 38/125, subject to render/TOC/regression PASS.
+- Remaining unfilled M5 slots before mutation = 102/125; after successful #43 + #44 + #47 + #48 + #51 + #53 + #54 + #55 + #57 + #58 + #70 + #95 + #109 + #111 + #121 mutation = 87/125.
 - M4 #78 remains unresolved at exact-variety reusable natural-photo level.
 - Two historical CORRECTION-READY IDs in #1–25 remain unrecovered and MUST NOT be inferred.
 
