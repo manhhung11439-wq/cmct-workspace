@@ -69,4 +69,47 @@ if thumbs:
     sh.save(OUT/"figure_contact_sheet.jpg",quality=90)
 manifest={"pmcid":PMC,"license":"CC BY 4.0 per article","figures":figs,"assets":records}
 (OUT/"manifest.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding="utf-8")
+
+# Probe publisher full-size Figure 4 assets for higher native resolution.
+publisher_candidates=[
+ "https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41598-024-53008-0/MediaObjects/41598_2024_53008_Fig4_HTML.png",
+ "https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41598-024-53008-0/MediaObjects/41598_2024_53008_Fig4_HTML.jpg",
+ "https://media.springernature.com/lw1200/springer-static/image/art%3A10.1038%2Fs41598-024-53008-0/MediaObjects/41598_2024_53008_Fig4_HTML.png",
+ "https://media.springernature.com/lw1200/springer-static/image/art%3A10.1038%2Fs41598-024-53008-0/MediaObjects/41598_2024_53008_Fig4_HTML.jpg",
+]
+hires=[]
+for u in publisher_candidates:
+    try:
+        rr=get(u); b=rr.content
+        im=Image.open(io.BytesIO(b)); im.load()
+        s1,s256=hh(b)
+        ext=(im.format or "PNG").lower().replace("jpeg","jpg")
+        p=OUT/f"Figure_4_publisher_{im.width}x{im.height}.{ext}"; p.write_bytes(b)
+        rec={"url":rr.url,"file":str(p),"w":im.width,"h":im.height,"bytes":len(b),"sha1":s1,"sha256":s256,"format":im.format}
+        hires.append(rec)
+        print("PUBLISHER_FIG4="+json.dumps(rec,ensure_ascii=False),flush=True)
+    except Exception as e:
+        print("PUBLISHER_FIG4_FAIL",u,repr(e),flush=True)
+
+if hires:
+    best=max(hires,key=lambda x:x["w"]*x["h"])
+    bim=Image.open(best["file"]).convert("RGB")
+    # SC06 is the upper-left specimen cell in panel A. Crop proportions are taken
+    # from the authentic Figure 4 layout and include SC06 label + scale bar.
+    # Normalize from the 708x307 EuropePMC view to the best publisher asset.
+    base_box=(0,27,91,123)
+    sx=bim.width/708.0; sy=bim.height/307.0
+    box=(round(base_box[0]*sx),round(base_box[1]*sy),round(base_box[2]*sx),round(base_box[3]*sy))
+    sc=bim.crop(box)
+    cp=OUT/"m5_005_SC06_Notopterygium_incisum_commercial_crop.png"; sc.save(cp,format="PNG")
+    cb=cp.read_bytes(); cs1,cs256=hh(cb)
+    controlled={"source":best,"crop_box":box,"base_box_708x307":base_box,
+                "file":str(cp),"w":sc.width,"h":sc.height,"bytes":len(cb),
+                "sha1":cs1,"sha256":cs256,
+                "identity":"SC06 = Notopterygium incisum per Figure 4 caption and ITS2 identification",
+                "material_role":"commercial Qiang-huo / processed medicinal material",
+                "license":"CC BY 4.0 at article level; no separate figure credit line in XML"}
+    (OUT/"controlled_SC06.json").write_text(json.dumps(controlled,ensure_ascii=False,indent=2),encoding="utf-8")
+    print("CONTROLLED_SC06="+json.dumps(controlled,ensure_ascii=False),flush=True)
+
 print("ASSETS="+json.dumps(records,ensure_ascii=False),flush=True)
