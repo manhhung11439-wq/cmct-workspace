@@ -1,3 +1,46 @@
+# CMCT — TẬP 1 REV17 PROMOTED SOURCE-OF-TRUTH CHECKPOINT
+
+Date promoted/verified: 2026-10-16
+
+## AUTHORITATIVE SOURCE CONTROL
+- PROMOTED DOCX: `Tap_1_PRINT_MASTER_REV17_M5_CONSOLIDATED_TOCSYNC_2026-10-16.docx`.
+- PROMOTED PDF: `Tap_1_PRINT_MASTER_REV17_M5_CONSOLIDATED_TOCSYNC_2026-10-16.pdf`.
+- DOCX SHA-256: `61c2ad6f52c632be70b384a76150fdeb7ba5625ccbc930b3d73289a536ce0275`.
+- PDF SHA-256: `b032b098402f9a543caa5f70f37a5c5099c84be93e7fa4ad872b73f7f6f68036`.
+- Rendered pages: 585.
+- REV16 and #28-only REV17-PRETOC are SUPERSEDED and MUST NOT be used as mutation bases.
+
+## REV17 QA LOCK
+- DOCX ZIP integrity: PASS.
+- Tracked insertions/deletions: 0/0.
+- Comments: none.
+- Broken internal relationships: none.
+- M5 captions: 23/125.
+- M5 IDs present: #1, #2, #3, #7, #11, #13, #14, #16, #17, #20, #26, #28, #29, #41, #42, #46, #49, #50, #66, #78, #81, #98, #99.
+- TOC entries: 125/125.
+- Heading page map: 125/125.
+- TOC/page mismatches: 0.
+- PDF pages: 585.
+- Raster pages: 585/585; zero-byte/missing: 0.
+- Raster dimensions: 1414×2000 for all pages.
+- PDF text blocks outside page: 0.
+- Outer-edge dark-content flags: 0.
+- Structural controller: PASS.
+- Literal all-page 100%-zoom final visual gate remains DEFERRED until M4/M5 stabilizes.
+
+## IMAGE COMPLETION STATE
+- M4: 124/125; only #78 Ngân Sài Hồ remains exact-natural unresolved.
+- M5: 23/125 actual drawings in promoted REV17.
+- M5 remaining without drawing: 102/125.
+- Two historical #1–25 CORRECTION-READY IDs remain archive-unrecovered; do not infer them from present-day PASS rows.
+
+## MUTATION RULE FROM NOW ON
+Every new FULL-GATE batch MUST mutate from the promoted REV17 above, then:
+mutation -> full render -> actual page-map -> TOC sync -> re-render -> structural/raster QA -> changed-page high-resolution regression.
+Do not mutate from REV16 or PRETOC branches.
+
+---
+
 # CMCT — TẬP 1 PENDING REV17 FULL-GATE CHECKPOINT
 
 Date: 2026-10-15
