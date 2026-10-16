@@ -1,0 +1,22 @@
+name: CMCT M5 focused exact category A
+on:
+  push:
+    paths:
+      - 'scripts/scan_m5_focused_A.py'
+      - '.github/workflows/cmct_m5_focused_A.yml'
+  workflow_dispatch:
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests
+      - run: python scripts/scan_m5_focused_A.py | tee focused_A.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-focused-A
+          path: |
+            evidence/m5_t1_focused_A/
+            focused_A.log
+          if-no-files-found: error
+          retention-days: 30
