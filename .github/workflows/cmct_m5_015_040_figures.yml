@@ -1,0 +1,23 @@
+name: CMCT M5 exact figure scout 15 40
+on:
+  push:
+    paths:
+      - 'scripts/scout_m5_015_040_figures.py'
+      - '.github/workflows/cmct_m5_015_040_figures.yml'
+  workflow_dispatch:
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pillow
+      - run: set -o pipefail; python scripts/scout_m5_015_040_figures.py | tee scout_m5_015_040.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-015-040-figure-scout
+          path: |
+            evidence/m5_t1_015_040_figure_scout/
+            scout_m5_015_040.log
+          if-no-files-found: error
+          retention-days: 30
