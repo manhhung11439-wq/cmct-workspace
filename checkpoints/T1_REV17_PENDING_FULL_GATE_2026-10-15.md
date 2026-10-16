@@ -597,3 +597,15 @@ Therefore no exact-variety natural photograph satisfies the M4 publication gate.
 - #108 Blumea lacera: irrelevant/historical document hits.
 - #109 Terminalia catappa and #110 Mangifera indica: search results are mainly documents/archives; no file-level proof of harvested leaf material matching manuscript.
 - Living-source or document surrogate inserted: 0.
+
+
+## Targeted rerun #86–97 — 2026-10-16
+- Workflow run 38873537299: SUCCESS.
+- Result: no new FULL-GATE promotion.
+- #86 Catharanthus roseus, #88 Jasminum subtriplinerve, #89 Excoecaria cochinchinensis, #90 Sauropus androgynus: no exact harvested/processed medicinal-material photograph.
+- #87 Gymnanthemum amygdalinum: historical medicinal-botany documents, not detached medicinal leaf material.
+- #91 Nelumbo nucifera: strict search still does not provide file-level exact species + dried medicinal leaf package superior to previously HOLD candidate.
+- #92 Eleusine indica and #93 Bidens pilosa: search results are documents, not harvested whole/aerial herb.
+- #94 Pulsatilla chinensis, #95 Sophora tonkinensis, #96 Lasiosphaera/Calvatia medicinal Mã Bột scope, #97 Lobelia chinensis: no exact processed crude-drug photograph with full file-level chain.
+- #98/#99 already have M5 in promoted REV17; not replaced.
+- New insertions: 0.
