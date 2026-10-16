@@ -1,0 +1,23 @@
+name: CMCT M5 052 056 scientific figure scout
+on:
+  push:
+    paths:
+      - 'scripts/scout_m5_052_056_scientific_figures.py'
+      - '.github/workflows/cmct_m5_052_056_scientific_scout.yml'
+  workflow_dispatch:
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests beautifulsoup4
+      - run: set -o pipefail; python scripts/scout_m5_052_056_scientific_figures.py | tee scout_052_056.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-052-056-scientific-scout
+          path: |
+            evidence/m5_t1_052_056_scientific_scout/
+            scout_052_056.log
+          if-no-files-found: error
+          retention-days: 30
