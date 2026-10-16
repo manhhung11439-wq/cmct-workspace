@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 strict identity check — #52 Taraxaci herba cum radix candidate",
+  "batch": "Tập 1 M5 strict identity/material check — #110 Mango leaf candidates",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,9 +14,14 @@
   },
   "items": [
     {
-      "id": 52,
-      "filename": "m5_052_Taraxaci_herba_cum_radix_132292.jpg",
-      "commons_title": "File:Taraxaci herba cum radix 132292.jpg"
+      "id": 110,
+      "filename": "m5_110_MANGO_LEAVES.jpg",
+      "commons_title": "File:MANGO LEAVES.jpg"
+    },
+    {
+      "id": 110,
+      "filename": "m5_110_Gowri_Habba_mango_leaves.jpg",
+      "commons_title": "File:Gowri Habba Swarna Gowri.jpg"
     }
   ]
 }
