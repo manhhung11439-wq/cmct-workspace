@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 strict verification — #90 Sauropus androgynus leafy vegetable",
+  "batch": "Tập 1 M5 #84 Oroxylum indicum exact-material verification",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,10 +14,19 @@
   },
   "items": [
     {
-      "id": 90,
-      "filename": "m5_090_Sauropus_androgynus_Maddaji_leafy_vegetable.jpg",
-      "commons_title": "File:'Maddaji' or Leaf Asparagus,Sauropus androgynus.jpg",
-      "expected_sha1": "5748e94a68436b17f383cfdb1534e67a84dcc138"
+      "id": 84,
+      "filename": "m5_084_Oroxylum_indicum_11.JPG",
+      "commons_title": "File:Oroxylum indicum 11.JPG"
+    },
+    {
+      "id": 84,
+      "filename": "m5_084_Oroxylum_indicum_12.JPG",
+      "commons_title": "File:Oroxylum indicum 12.JPG"
+    },
+    {
+      "id": 84,
+      "filename": "m5_084_Oroxylum_indicum_13.JPG",
+      "commons_title": "File:Oroxylum indicum 13.JPG"
     }
   ]
 }
