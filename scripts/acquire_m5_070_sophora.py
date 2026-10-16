@@ -42,7 +42,23 @@ for k,img in enumerate(page.get_images(full=True),1):
     except Exception:continue
     p=OUT/f"m5_070_fig1_xref{xref}_{k}.{ex['ext']}";p.write_bytes(data)
     s1,s256=hh(data);imgs.append({"xref":xref,"file":str(p),"bytes":len(data),"width":w,"height":h,"format":fmt,"sha1":s1,"sha256":s256})
-manifest={"id":70,"article":"Determination of Antioxidant, Cytotoxicity, and Acetylcholinesterase Inhibitory Activities of Alkaloids Isolated from Sophora flavescens Ait. Grown in Dak Nong, Vietnam","journal":"Pharmaceuticals 2022;15(11):1384","doi":"10.3390/ph15111384","license":"CC BY 4.0","resolved_pdf_url":r.url,"pdf_file":str(pp),"pdf_bytes":len(pdf),"pdf_sha1":ps1,"pdf_sha256":ps256,"figure_page":page_idx+1,"page_text_excerpt":page_text[:7000],"images":imgs}
+# Controlled derivative: Figure 1D (dried root) only.
+src=[x for x in imgs if x["sha256"]=="f04f1c1d0486d06ed7eb0372539bdbd429e782f3593ab9d20f77cc80e5bc6c1e"]
+if len(src)!=1: raise RuntimeError(f"Expected exact Figure 1 composite hash once, got {len(src)}")
+src_path=pathlib.Path(src[0]["file"])
+im=Image.open(src_path).convert("RGB")
+if im.size!=(3183,663): raise RuntimeError(f"Unexpected Figure 1 size {im.size}; stale crop prohibited")
+crop_box=(1629,0,2390,663)
+drug=im.crop(crop_box)
+drug_path=OUT/"m5_070_fig1D_dried_root_crop.png"
+drug.save(drug_path,format="PNG",optimize=False)
+db=drug_path.read_bytes();ds1,ds256=hh(db)
+derivative={"file":str(drug_path),"source_image_sha256":src[0]["sha256"],"crop_box":crop_box,
+"width":drug.width,"height":drug.height,"bytes":len(db),"sha1":ds1,"sha256":ds256,
+"transformation":"crop only from original embedded Figure 1 composite; retains panel D dried root; excludes panels A-C and E"}
+
+manifest={"id":70,"article":"Determination of Antioxidant, Cytotoxicity, and Acetylcholinesterase Inhibitory Activities of Alkaloids Isolated from Sophora flavescens Ait. Grown in Dak Nong, Vietnam","journal":"Pharmaceuticals 2022;15(11):1384","doi":"10.3390/ph15111384","license":"CC BY 4.0","resolved_pdf_url":r.url,"pdf_file":str(pp),"pdf_bytes":len(pdf),"pdf_sha1":ps1,"pdf_sha256":ps256,"figure_page":page_idx+1,"page_text_excerpt":page_text[:7000],"images":imgs,"controlled_derivative":derivative}
 (OUT/"extract_manifest.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding="utf-8")
 print("M5_070_PAGE",page_idx+1,"IMAGES",json.dumps(imgs),flush=True)
+print("M5_070_DERIVATIVE="+json.dumps(derivative,ensure_ascii=False),flush=True)
 print("M5_070_MANIFEST="+json.dumps(manifest,ensure_ascii=False),flush=True)
