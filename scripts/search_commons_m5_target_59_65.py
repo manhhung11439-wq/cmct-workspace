@@ -1,3 +1,4 @@
+# resume marker 2026-10-16T15:12+07 — parallel target 59-65
 import json,time,re,html
 from pathlib import Path
 import requests
