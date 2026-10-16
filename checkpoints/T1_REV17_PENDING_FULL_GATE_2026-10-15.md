@@ -370,3 +370,58 @@ Therefore no exact-variety natural photograph satisfies the M4 publication gate.
   - #64 similarly produced unrelated false positives.
   - #65 returned mainly botanical literature/plant material, not sliced/roasted medicinal leaves.
 - Net new M5 PASS from #59–65: 0.
+
+
+# REV17 PROMOTED SOURCE-OF-TRUTH — 2026-10-16
+
+## Promoted artifact
+- DOCX: `Tap_1_PRINT_MASTER_REV17_M5_CONSOLIDATED_TOCSYNC_2026-10-16.docx`
+- DOCX SHA-256: `61c2ad6f52c632be70b384a76150fdeb7ba5625ccbc930b3d73289a536ce0275`
+- PDF: `Tap_1_PRINT_MASTER_REV17_M5_CONSOLIDATED_TOCSYNC_2026-10-16.pdf`
+- PDF SHA-256: `b032b098402f9a543caa5f70f37a5c5099c84be93e7fa4ad872b73f7f6f68036`
+- Rendered pages: 585.
+- Source lineage verified directly: REV17-PRETOC was REV16 + #28 only; consolidated REV17 added the remaining FULL-GATE PASS rows without duplicate #28.
+
+## M5 state after promotion
+- Actual M5 drawings in promoted manuscript = 23/125.
+- IDs: #1, #2, #3, #7, #11, #13, #14, #16, #17, #20, #26, #28, #29, #41, #42, #46, #49, #50, #66, #78, #81, #98, #99.
+- M5 slots still without an actual drawing = 102/125.
+- The two archive-unrecovered historical CORRECTION-READY IDs in #1–25 remain unrecovered; no ID inference was used.
+
+## REV17 controller QA
+- DOCX ZIP integrity: PASS.
+- Comments: 0.
+- Tracked changes: 0 insertions / 0 deletions.
+- Broken internal relationships: 0.
+- M5 captions: 23, exact expected ID sequence.
+- TOC entries: 125.
+- Heading page-map resolved: 125/125.
+- TOC/page-map mismatches: 0.
+- Group 2 actual/start TOC page: 165 / 165.
+- PDF pages: 585.
+- Raster pages: 585/585.
+- Raster dimensions: 1414 × 2000 on all pages.
+- Missing/zero-byte raster pages: 0.
+- PDF text blocks outside page: 0.
+- Outer-edge dark-content flags: 0.
+- Changed-page visual regression: PASS for all 16 newly inserted M5 pages and TOC pages.
+- Final literal all-page 100%-zoom review remains DEFERRED under project rule until M4/M5 stabilize.
+
+## Controlled insertion derivative note
+- All original source binaries/hashes remain retained in acquisition evidence.
+- Layout-friendly derivatives were used for the consolidated DOCX to avoid malformed image metadata and excessive document bloat.
+- #14 Tân Di uses the exact controlled right-panel crop from the CC BY 4.0 scientific Figure 1; derivative SHA-1 `0b56e810a73be6167797249f1aaa30d9ea4024a4`, SHA-256 `fd8443c8228e3374bb9b096d0e6ab631c7438a4256dd02e7ab0d8e853b06a541`.
+- #7 Ma Hoàng original evidence remains hash-locked; DOCX uses a clean rendering derivative because python-docx cannot parse malformed EXIF in the original JPEG.
+
+## M4 state
+- M4 = 124/125.
+- #78 Ngân Sài Hồ remains unresolved at exact-variety natural-photo level.
+- Exact-variety natural-photo substitutes are still prohibited when only species-level, herbarium, or illustration evidence is available.
+
+## New continuation checkpoint
+- Promoted source-of-truth = REV17 above.
+- Continue M5 acquisition for the 102 remaining slots using the same FULL-GATE.
+- Continue M4 #78 exact-natural acquisition in parallel.
+- Any new PASS batch: mutate from promoted REV17 -> render -> actual page-map -> TOC sync -> full structural/raster QA -> changed-page visual regression.
+- Do not run final literal all-page 100%-zoom gate until M4/M5 completion stabilizes.
+- Tập 1 Final Controller remains NOT PASS; publication-image completion remains NOT READY.
