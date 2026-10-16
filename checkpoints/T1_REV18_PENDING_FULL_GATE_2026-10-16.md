@@ -19,6 +19,16 @@ See `checkpoints/T1_REV17_SOURCE_GUARD_2026-10-16.md`.
 
 ## New post-REV17 FULL-GATE queue
 
+
+### #30 Lá Chanh — HOLD after original-binary visual inspection
+- Candidate: Wikimedia Commons `File:Citrus aurantifolia leaves.jpg`.
+- Exact identity/provenance/license: category `Citrus × aurantiifolia`; author Vinayaraj; own work; CC BY-SA 3.0.
+- Original binary: 2,484×3,306 JPEG; 1,990,892 bytes; SHA1 `45349373b6dafdcb10e8e405f5acac299ef40345`; SHA256 `e17c761d006000c1c448968a26fc393da1b2b950f614cf7ca7775a7e9db0e12a`.
+- Strict ingest run 38880746856 — SUCCESS; artifact 12037476305.
+- Direct visual inspection of the original shows leaves still attached to a living shoot.
+- Manuscript M5 role is medicinal leaf material, principally fresh leaf; living attached foliage is not promoted as a harvested medicinal-material image under the current gate.
+- Verdict: MATERIAL-ROLE GATE FAIL/HOLD — DO NOT INSERT.
+
 ### #43 Hoàng Cầm — FULL-GATE PASS
 - Manuscript source: `Scutellaria baicalensis Georgi`; medicinal part = root; preparation = dried root, cut/sliced.
 - Scientific source: Zhao Q, Chen X-Y, Martin C. (2016), *Scutellaria baicalensis, the golden herb from the garden of Chinese medicinal plants*, Science Bulletin 61:1391–1398, Fig. 1b; DOI 10.1007/s11434-016-1136-5.
