@@ -1,0 +1,23 @@
+name: CMCT M5 PD atlas controlled crops 6 8 9 10
+on:
+  push:
+    paths:
+      - 'scripts/acquire_m5_atlas_pass_006_008_009_010.py'
+      - '.github/workflows/cmct_m5_atlas_pass_006_008_009_010.yml'
+  workflow_dispatch:
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pymupdf pillow
+      - run: set -o pipefail; python scripts/acquire_m5_atlas_pass_006_008_009_010.py | tee acquire_atlas_pass_006_008_009_010.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-atlas-pass-006-008-009-010
+          path: |
+            evidence/m5_t1_atlas_pass_006_008_009_010/
+            acquire_atlas_pass_006_008_009_010.log
+          if-no-files-found: error
+          retention-days: 30
