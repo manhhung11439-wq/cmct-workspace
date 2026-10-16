@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 #84 Oroxylum indicum exact-material verification",
+  "batch": "Tập 1 M5 #121 Phyllanthus acidus harvested fresh fruit verification",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,19 +14,14 @@
   },
   "items": [
     {
-      "id": 84,
-      "filename": "m5_084_Oroxylum_indicum_11.JPG",
-      "commons_title": "File:Oroxylum indicum 11.JPG"
+      "id": 121,
+      "filename": "m5_121_Phyllanthus_acidus_supermarket_fruit.jpg",
+      "commons_title": "File:Phyllanthus acidus2.jpg"
     },
     {
-      "id": 84,
-      "filename": "m5_084_Oroxylum_indicum_12.JPG",
-      "commons_title": "File:Oroxylum indicum 12.JPG"
-    },
-    {
-      "id": 84,
-      "filename": "m5_084_Oroxylum_indicum_13.JPG",
-      "commons_title": "File:Oroxylum indicum 13.JPG"
+      "id": 121,
+      "filename": "m5_121_Phyllanthus_acidus_whole_cross_section.jpg",
+      "commons_title": "File:Phyllanthus acidus - whole and cross section.jpg"
     }
   ]
 }
