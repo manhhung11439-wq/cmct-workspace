@@ -549,3 +549,17 @@ Therefore no exact-variety natural photograph satisfies the M4 publication gate.
 - #54–58 search results are predominantly PDFs/illustrations, live plants, or wrong medicinal form → HOLD.
 - Historical CORRECTION-READY IDs inferred: 0.
 - Unsafe species substitution: 0.
+
+
+## Targeted rerun #59–65 — 2026-10-16
+- Workflow run 38872592314: SUCCESS.
+- Result: no new FULL-GATE promotion.
+- #59 Callisia fragrans: only PDF hit in strict harvested-material search; live/source-organism images remain excluded.
+- #60 Pseuderanthemum palatiferum: no strict harvested-material hit.
+- #61 Helicteres hirsuta: search returned historical materia-medica PDFs; no exact roasted/dried stems-leaves photograph.
+- #62 Paederia lanuginosa: no strict detached-fresh-leaf hit; available file-level imagery remains living/source plant.
+- #63 Ampelopsis cantoniensis: only catalogue/botanical PDF hits; no exact dried stems/leaves medicinal material.
+- #64 Hedyotis capitellata: only historical PDFs/materia-medica references; no exact dried stems/leaves photo.
+- #65 Crinum latifolium: available leaf photos show living/source leaves; manuscript requires sliced/roasted-yellow medicinal preparation for M5 target → HOLD.
+- Unsafe live-plant substitution: 0.
+- Wrong-preparation substitution: 0.
