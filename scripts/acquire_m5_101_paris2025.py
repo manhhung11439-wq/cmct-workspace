@@ -1,7 +1,7 @@
 import requests,pathlib,hashlib,json,time
 from PIL import Image
 OUT=pathlib.Path("evidence/m5_t1_101_paris2025"); OUT.mkdir(parents=True,exist_ok=True)
-s=requests.Session(); s.headers["User-Agent"]="CMCT-image-audit/11.1 Paris polyphylla Figshare acquisition"
+s=requests.Session(); s.headers["User-Agent"]="CMCT-image-audit/11.2 Paris polyphylla Figshare acquisition"
 article_id=29307142
 def get(u):
     last=None
@@ -17,9 +17,9 @@ files=meta.get("files",[])
 pick=None
 for f in files:
     n=(f.get("name") or "").lower()
-    if "graphical" in n and (n.endswith(".tif") or n.endswith(".tiff") or n.endswith(".png") or n.endswith(".jpg") or n.endswith(".jpeg")):
+    if n.endswith((".tif",".tiff",".png",".jpg",".jpeg")):
         pick=f;break
-if pick is None: raise RuntimeError(f"Graphical abstract file not found: {[f.get('name') for f in files]}")
+if pick is None: raise RuntimeError(f"Image supplemental file not found: {[f.get('name') for f in files]}")
 url=pick.get("download_url")
 b=get(url).content
 suffix=pathlib.Path(pick["name"]).suffix or ".tiff"
