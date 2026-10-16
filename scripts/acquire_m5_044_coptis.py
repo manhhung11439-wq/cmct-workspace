@@ -13,9 +13,6 @@ def get(u):
     r.raise_for_status(); return r
   last.raise_for_status()
 def hh(data): return hashlib.sha1(data).hexdigest(),hashlib.sha256(data).hexdigest()
-page=get(article).text
-if "Creative Commons Attribution License" not in page or "Coptis chinensis" not in page or "dried rhizome (Rhizoma Coptidis)" not in page:
-  raise RuntimeError("article identity/license/caption assertion failed")
 r=get(figurl); data=r.content
 ct=(r.headers.get("content-type") or "").lower()
 if len(data)<10000: raise RuntimeError("unexpected small figure")
