@@ -199,6 +199,16 @@ Rejected alternate for #121:
 
 
 
+
+### #71 Bạch Tiên Bì — HOLD after supplementary inspection
+- Scientific source: Park S et al., *Dictamnus dasycarpus Turcz. Root Bark Improves Skin Barrier Function and Symptoms of Atopic Dermatitis in Mice*, Int J Mol Sci. 2024;25(23):13178; DOI 10.3390/ijms252313178; CC BY 4.0.
+- Exact material context: methods use dried root bark of `Dictamnus dasycarpus`; voucher MS2021-1029.
+- Original article PDF: 2,886,689 bytes; SHA1 `9e817c0a088f3f46c5c17c019f0f33e61780b557`; SHA256 `8a555da8cfea2605622e9b9dfa1fdff3f4ed3207bce2ebdada54fbdc9acab55a`.
+- Supplement ZIP: 366,783 bytes; SHA1 `23af9baaeb36c83be163cf2f095c78351efed3ca`; SHA256 `2b4cd3a5d595d51a1d2a3f896b1af21ff2586ef623e22d133c6acc6e106a7d33`.
+- Reproducible scout run 38878985444 — SUCCESS; artifact `cmct-m5-071-dictamnus`, artifact ID 12036527436.
+- Direct inspection of Supplementary data S2 confirms Figure S2 is **chromatograms for dictamnine and root-bark extract**, not a photograph of the crude root-bark medicinal material.
+- Verdict: scientific evidence supports identity/material context only; M5 IMAGE GATE FAIL → HOLD / DO NOT INSERT.
+
 ### #70 Khổ Sâm — FULL-GATE PASS
 - Manuscript source: `Sophora flavescens Aiton`; medicinal part = root; preparation target = dried/sliced root.
 - Scientific source: *Determination of Antioxidant, Cytotoxicity, and Acetylcholinesterase Inhibitory Activities of Alkaloids Isolated from Sophora flavescens Ait. Grown in Dak Nong, Vietnam*. Pharmaceuticals. 2022;15(11):1384. DOI 10.3390/ph15111384.
