@@ -120,3 +120,42 @@ Rejected alternate for #121:
 4. Promote REV18 only if all controller checks PASS.
 5. Continue M4 #78 exact-variety natural-photo acquisition in parallel.
 6. Defer literal all-page 100%-zoom final gate until M4/M5 stabilize.
+
+
+## Additional post-REV17 strict verification — HOLD / REJECT
+
+### #15 Tang Diệp — HOLD
+- Candidate: Wikimedia Commons `File:Ppongnip-cha.jpg`.
+- File-level identity: `Morus alba`; description = “Ppongnip-cha (mulberry leaf tea)”.
+- Author: 백만볼투; license CC BY 4.0; original binary/hash verified.
+- Original: 740 × 493; 102,229 bytes; SHA1 `50eb44b3649ffffd8ea399b237e61b02dc1295f8`; SHA256 `62b5d6d5a489093c2e58cd3b65d497a268e395e19fed7ebc0a99fc7581680dc6`.
+- Ingest run 38843470852: SUCCESS.
+- Manuscript target is harvested mature mulberry leaf, dried (or explicitly honey-prepared). The candidate is the finished brewed tea, not medicinal leaf material.
+- Verdict: ROLE/PREPARATION FAIL → HOLD / DO NOT INSERT.
+
+### #19 Thiền Thoái — HOLD
+- Candidate: Wikimedia Commons `File:Cicada molt.jpg`.
+- Exact role/form: empty cicada molt/exuvia; description = “A cicada's molt found on a hilly region”; category = `Cicadidae exuvia`.
+- Author: Srichakra Pranav; own work; CC BY-SA 4.0.
+- Original: 5136 × 3344; 8,513,895 bytes.
+- SHA1 `cf83a7241a3f4cc1eb9cb4659a506584e3ac7cef`; SHA256 `91104364ea98d835933a639a258cd3707dfe8b7095318aaa368c3e4e83e05ada`.
+- Ingest run 38843686912: SUCCESS.
+- Identity is only controlled to family-level Cicadidae; file metadata does not identify `Cryptotympana atrata` / medicinal synonym `C. pustulata`.
+- Verdict: SPECIES IDENTITY FAIL → HOLD / DO NOT INSERT.
+
+### #40 Thảo Quyết Minh — HOLD
+Candidate A:
+- `File:Cassia Tora (the seeds).JPG`; category `Senna tora`; author Nikitakamka; own work; CC BY-SA 4.0.
+- Description = “old branch with seeds”.
+- 2592 × 1944; 2,154,961 bytes; SHA1 `38050a5c787c681104ff42a704828a5c8d3a8ca7`; SHA256 `35b6ec0501bfadb21b5e93697f6f0022dfae93ccb79d27d6d29e3e16c5f3eb24`.
+- Ingest run 38843348819: SUCCESS.
+- Fails material/preparation gate: seeds remain on branch and are not demonstrated as mature dried Semen Cassiae / roasted medicinal seed.
+
+Candidate B:
+- `File:Gyeolmyeongja-cha.jpg`; category `Senna tora`; description = “gyeolmyeongja-cha (senna tea)”.
+- Author sks2015; CC BY 4.0.
+- 560 × 420; 81,031 bytes; SHA1 `9ef83b5f55ebb4f5c4a0e0e90bd4ef44c1a5f994`; SHA256 `84265d779d74cfe02e0ab04ddccf922fc735a62543029512b4dca0fa37e1f2f3`.
+- Ingest run 38843409415: SUCCESS.
+- Fails material-role gate: finished brewed tea, not the dried/roasted seed drug itself.
+- Verdict for both: HOLD / DO NOT INSERT.
+
