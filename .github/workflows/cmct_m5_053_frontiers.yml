@@ -1,0 +1,20 @@
+name: CMCT M5 053 Frontiers figure acquisition
+on:
+  push:
+    paths:
+      - 'scripts/acquire_m5_053_frontiers.py'
+      - '.github/workflows/cmct_m5_053_frontiers.yml'
+  workflow_dispatch:
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pymupdf pillow
+      - run: python scripts/acquire_m5_053_frontiers.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-053-frontiers
+          path: evidence/m5_053_frontiers/
+          if-no-files-found: error
+          retention-days: 30
