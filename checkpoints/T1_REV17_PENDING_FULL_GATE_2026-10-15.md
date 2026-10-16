@@ -323,6 +323,8 @@ Specific rejects / HOLD:
 - #48 available “Dried gardenia seeds” is wrong part relative to manuscript’s mature dried whole fruit → reject.
 
 ## M4 #78 parallel state
+
+- New exact-variety evidence: Li et al. (2024), Chemical and Biological Technologies in Agriculture, Fig. 1 explicitly shows S. lanceolata habitat, above-ground part and root from field/resource surveys. However the article is licensed CC BY-NC-ND 4.0; this does not satisfy the project publication/reuse gate for M4. Evidence-only; DO NOT INSERT.
 Exact-variety search remains unresolved. 2026-10-15 refresh reconfirmed the accepted taxon `Mesostemma dichotomum var. lanceolatum` (syn. `Stellaria dichotoma var. lanceolata`) and medicinal-name mapping for Yinchaihu, but reusable search results still do not provide an exact-variety natural field photograph. GRIN explicitly reports no images for the exact variety; species-level natural images and exact-variety herbarium/illustration substitutes remain prohibited.
 
 ## Next exact mutation sequence
