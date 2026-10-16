@@ -106,6 +106,13 @@ Rejected alternate for #121:
 - #58 Xuyên Tâm Liên: no exact reusable dried/cut aerial-herb photograph recovered.
 - Verdict: 0 new PASS; no manuscript mutation triggered.
 
+
+### Direct original-binary visual holds — preserved
+- #90 Rau Ngót: Commons file `'Maddaji' or Leaf Asparagus,Sauropus androgynus.jpg` has exact file-level identity, author AditiB08, CC BY-SA 4.0 and original-byte/hash PASS, but direct original-image inspection shows the leaves still attached to a living plant. M5 fresh/dried leaf material gate = HOLD.
+- #100 Cây Lá Bỏng: both verified original candidates (`Kalanchoe pinnata leaf.jpg`, `Miracle leaf.jpg`) show leaves attached to living plants; detached fresh-leaf material gate = HOLD.
+- #103 Sương Sâm: `Lá sương sâm.jpg` has exact `Tiliacora triandra`, Bùi Thụy Đào Nguyên, CC BY-SA 3.0 and original-byte/hash PASS, but direct original-image inspection shows a living vine with attached leaves. M5 harvested-leaf gate = HOLD.
+- #110 Lá Xoài: candidate originals have reusable licenses and authentic bytes, but one shows mango foliage/branch being handled outdoors and the ritual image uses mango leaves decoratively; the complete exact `Mangifera indica` + harvested medicinal-leaf chain is not cleanly established at file level. Status = HOLD.
+
 ## Next exact action
 1. Continue FULL-GATE acquisition for remaining M5 rows while the exact promoted 583-page REV17 raw source is being recovered/verified.
 2. Queue PASS rows here; do not mutate the 585-page Library variant.
