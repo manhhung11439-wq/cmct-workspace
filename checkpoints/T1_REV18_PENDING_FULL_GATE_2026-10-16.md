@@ -19,6 +19,24 @@ See `checkpoints/T1_REV17_SOURCE_GUARD_2026-10-16.md`.
 
 ## New post-REV17 FULL-GATE queue
 
+### #111 Mãng Cầu Xiêm — FULL-GATE PASS
+Selected file:
+- Wikimedia Commons: `File:Soursop leaves.jpg`
+- Exact identity: structured data depicts `Annona muricata`
+- Exact medicinal part: leaf
+- Exact represented form: detached/harvested fresh leaves (“Soursop leaves in a bag”)
+- Manuscript permits leaf material in fresh or gently dried form; this row is controlled as fresh detached leaves.
+- Author: Zenyrgarden
+- Provenance: own work → Wikimedia Commons
+- License: CC BY-SA 4.0
+- Original dimensions: 2448 × 3264
+- Original bytes: 1,417,626
+- Commons SHA-1: `59ad698ea6726b28b821a562c9a97ceec0f421d7`
+- SHA-256: `c09c42e0345d112a2f617860b0e0c9ac565747d7b704fc74db4bc7d7a9d16392`
+- Binary/provenance ingest run: 38837326929 — SUCCESS
+- Status: FULL-GATE PASS
+- Mutation rule: insert only into the next revision derived from the exact promoted REV17 base.
+
 ### #121 Chùm Ruột — FULL-GATE PASS
 Selected file:
 - Wikimedia Commons: `File:Phyllanthus acidus - whole and cross section.jpg`
@@ -42,9 +60,9 @@ Rejected alternate for #121:
 
 ## Current execution state
 - Promoted manuscript M5 remains 23/125 until a controlled mutation is performed.
-- New FULL-GATE queue after promotion = 1 row (#121).
-- If/when #121 is mutated from the exact promoted REV17 base, expected M5 count becomes 24/125, subject to render/TOC/regression PASS.
-- Remaining unfilled M5 slots before mutation = 102/125; after successful #121 mutation = 101/125.
+- New FULL-GATE queue after promotion = 2 rows (#111, #121).
+- If/when #111 and #121 are mutated from the exact promoted REV17 base, expected M5 count becomes 25/125, subject to render/TOC/regression PASS.
+- Remaining unfilled M5 slots before mutation = 102/125; after successful #111 + #121 mutation = 100/125.
 - M4 #78 remains unresolved at exact-variety reusable natural-photo level.
 - Two historical CORRECTION-READY IDs in #1–25 remain unrecovered and MUST NOT be inferred.
 
