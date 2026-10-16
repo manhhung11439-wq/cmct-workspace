@@ -66,6 +66,19 @@ See `checkpoints/T1_REV17_SOURCE_GUARD_2026-10-16.md`.
 - Mutation rule: queue for REV18; insert only from the exact promoted 583-page REV17 source.
 
 
+
+### #54 Xạ Can — FULL-GATE PASS
+- Manuscript source: `Iris domestica (L.) Goldblatt & Mabb.`; medicinal synonym context = `Belamcanda chinensis`; medicinal part = rhizome; preparation = cleaned/dried rhizome.
+- Public specimen-atlas source: `中國藥物標本圖影` (Chinese drug specimen atlas), National Library of China scan, Wikimedia Commons file `File:NLC416-08jh015896-38387 中國藥物標本圖影.pdf`.
+- File metadata: Public domain; credit = National Library of China; editor = 中國醫藥研究社編輯.
+- Exact medicinal identity: atlas page 126 contains the vertical drug label `射干` (Shegan/Xạ Can) beside photographed crude-drug rhizome pieces; living-plant panel is excluded from the controlled derivative.
+- Original PDF: 20,699,714 bytes; SHA1 `1aef378d7c63ab41a2ddd116b492da98e63cae75`; SHA256 `88f39462dedfcfa9475764f7693132abc5de5b6c041cd1038c9f73ea0e4ea61e`.
+- Controlled derivative: rendered original scan at Matrix(2.2,2.2) + crop only; page 126; crop box `(600,520,1080,1100)`; PNG 480×580; 248,057 bytes; SHA1 `cc6dc52c7010aa15b129e65ee6b76180d05d39f9`; SHA256 `c45c59759f4940aa368e6833fdd6eeb258c99b55f687d273364f0396577a2e15`.
+- Reproducible acquisition run 38852891928 — SUCCESS; artifact `cmct-m5-054-shegan`, artifact ID 12025729073.
+- Controlled caption: `Ảnh 5 – Xạ Can (Shegan): thân rễ dược liệu khô. Nguồn: 中國藥物標本圖影, National Library of China scan, p.126; Public Domain; ảnh đã crop chỉ phần dược liệu và nhãn 射干.`
+- Status: FULL-GATE PASS.
+- Mutation rule: queue for REV18; insert only from the exact promoted 583-page REV17 base.
+
 ### #55 Xích Thược — FULL-GATE PASS
 - Manuscript source: `Paeonia lactiflora Pall.`; medicinal part = root; preparation = leave bark intact, dry directly, slice; explicitly distinct from Bạch Thược boiling/peeling processing.
 - Scientific source: Tan Y-Q, Chen H-W, Li J, Wu Q-J. *Efficacy, Chemical Constituents, and Pharmacological Actions of Radix Paeoniae Rubra and Radix Paeoniae Alba*. Frontiers in Pharmacology 2020;11:1054. DOI 10.3389/fphar.2020.01054.
@@ -172,9 +185,9 @@ Rejected alternate for #121:
 
 ## Current execution state
 - Promoted manuscript M5 remains 23/125 until a controlled mutation is performed.
-- New FULL-GATE queue after promotion = 9 rows (#43, #51, #53, #55, #57, #58, #109, #111, #121).
-- If/when #43, #51, #53, #55, #57, #58, #109, #111 and #121 are mutated from the exact promoted REV17 base, expected M5 count becomes 32/125, subject to render/TOC/regression PASS.
-- Remaining unfilled M5 slots before mutation = 102/125; after successful #43 + #51 + #53 + #55 + #57 + #58 + #109 + #111 + #121 mutation = 93/125.
+- New FULL-GATE queue after promotion = 10 rows (#43, #51, #53, #54, #55, #57, #58, #109, #111, #121).
+- If/when #43, #51, #53, #54, #55, #57, #58, #109, #111 and #121 are mutated from the exact promoted REV17 base, expected M5 count becomes 33/125, subject to render/TOC/regression PASS.
+- Remaining unfilled M5 slots before mutation = 102/125; after successful #43 + #51 + #53 + #54 + #55 + #57 + #58 + #109 + #111 + #121 mutation = 92/125.
 - M4 #78 remains unresolved at exact-variety reusable natural-photo level.
 - Two historical CORRECTION-READY IDs in #1–25 remain unrecovered and MUST NOT be inferred.
 
