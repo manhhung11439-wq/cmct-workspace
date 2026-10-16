@@ -199,9 +199,9 @@ Rejected alternate for #121:
 
 ## Current execution state
 - Promoted manuscript M5 remains 23/125 until a controlled mutation is performed.
-- New FULL-GATE queue after promotion = 11 rows (#43, #44, #51, #53, #54, #55, #57, #58, #109, #111, #121).
-- If/when #43, #44, #51, #53, #54, #55, #57, #58, #109, #111 and #121 are mutated from the exact promoted REV17 base, expected M5 count becomes 34/125, subject to render/TOC/regression PASS.
-- Remaining unfilled M5 slots before mutation = 102/125; after successful #43 + #44 + #51 + #53 + #54 + #55 + #57 + #58 + #109 + #111 + #121 mutation = 91/125.
+- New FULL-GATE queue after promotion = 12 rows (#43, #44, #47, #51, #53, #54, #55, #57, #58, #109, #111, #121).
+- If/when #43, #44, #47, #51, #53, #54, #55, #57, #58, #109, #111 and #121 are mutated from the exact promoted REV17 base, expected M5 count becomes 35/125, subject to render/TOC/regression PASS.
+- Remaining unfilled M5 slots before mutation = 102/125; after successful #43 + #44 + #47 + #51 + #53 + #54 + #55 + #57 + #58 + #109 + #111 + #121 mutation = 90/125.
 - M4 #78 remains unresolved at exact-variety reusable natural-photo level.
 - Two historical CORRECTION-READY IDs in #1–25 remain unrecovered and MUST NOT be inferred.
 
