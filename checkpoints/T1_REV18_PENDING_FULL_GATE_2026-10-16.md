@@ -80,6 +80,22 @@ See `checkpoints/T1_REV17_SOURCE_GUARD_2026-10-16.md`.
 - Status: FULL-GATE PASS.
 - Mutation rule: queue for REV18; insert only from the exact promoted 583-page REV17 base.
 
+
+### #58 Xuyên Tâm Liên — FULL-GATE PASS
+- Manuscript source: `Andrographis paniculata (Burm.f.) Nees`; medicinal part = aerial herb; preparation = harvested aerial parts dried/cut.
+- Scientific source: Tabboon P, Limpongsa E, Rongthong T, Pongjanyakul T, Jaipakdee N. *Intestinal Permeation Characteristics via Non-Everted Gut Sac of Diterpene Lactones from Pure Andrographolide and Three Different Andrographis Extracts: An Investigation into Liqui-Mass with Different Solvents*. Pharmaceutics. 2026;18(1):90. DOI 10.3390/pharmaceutics18010090.
+- Article license: CC BY 4.0.
+- Exact identity: `A. paniculata` specimens authenticated by a botanist; voucher collections HB 200/66–HB 202/66 retained at Khon Kaen University.
+- Exact material/form: Figure 2a is explicitly captioned `Dried aerial parts of A. paniculata`; this matches manuscript Herba Andrographitis aerial-part dried-drug target.
+- Original article PDF: 6,886,997 bytes; SHA1 `9f67320ae1f7822a523952a37745e94bd0d71dbf`; SHA256 `bde0c1265ac1d4c9c8d8ad0d35b3b5b9791a92f72e8155dec71b08d9c632e370`.
+- PDF page 4 uses Figure 2 split into multiple thin image strips; original PDF bytes and all embedded strips are retained for provenance.
+- Controlled derivative: original PDF rendered reproducibly at Matrix(2.2,2.2), then cropped to Figure 2a only; crop box `(360,500,755,790)`; PNG 395×290; 109,459 bytes; SHA1 `56a17eeba13d5427e02403d8ee9407a8d9ac2baa`; SHA256 `9263d62e95300f331b87744e88d173830127ad32d8fd2cd4b25e4467fdaa77f1`.
+- Transformation: page render + crop only; panel 2b powdered leaves and panel 2c TLC are excluded; no content alteration inside panel 2a.
+- Reproducible workflow run 38851531020 — SUCCESS; artifact `cmct-m5-058-andrographis`, artifact ID 12026030448.
+- Controlled caption: `Ảnh 5 – Xuyên Tâm Liên (Andrographis paniculata): phần trên mặt đất đã làm khô. Nguồn: Tabboon et al., Pharmaceutics 2026, Fig. 2a; CC BY 4.0; ảnh đã crop chỉ phần dược liệu.`
+- Status: FULL-GATE PASS.
+- Mutation rule: queue for REV18; insert only from the exact promoted 583-page REV17 base.
+
 ### #109 Lá Bàng — FULL-GATE PASS
 Selected file:
 - Wikimedia Commons: `File:444Talisay leaves camote slices 01.jpg`
@@ -140,14 +156,14 @@ Rejected alternate for #121:
 
 ## Current execution state
 - Promoted manuscript M5 remains 23/125 until a controlled mutation is performed.
-- New FULL-GATE queue after promotion = 7 rows (#43, #53, #55, #57, #109, #111, #121).
-- If/when #43, #53, #55, #57, #109, #111 and #121 are mutated from the exact promoted REV17 base, expected M5 count becomes 30/125, subject to render/TOC/regression PASS.
-- Remaining unfilled M5 slots before mutation = 102/125; after successful #43 + #53 + #55 + #57 + #109 + #111 + #121 mutation = 95/125.
+- New FULL-GATE queue after promotion = 8 rows (#43, #53, #55, #57, #58, #109, #111, #121).
+- If/when #43, #53, #55, #57, #58, #109, #111 and #121 are mutated from the exact promoted REV17 base, expected M5 count becomes 31/125, subject to render/TOC/regression PASS.
+- Remaining unfilled M5 slots before mutation = 102/125; after successful #43 + #53 + #55 + #57 + #58 + #109 + #111 + #121 mutation = 94/125.
 - M4 #78 remains unresolved at exact-variety reusable natural-photo level.
 - Two historical CORRECTION-READY IDs in #1–25 remain unrecovered and MUST NOT be inferred.
 
 ## Targeted-search verdicts since REV17 promotion
-- #51–58 broad Commons search: no direct Commons FULL-GATE; subsequent exact scientific-figure acquisition promoted #53, #55 and #57 to FULL-GATE.
+- #51–58 broad Commons search: no direct Commons FULL-GATE; subsequent exact scientific-figure acquisition promoted #53, #55, #57 and #58 to FULL-GATE.
 - #67–75: no new FULL-GATE.
 - #76–85: no new FULL-GATE.
 - #86–97: no new FULL-GATE.
