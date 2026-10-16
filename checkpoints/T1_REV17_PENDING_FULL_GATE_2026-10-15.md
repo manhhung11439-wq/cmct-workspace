@@ -292,6 +292,7 @@ Date: 2026-10-15
 Most hits in these ranges were live plants, catalogue scans, herbarium/illustrations, or PDFs and are NOT promoted to M5.
 
 Specific rejects / HOLD:
+- #52 Taraxacum candidate `File:Taraxaci herba cum radix 132292.jpg`: original binary/provenance/license PASS, but file description explicitly identifies dried `Taraxacum officinale`, whereas manuscript source is `Taraxacum mongolicum` → species-level identity FAIL / HOLD; do not insert.
 
 - #86–97 targeted medicinal-material search completed: no new FULL-GATE file. #86–90/#92–97 returned PDFs, live/botanical images, or no exact harvested/processed material; #91 remains species-identity blocked at file level.
 - #101–110 targeted search completed: no new FULL-GATE file. #101 is dominated by materia-medica PDFs; #102–105/#108–110 do not provide exact harvested/processed material with a complete file-level chain.
