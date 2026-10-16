@@ -1,5 +1,5 @@
 {
-  "batch": "Tập 1 M5 FULL-GATE binary acquisition — #15 Morus alba dried leaf tea",
+  "batch": "Tập 1 M5 FULL-GATE verification — #19 Cryptotympana atrata cicada molt/exuviae candidate",
   "rules": {
     "historical_correction_ready_ids": "DO NOT GUESS",
     "require": [
@@ -14,9 +14,9 @@
   },
   "items": [
     {
-      "id": 15,
-      "filename": "m5_015_Ppongnip_cha.jpg",
-      "commons_title": "File:Ppongnip-cha.jpg"
+      "id": 19,
+      "filename": "m5_019_Cicada_molt.jpg",
+      "commons_title": "File:Cicada molt.jpg"
     }
   ]
 }
