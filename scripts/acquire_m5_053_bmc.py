@@ -20,17 +20,11 @@ r=get(pdf_url);pdf=r.content
 if not pdf.startswith(b"%PDF"):raise RuntimeError("Not PDF: "+r.url+" "+str(r.headers.get("content-type")))
 pp=OUT/"m5_053_BMC_article_original.pdf";pp.write_bytes(pdf);ps1,ps256=hh(pdf)
 doc=fitz.open(stream=pdf,filetype="pdf")
-page_idx=None;page_text=""
-for i,p in enumerate(doc):
-    txt=p.get_text("text")
-    if ("BBLG" in txt and ("Isatidis Radix" in txt or "Isatis indigotica" in txt)) or ("Photographs and extracted compound" in txt):
-        print("BMC53_PAGE_CANDIDATE",i+1,txt[:800].replace("\n"," | "),flush=True)
-        if page_idx is None:
-            page_idx=i;page_text=txt
-if page_idx is None:
-    # Figure 3 is on journal page 7; tolerate text extraction failure and use the corresponding PDF page with largest raster figure.
-    page_idx=min(6,len(doc)-1);page_text=doc[page_idx].get_text("text")
-    print("BMC53_PAGE_FALLBACK",page_idx+1,page_text[:1000].replace("\n"," | "),flush=True)
+page_idx=6 if len(doc)>6 else None
+page_text=doc[page_idx].get_text("text") if page_idx is not None else ""
+print("BMC53_PAGE_SELECTED",page_idx+1 if page_idx is not None else None,page_text[:1600].replace("\n"," | "),flush=True)
+if page_idx is None or "BBLG" not in page_text or ("Fig." not in page_text and "Fig " not in page_text):
+    raise RuntimeError("Expected Fig. 3 / BBLG evidence not present on PDF page 7; refuse extraction")
 page=doc[page_idx]
 pix=page.get_pixmap(matrix=fitz.Matrix(2.5,2.5),alpha=False)
 pagepng=OUT/f"m5_053_fig3_page_{page_idx+1}.png";pix.save(str(pagepng))
