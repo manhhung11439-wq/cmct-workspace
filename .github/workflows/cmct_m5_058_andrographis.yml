@@ -1,0 +1,23 @@
+name: CMCT M5 058 Andrographis figure
+on:
+  push:
+    paths:
+      - 'scripts/acquire_m5_058_andrographis.py'
+      - '.github/workflows/cmct_m5_058_andrographis.yml'
+  workflow_dispatch:
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pymupdf pillow
+      - run: set -o pipefail; python scripts/acquire_m5_058_andrographis.py | tee m5_058_andrographis.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-058-andrographis
+          path: |
+            evidence/m5_t1_058_andrographis/
+            m5_058_andrographis.log
+          if-no-files-found: error
+          retention-days: 30
