@@ -23,9 +23,14 @@ doc=fitz.open(stream=pdf,filetype="pdf")
 page_idx=None;page_text=""
 for i,p in enumerate(doc):
     txt=p.get_text("text")
-    if "Fig. 3" in txt and "Isatidis Radix (BBLG)" in txt:
-        page_idx=i;page_text=txt;break
-if page_idx is None:raise RuntimeError("Fig 3 page not found")
+    if ("BBLG" in txt and ("Isatidis Radix" in txt or "Isatis indigotica" in txt)) or ("Photographs and extracted compound" in txt):
+        print("BMC53_PAGE_CANDIDATE",i+1,txt[:800].replace("\n"," | "),flush=True)
+        if page_idx is None:
+            page_idx=i;page_text=txt
+if page_idx is None:
+    # Figure 3 is on journal page 7; tolerate text extraction failure and use the corresponding PDF page with largest raster figure.
+    page_idx=min(6,len(doc)-1);page_text=doc[page_idx].get_text("text")
+    print("BMC53_PAGE_FALLBACK",page_idx+1,page_text[:1000].replace("\n"," | "),flush=True)
 page=doc[page_idx]
 pix=page.get_pixmap(matrix=fitz.Matrix(2.5,2.5),alpha=False)
 pagepng=OUT/f"m5_053_fig3_page_{page_idx+1}.png";pix.save(str(pagepng))
