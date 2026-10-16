@@ -19,6 +19,25 @@ See `checkpoints/T1_REV17_SOURCE_GUARD_2026-10-16.md`.
 
 ## New post-REV17 FULL-GATE queue
 
+### #109 Lá Bàng — FULL-GATE PASS
+Selected file:
+- Wikimedia Commons: `File:444Talisay leaves camote slices 01.jpg`
+- Exact identity: file description names `Terminalia catappa L.`; Commons category = `Terminalia catappa leaves`.
+- Exact medicinal part: leaf.
+- Exact represented form: detached fresh leaf, visibly separated from the source tree and held in hand.
+- Manuscript permits fresh leaf (“rửa sạch, dùng ngay”) or gently dried leaf; this row is controlled as fresh detached leaf.
+- Author: Judgefloro.
+- Provenance: own work → Wikimedia Commons.
+- License: CC0.
+- Original dimensions: 4608 × 3456.
+- Original bytes: 6,528,493.
+- Commons SHA-1: `a58e812ec4a54684557c087662555e446580f467`.
+- SHA-256: `b9f1a570100b5a2d8d51efa1e5828f967afb13c3426c0bd3e36c0abf60cf409a`.
+- Binary/provenance ingest run: 38836956723 — SUCCESS.
+- Visual material-state check: PASS.
+- Status: FULL-GATE PASS.
+- Mutation rule: insert only into the next revision derived from the exact promoted REV17 base.
+
 ### #111 Mãng Cầu Xiêm — FULL-GATE PASS
 Selected file:
 - Wikimedia Commons: `File:Soursop leaves.jpg`
@@ -60,9 +79,9 @@ Rejected alternate for #121:
 
 ## Current execution state
 - Promoted manuscript M5 remains 23/125 until a controlled mutation is performed.
-- New FULL-GATE queue after promotion = 2 rows (#111, #121).
-- If/when #111 and #121 are mutated from the exact promoted REV17 base, expected M5 count becomes 25/125, subject to render/TOC/regression PASS.
-- Remaining unfilled M5 slots before mutation = 102/125; after successful #111 + #121 mutation = 100/125.
+- New FULL-GATE queue after promotion = 3 rows (#109, #111, #121).
+- If/when #109, #111 and #121 are mutated from the exact promoted REV17 base, expected M5 count becomes 26/125, subject to render/TOC/regression PASS.
+- Remaining unfilled M5 slots before mutation = 102/125; after successful #109 + #111 + #121 mutation = 99/125.
 - M4 #78 remains unresolved at exact-variety reusable natural-photo level.
 - Two historical CORRECTION-READY IDs in #1–25 remain unrecovered and MUST NOT be inferred.
 
