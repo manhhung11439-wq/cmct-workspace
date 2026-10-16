@@ -1,0 +1,22 @@
+name: CMCT M5 057 Artemisia MDPI
+on:
+  push:
+    paths:
+      - 'scripts/acquire_m5_057_artemisia.py'
+      - '.github/workflows/cmct_m5_057_artemisia.yml'
+  workflow_dispatch:
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pymupdf pillow
+      - run: set -o pipefail; python scripts/acquire_m5_057_artemisia.py | tee m5_057_artemisia.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-057-artemisia
+          path: |
+            evidence/m5_t1_057_artemisia_mdpi/
+            m5_057_artemisia.log
+          if-no-files-found: error
+          retention-days: 30
