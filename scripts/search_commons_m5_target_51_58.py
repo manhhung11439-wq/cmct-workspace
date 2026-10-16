@@ -1,4 +1,4 @@
-# rerun marker 2026-10-16T07:43+07 — manuscript roles re-locked; criteria unchanged
+# rerun marker 2026-10-16T09:13+07 — manuscript roles re-locked exactly; targeted acquisition resumed
 import json,time,re,html
 from pathlib import Path
 import requests
@@ -9,10 +9,10 @@ targets={
  52:{"taxon":"Taraxacum mongolicum","terms":["Taraxacum mongolicum dried whole plant","Herba Taraxaci","蒲公英 中药","蒲公英 藥材"],"role":["whole plant","herba","dried","蒲公英","藥材","药材"]},
  53:{"taxon":"Isatis tinctoria","terms":["Isatis tinctoria dried root","Radix Isatidis","Banlangen dried root","板蓝根 中药","板藍根 藥材"],"role":["root","radix","dried","板蓝根","板藍根","藥材","药材"]},
  54:{"taxon":"Iris domestica","terms":["Iris domestica dried rhizome","Belamcanda chinensis dried rhizome","Rhizoma Belamcandae","Shegan dried rhizome","射干 中药","射干 藥材"],"role":["rhizome","dried","射干","藥材","药材"]},
- 55:{"taxon":"Paeonia lactiflora","terms":["Paeonia lactiflora red peony root dried","Radix Paeoniae Rubra","Chishao dried root","赤芍 中药","赤芍 藥材"],"role":["root","radix","dried","赤芍","藥材","药材"]},
+ 55:{"taxon":"Paeonia lactiflora","terms":["Paeonia lactiflora red peony unpeeled root dried sliced","Radix Paeoniae Rubra","Chishao dried root","赤芍 中药","赤芍 藥材"],"role":["root","radix","dried","赤芍","藥材","药材"]},
  56:{"taxon":"Lycium chinense","terms":["Lycium chinense dried root bark","Cortex Lycii","Digupi dried root bark","地骨皮 中药","地骨皮 藥材"],"role":["root bark","cortex","dried","地骨皮","藥材","药材"]},
- 57:{"taxon":"Artemisia annua","terms":["Artemisia annua dried aerial herb","Herba Artemisiae Annuae","Qinghao dried herb","青蒿 中药","青蒿 藥材"],"role":["aerial","herba","dried","青蒿","藥材","药材"]},
- 58:{"taxon":"Andrographis paniculata","terms":["Andrographis paniculata dried aerial herb","Herba Andrographitis","Chuanxinlian dried herb","穿心莲 中药","穿心蓮 藥材"],"role":["aerial","herba","dried","穿心莲","穿心蓮","藥材","药材"]},
+ 57:{"taxon":"Artemisia annua","terms":["Artemisia annua aerial herb shade dried before flowering","Herba Artemisiae Annuae","Qinghao dried herb","青蒿 中药","青蒿 藥材"],"role":["aerial","herba","dried","青蒿","藥材","药材"]},
+ 58:{"taxon":"Andrographis paniculata","terms":["Andrographis paniculata dried aerial herb cut flowering","Herba Andrographitis","Chuanxinlian dried herb","穿心莲 中药","穿心蓮 藥材"],"role":["aerial","herba","dried","穿心莲","穿心蓮","藥材","药材"]},
 }
 s=requests.Session(); s.headers["User-Agent"]="CMCT-image-audit/1.5 targeted crude-drug search"
 api="https://commons.wikimedia.org/w/api.php"
