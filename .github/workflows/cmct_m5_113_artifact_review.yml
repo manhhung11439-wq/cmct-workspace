@@ -1,0 +1,27 @@
+name: CMCT M5 113 artifact visual review
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/cmct_m5_113_artifact_review.yml'
+permissions:
+  actions: read
+  contents: read
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: gh run download 39025992366 -n cmct-m5-113-la-cam -D prior
+      - run: |
+          python - <<'PY'
+          import pathlib,base64,io
+          from PIL import Image
+          ps=list(pathlib.Path("prior").rglob("m5_113_la_cam_candidate*"))
+          if not ps: raise SystemExit("candidate missing")
+          im=Image.open(ps[0]).convert("RGB"); im.thumbnail((700,700))
+          b=io.BytesIO(); im.save(b,"JPEG",quality=72,optimize=True)
+          print("M113_B64="+base64.b64encode(b.getvalue()).decode())
+          PY
