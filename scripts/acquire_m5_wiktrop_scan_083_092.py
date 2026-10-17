@@ -52,7 +52,7 @@ for rid,info in targets.items():
         for k,v in pp.items():
             if isinstance(v,dict) and "name" in v and isinstance(v.get("name"),str):
                 if "Ageratum" in v["name"] or "Eleusine" in v["name"]: accepted=v["name"]
-        resources=obs.get("observationResource",[])
+        resources=pp.get("observationResource",[])
         for ri,entry in enumerate(resources,1):
             res=entry.get("resource",{}); lic=entry.get("license") or {}; user=entry.get("userIbp") or {}
             fn=res.get("fileName") or ""
