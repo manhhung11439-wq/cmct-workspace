@@ -45,3 +45,5 @@ sheet=Image.new("RGB",(1360,1000),"white")
 for i,t in enumerate(tiles): sheet.paste(t,((i%2)*680,(i//2)*500))
 sheet.save(OUT/"quadrants.jpg",quality=92)
 print("MANIFEST="+json.dumps(rec,ensure_ascii=False),flush=True)
+
+# rerun 2026-10-17 Batch31 candidate refresh
