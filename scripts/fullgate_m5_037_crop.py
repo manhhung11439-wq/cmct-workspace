@@ -18,7 +18,7 @@ info,data=imgs[0]
 orig=OUT/"figure1_original.jpeg"; orig.write_bytes(data)
 im=Image.open(io.BytesIO(data)).convert("RGB")
 # Panel A occupies the top-left cell of the 3-column Figure 1 grid.
-box=(0,0,245,235)
+box=(0,0,230,225)
 crop=im.crop(box)
 out=OUT/"m5_037_Gymnema_sylvestre_dried_leaf_stem_powder_panelA.png"; crop.save(out,"PNG",optimize=True)
 cb=out.read_bytes()
