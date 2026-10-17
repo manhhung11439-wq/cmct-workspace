@@ -1,0 +1,23 @@
+name: CMCT M5 125 JBPR viewer probe
+on:
+  push:
+    paths:
+      - 'scripts/probe_m5_125_jbpr_viewer.py'
+      - '.github/workflows/cmct_m5_125_jbpr_viewer.yml'
+  workflow_dispatch:
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests
+      - run: set -o pipefail; python scripts/probe_m5_125_jbpr_viewer.py | tee probe.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-125-jbpr-viewer
+          path: |
+            evidence/m5_t1_125_jbpr_probe/
+            probe.log
+          if-no-files-found: error
+          retention-days: 30
