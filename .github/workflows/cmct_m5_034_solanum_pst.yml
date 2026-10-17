@@ -1,0 +1,23 @@
+name: CMCT M5 034 Solanum PST processed material
+on:
+  push:
+    paths:
+      - 'scripts/acquire_m5_034_solanum_pst.py'
+      - '.github/workflows/cmct_m5_034_solanum_pst.yml'
+  workflow_dispatch:
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pymupdf pillow
+      - run: set -o pipefail; python scripts/acquire_m5_034_solanum_pst.py | tee acquire.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-034-solanum-pst
+          path: |
+            evidence/m5_t1_034_solanum_pst/
+            acquire.log
+          if-no-files-found: error
+          retention-days: 30
