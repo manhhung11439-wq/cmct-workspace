@@ -1,7 +1,7 @@
 import pathlib,requests,time,hashlib,json,re
 import fitz
 OUT=pathlib.Path("evidence/m5_t1_113_peristrophe_2016"); OUT.mkdir(parents=True,exist_ok=True)
-URL="https://www.scipress.com/IJPPE.4.14.pdf"
+URLS=["https://pdfs.semanticscholar.org/4ae1/b7454ee1e6e9b34b24570ae371b6d682e98d.pdf","https://www.scipress.com/IJPPE.4.14.pdf"]
 s=requests.Session(); s.headers["User-Agent"]="CMCT-image-audit/31.2 Peristrophe bivalvis CC-BY figure acquisition"
 def get(u):
     last=None
