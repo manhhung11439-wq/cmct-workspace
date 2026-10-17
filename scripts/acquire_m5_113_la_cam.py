@@ -35,3 +35,5 @@ rec={
 assert s1==ii.get('sha1'),(s1,ii.get('sha1'))
 (OUT/'manifest.json').write_text(json.dumps(rec,ensure_ascii=False,indent=2),encoding='utf-8')
 print('MANIFEST='+json.dumps(rec,ensure_ascii=False),flush=True)
+
+# rerun 2026-10-17 Batch31 candidate refresh
