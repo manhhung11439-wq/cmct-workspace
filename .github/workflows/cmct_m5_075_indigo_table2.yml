@@ -1,0 +1,23 @@
+name: CMCT M5 075 Indigo Table2
+on:
+  push:
+    paths:
+      - 'scripts/acquire_m5_075_indigo_table2.py'
+      - '.github/workflows/cmct_m5_075_indigo_table2.yml'
+  workflow_dispatch:
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pymupdf
+      - run: set -o pipefail; python scripts/acquire_m5_075_indigo_table2.py | tee m5_075_indigo_table2.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-075-indigo-table2
+          path: |
+            evidence/m5_t1_075_indigo/
+            m5_075_indigo_table2.log
+          if-no-files-found: error
+          retention-days: 30
