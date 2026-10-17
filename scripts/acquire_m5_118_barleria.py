@@ -62,3 +62,5 @@ manifest={"id":118,"target":"Kim Vàng / Barleria lupulina Lindl.",
 "controller_status":"PDF + EMBEDDED IMAGES ACQUIRED; VISUAL LOCK REQUIRED"}
 (OUT/"manifest.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding="utf-8")
 print("MANIFEST="+json.dumps(manifest,ensure_ascii=False),flush=True)
+
+# rerun 2026-10-17 Batch31 candidate refresh
