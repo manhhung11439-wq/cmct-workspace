@@ -69,3 +69,5 @@ if thumbs:
     for i,t in enumerate(thumbs): sheet.paste(t,((i%cols)*330,(i//cols)*285))
     sheet.save(OUT/"contact.jpg",quality=90)
 print("TOTAL",len(rows),flush=True)
+
+# rerun 2026-10-17 batch31 provenance refresh
