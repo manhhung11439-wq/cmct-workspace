@@ -17,7 +17,7 @@ jobs:
         with:
           name: cmct-m5-082-houttuynia-dry
           path: |
-            evidence/m5_t1_082_houttuynia_dry/
+            evidence/m5_t1_082_houttuynia_dry_direct/
             acquire.log
           if-no-files-found: error
           retention-days: 30
