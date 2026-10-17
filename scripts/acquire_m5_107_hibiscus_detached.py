@@ -1,0 +1,47 @@
+import json,hashlib,pathlib,time,requests,html,re
+from PIL import Image,ImageOps,ImageDraw
+OUT=pathlib.Path("evidence/m5_t1_107_hibiscus_detached"); OUT.mkdir(parents=True,exist_ok=True)
+TITLE="File:Hibiscus rosa-sinensis displaying unique flower parts.jpg"
+s=requests.Session(); s.headers["User-Agent"]="CMCT-image-audit/31.3 Hibiscus detached-flower acquisition"
+def get(u,params=None):
+    last=None
+    for i in range(8):
+        r=s.get(u,params=params,timeout=180,allow_redirects=True); last=r
+        if r.status_code in (429,500,502,503,504):
+            time.sleep(min(60,2*(2**i))); continue
+        r.raise_for_status(); return r
+    last.raise_for_status()
+def clean(v):
+    if isinstance(v,dict): v=v.get("value","")
+    return re.sub(r"<[^>]+>","",html.unescape(str(v))).strip()
+def hh(b): return hashlib.sha1(b).hexdigest(),hashlib.sha256(b).hexdigest()
+q=get("https://commons.wikimedia.org/w/api.php",{
+ "action":"query","format":"json","prop":"imageinfo","iiprop":"url|size|sha1|extmetadata","titles":TITLE
+}).json()
+p=next(iter(q["query"]["pages"].values())); ii=p["imageinfo"][0]; meta=ii.get("extmetadata",{})
+b=get(ii["url"]).content
+out=OUT/"m5_107_Hibiscus_rosa_sinensis_flower_source.jpg"; out.write_bytes(b)
+im=Image.open(out); im.load(); s1,s256=hh(b)
+assert s1==ii.get("sha1"),(s1,ii.get("sha1"))
+rec={"id":107,"target":"Dâm Bụt / Hibiscus × rosa-sinensis L.","title":TITLE,
+"canonical_title":p.get("title"),"pageid":p.get("pageid"),"original_url":ii["url"],
+"api_sha1":ii.get("sha1"),"local_sha1":s1,"local_sha256":s256,"bytes":len(b),
+"width":im.width,"height":im.height,"format":im.format,"file":str(out),
+"description":clean(meta.get("ImageDescription","")),"author":clean(meta.get("Artist","")),
+"credit":clean(meta.get("Credit","")),"license_short":clean(meta.get("LicenseShortName","")),
+"license_url":clean(meta.get("LicenseUrl","")),"usage_terms":clean(meta.get("UsageTerms","")),
+"copyrighted":clean(meta.get("Copyrighted","")),"categories":clean(meta.get("Categories","")),
+"controller_status":"ORIGINAL_ACQUIRED; visually verify detached/fallen flower region before any crop/promotion"}
+(OUT/"manifest.json").write_text(json.dumps(rec,ensure_ascii=False,indent=2),encoding="utf-8")
+# Full-size review and quadrant sheet
+v=ImageOps.exif_transpose(Image.open(out)).convert("RGB")
+rv=v.copy(); rv.thumbnail((1400,1000)); rv.save(OUT/"review_full.jpg",quality=92)
+W,H=v.size; tiles=[]
+for idx,(x1,y1,x2,y2) in enumerate([(0,0,W//2,H//2),(W//2,0,W,H//2),(0,H//2,W//2,H),(W//2,H//2,W,H)],1):
+    c=v.crop((x1,y1,x2,y2)); c.thumbnail((650,450))
+    t=Image.new("RGB",(680,500),"white"); t.paste(c,((680-c.width)//2,5))
+    ImageDraw.Draw(t).text((10,465),f"Q{idx} source box {(x1,y1,x2,y2)}",fill="black"); tiles.append(t)
+sheet=Image.new("RGB",(1360,1000),"white")
+for i,t in enumerate(tiles): sheet.paste(t,((i%2)*680,(i//2)*500))
+sheet.save(OUT/"quadrants.jpg",quality=92)
+print("MANIFEST="+json.dumps(rec,ensure_ascii=False),flush=True)
