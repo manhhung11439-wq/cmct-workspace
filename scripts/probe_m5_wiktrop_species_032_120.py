@@ -8,7 +8,7 @@ s=requests.Session(); s.headers["User-Agent"]="CMCT-image-audit/33.0 WIKTROP spe
 def get(u):
     last=None
     for i in range(7):
-        r=s.get(u,timeout=120,allow_redirects=True); last=r
+        try:\n            r=s.get(u,timeout=35,allow_redirects=True); last=r\n        except requests.RequestException as e:\n            last=e\n            time.sleep(min(20,2*(2**i))); continue
         if r.status_code in (429,500,502,503,504):
             time.sleep(min(30,2*(2**i))); continue
         if r.status_code==404: return r
