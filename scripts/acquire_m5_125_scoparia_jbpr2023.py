@@ -1,12 +1,9 @@
-import pathlib,requests,time,hashlib,json
+import pathlib,requests,time,hashlib,json,re,html as htmllib,urllib.parse
 import fitz
 from PIL import Image
 OUT=pathlib.Path("evidence/m5_t1_125_scoparia_jbpr2023"); OUT.mkdir(parents=True,exist_ok=True)
-URLS=[
- "https://www.jbpr.in/index.php/jbpr/article/view/956/827",
- "https://www.jbpr.in/index.php/jbpr/article/download/956/827"
-]
-s=requests.Session(); s.headers["User-Agent"]="CMCT-image-audit/33.0 Scoparia dulcis pharmacognosy acquisition"
+START="https://www.jbpr.in/index.php/jbpr/article/view/956/827"
+s=requests.Session(); s.headers["User-Agent"]="Mozilla/5.0 CMCT-image-audit/33.1 Scoparia dulcis pharmacognosy acquisition"
 def get(u):
     last=None
     for i in range(8):
@@ -16,19 +13,34 @@ def get(u):
         return r
     return last
 def hh(b): return hashlib.sha1(b).hexdigest(),hashlib.sha256(b).hexdigest()
-pb=None; src=None; attempts=[]
-for u in URLS:
-    r=get(u); ct=(r.headers.get("content-type") or "").lower()
-    attempts.append({"url":u,"status":r.status_code,"final":r.url,"content_type":ct,"bytes":len(r.content)})
-    if r.ok and (r.content[:4]==b"%PDF" or "application/pdf" in ct):
-        pb=r.content; src=r.url; break
-if pb is None: raise RuntimeError("PDF unavailable: "+json.dumps(attempts))
+attempts=[]; queue=[START]; seen=set(); pb=None; src=None
+for depth in range(3):
+    new=[]
+    for u in queue:
+        if u in seen: continue
+        seen.add(u)
+        r=get(u); ct=(r.headers.get("content-type") or "").lower()
+        attempts.append({"url":u,"status":r.status_code,"final":r.url,"content_type":ct,"bytes":len(r.content)})
+        if r.ok and (r.content[:4]==b"%PDF" or "application/pdf" in ct):
+            pb=r.content; src=r.url; break
+        if r.ok and "text/html" in ct:
+            txt=r.text; (OUT/f"viewer_{len(seen)}.html").write_text(txt,encoding="utf-8",errors="ignore")
+            for m in re.findall(r'''(?:src|href|data)=["']([^"']+)["']''',txt,re.I):
+                m=htmllib.unescape(m)
+                uu=urllib.parse.urljoin(r.url,m)
+                low=uu.lower()
+                if any(k in low for k in ["/download/","galley","pdf","article/view/956"]):
+                    if uu not in seen: new.append(uu)
+    if pb is not None: break
+    queue=list(dict.fromkeys(new))
+if pb is None:
+    raise RuntimeError("PDF unavailable after viewer crawl: "+json.dumps(attempts))
 pdf=OUT/"article.pdf"; pdf.write_bytes(pb); s1,s256=hh(pb)
 doc=fitz.open(stream=pb,filetype="pdf")
 pages=[]; imgs=[]
 for i,p in enumerate(doc):
     txt=p.get_text("text")
-    pages.append({"page":i+1,"text_head":txt[:2500],"images":len(p.get_images(full=True))})
+    pages.append({"page":i+1,"text_head":txt[:2800],"images":len(p.get_images(full=True))})
     pix=p.get_pixmap(matrix=fitz.Matrix(1.8,1.8),alpha=False); pix.save(OUT/f"page_{i+1:02d}.png")
     for j,img in enumerate(p.get_images(full=True),1):
         xref=img[0]
@@ -46,4 +58,4 @@ man={"id":125,"target":"Cam Thảo Đất / Scoparia dulcis L. / whole plant med
      "attempts":attempts,"pages":pages,"images":imgs,
      "controller_status":"PDF/embedded images acquired; actual medicinal-material image requires visual lock"}
 (OUT/"manifest.json").write_text(json.dumps(man,ensure_ascii=False,indent=2),encoding="utf-8")
-print("MANIFEST_SUMMARY="+json.dumps({"attempts":attempts,"pdf_pages":len(doc),"images":imgs},ensure_ascii=False),flush=True)
+print("MANIFEST_SUMMARY="+json.dumps({"source_url":src,"attempts":attempts,"pdf_pages":len(doc),"images":imgs},ensure_ascii=False),flush=True)
