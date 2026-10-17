@@ -1,0 +1,23 @@
+name: CMCT M5 052 Taraxacum 2026
+on:
+  push:
+    paths:
+      - 'scripts/scout_m5_052_taraxacum_2026.py'
+      - '.github/workflows/cmct_m5_052_taraxacum_2026.yml'
+  workflow_dispatch:
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pillow
+      - run: set -o pipefail; python scripts/scout_m5_052_taraxacum_2026.py | tee scout.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-052-taraxacum-2026
+          path: |
+            evidence/m5_t1_052_taraxacum_2026/
+            scout.log
+          if-no-files-found: error
+          retention-days: 30
