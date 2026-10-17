@@ -1,0 +1,23 @@
+name: CMCT priority Commons scout 056 069 074 076 080
+on:
+  push:
+    paths:
+      - 'scripts/scout_priority_commons_056_069_074_076_080.py'
+      - '.github/workflows/cmct_priority_commons_056_069_074_076_080.yml'
+  workflow_dispatch:
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pillow
+      - run: set -o pipefail; python scripts/scout_priority_commons_056_069_074_076_080.py | tee scout.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-priority-commons-056-069-074-076-080
+          path: |
+            evidence/m5_priority_commons_056_069_074_076_080/
+            scout.log
+          if-no-files-found: error
+          retention-days: 30
