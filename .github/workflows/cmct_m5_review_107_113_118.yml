@@ -1,0 +1,19 @@
+name: CMCT M5 visual review 107 113 118
+on:
+  push:
+    paths:
+      - 'scripts/review_m5_107_113_118.py'
+      - '.github/workflows/cmct_m5_review_107_113_118.yml'
+  workflow_dispatch:
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pymupdf pillow
+      - run: python scripts/review_m5_107_113_118.py | tee review.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-review-107-113-118
+          path: review.log
+          retention-days: 7
