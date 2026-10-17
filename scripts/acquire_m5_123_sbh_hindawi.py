@@ -46,10 +46,15 @@ if zipfile.is_zipfile(io.BytesIO(zb)):
             s1,s256=hh(b)
             orig.append({"archive_member":n,"file":str(p),"bytes":len(b),"width":im.width,"height":im.height,"format":im.format,"sha1":s1,"sha256":s256})
             break
-# PDF source
-pr=get("https://downloads.hindawi.com/journals/ecam/2018/4365739.pdf"); pb=pr.content
-(OUT/"article.pdf").write_bytes(pb)
-ps1,ps256=hh(pb)
+# PDF source is optional; Europe PMC XML + inline original are authoritative evidence.
+pdf_meta=None
+try:
+    pr=get("https://downloads.hindawi.com/journals/ecam/2018/4365739.pdf"); pb=pr.content
+    (OUT/"article.pdf").write_bytes(pb)
+    ps1,ps256=hh(pb)
+    pdf_meta={"pdf_url":pr.url,"pdf_bytes":len(pb),"pdf_sha1":ps1,"pdf_sha256":ps256}
+except Exception as e:
+    pdf_meta={"pdf_error":repr(e)}
 # material context
 contexts=[]
 for needle in ["dried entire plant of Scutellaria Barbata", "Scutellariae Barbatae Herba", "dried entire plant"]:
@@ -58,7 +63,7 @@ for needle in ["dried entire plant of Scutellaria Barbata", "Scutellariae Barbat
 man={"id":123,"target":"Bán Chi Liên / Scutellaria barbata D.Don / dried whole herb",
 "article":"Gong B. et al. Systematic Investigation of Scutellariae Barbatae Herba for Treating Hepatocellular Carcinoma Based on Network Pharmacology",
 "doi":DOI,"pmc":PMC,"licenses":licenses,"figure":target,"original":orig[0] if orig else None,
-"pdf_url":pr.url,"pdf_bytes":len(pb),"pdf_sha1":ps1,"pdf_sha256":ps256,
+"pdf":pdf_meta,
 "material_context":contexts,
 "controller_status":"ORIGINAL_ACQUIRED; FIGURE1 HERB PHOTO REQUIRES VISUAL CROP LOCK"}
 (OUT/"manifest.json").write_text(json.dumps(man,ensure_ascii=False,indent=2),encoding="utf-8")
