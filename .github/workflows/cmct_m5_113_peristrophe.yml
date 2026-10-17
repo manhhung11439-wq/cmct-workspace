@@ -1,0 +1,23 @@
+name: CMCT M5 113 Peristrophe CC BY
+on:
+  push:
+    paths:
+      - 'scripts/acquire_m5_113_peristrophe.py'
+      - '.github/workflows/cmct_m5_113_peristrophe.yml'
+  workflow_dispatch:
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pymupdf
+      - run: set -o pipefail; python scripts/acquire_m5_113_peristrophe.py | tee acquire.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-113-peristrophe
+          path: |
+            evidence/m5_t1_113_peristrophe/
+            acquire.log
+          if-no-files-found: error
+          retention-days: 30
