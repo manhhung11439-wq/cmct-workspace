@@ -1,0 +1,23 @@
+name: CMCT M5 exact fresh category screen
+on:
+  push:
+    paths:
+      - 'scripts/screen_m5_fresh_exact_categories.py'
+      - '.github/workflows/cmct_m5_fresh_exact_categories.yml'
+  workflow_dispatch:
+jobs:
+  screen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pillow
+      - run: set -o pipefail; python scripts/screen_m5_fresh_exact_categories.py | tee screen.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-fresh-exact-category-screen
+          path: |
+            evidence/m5_t1_fresh_exact_category_screen/
+            screen.log
+          if-no-files-found: error
+          retention-days: 30
