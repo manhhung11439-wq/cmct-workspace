@@ -1,0 +1,25 @@
+name: CMCT M5 037 crop probe
+on:
+  push:
+    paths:
+      - 'scripts/probe_m5_037_crop.py'
+      - '.github/workflows/cmct_m5_037_crop_probe.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pymupdf pillow
+      - run: set -o pipefail; python scripts/probe_m5_037_crop.py | tee probe.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-037-crop-probe
+          path: |
+            evidence/m5_t1_037_crop_probe/
+            probe.log
+          if-no-files-found: error
+          retention-days: 30
