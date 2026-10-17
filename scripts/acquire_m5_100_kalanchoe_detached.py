@@ -37,3 +37,5 @@ for i,title in enumerate(titles,1):
     if ii.get('sha1'): assert s1==ii['sha1']
     rows.append(row); print('CANDIDATE='+json.dumps(row,ensure_ascii=False),flush=True)
 (OUT/'manifest.json').write_text(json.dumps(rows,ensure_ascii=False,indent=2),encoding='utf-8')
+
+# rerun 2026-10-17 Batch31 candidate refresh
