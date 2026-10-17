@@ -1,0 +1,24 @@
+name: CMCT M5 090 Sauropus Springer Figure4
+on:
+  push:
+    paths:
+      - 'scripts/acquire_m5_090_sauropus_springer.py'
+      - '.github/workflows/cmct_m5_090_sauropus_springer.yml'
+  workflow_dispatch:
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pillow
+      - run: set -o pipefail; python scripts/acquire_m5_090_sauropus_springer.py | tee acquire.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-090-sauropus-springer
+          path: |
+            evidence/m5_t1_090_sauropus_springer/
+            acquire.log
+          if-no-files-found: error
+          retention-days: 30
