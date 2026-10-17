@@ -17,7 +17,7 @@ jobs:
         with:
           name: cmct-m5-113-peristrophe
           path: |
-            evidence/m5_t1_113_peristrophe/
+            evidence/m5_t1_113_peristrophe_2016/
             acquire.log
           if-no-files-found: error
           retention-days: 30
