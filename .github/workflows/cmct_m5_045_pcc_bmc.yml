@@ -1,0 +1,24 @@
+name: CMCT M5 045 PCC BMC raw material
+on:
+  push:
+    paths:
+      - 'scripts/acquire_m5_045_pcc_bmc.py'
+      - '.github/workflows/cmct_m5_045_pcc_bmc.yml'
+  workflow_dispatch:
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pillow
+      - run: set -o pipefail; python scripts/acquire_m5_045_pcc_bmc.py | tee acquire.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-045-pcc-bmc
+          path: |
+            evidence/m5_t1_045_pcc_bmc/
+            acquire.log
+          if-no-files-found: error
+          retention-days: 30
