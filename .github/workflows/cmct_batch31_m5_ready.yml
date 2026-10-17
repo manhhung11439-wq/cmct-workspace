@@ -1,0 +1,32 @@
+name: CMCT Batch31 M5 ready package
+on:
+  push:
+    paths:
+      - '.github/workflows/cmct_batch31_m5_ready.yml'
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: read
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          mkdir -p batch31_ready/m5_037 batch31_ready/m5_118
+          gh run download 39045102863 -n cmct-m5-037-fullgate-crop -D src37
+          gh run download 39045469709 -n cmct-m5-118-fullgate -D src118
+          cp src37/evidence/m5_t1_037_fullgate_crop/m5_037_Gymnema_sylvestre_dried_leaf_stem_powder_panelA.png batch31_ready/m5_037/
+          cp src37/evidence/m5_t1_037_fullgate_crop/manifest.json batch31_ready/m5_037/
+          cp src118/evidence/m5_t1_118_fullgate/m5_118_Barleria_lupulina_fresh_leaf_adaxial.jpeg batch31_ready/m5_118/
+          cp src118/evidence/m5_t1_118_fullgate/manifest.json batch31_ready/m5_118/
+          cp evidence/PENDING_BATCH31_REGISTER_2026-10-17.md batch31_ready/
+          sha256sum batch31_ready/m5_037/* batch31_ready/m5_118/* > batch31_ready/SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-batch31-m5-ready
+          path: batch31_ready/
+          if-no-files-found: error
+          retention-days: 30
