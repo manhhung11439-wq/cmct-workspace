@@ -1,0 +1,23 @@
+name: CMCT M5 024 Spirodela dried search
+on:
+  push:
+    paths:
+      - 'scripts/search_m5_024_spirodela_dried.py'
+      - '.github/workflows/cmct_m5_024_spirodela_dried.yml'
+  workflow_dispatch:
+jobs:
+  search:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests
+      - run: set -o pipefail; python scripts/search_m5_024_spirodela_dried.py | tee search.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-024-spirodela-dried-search
+          path: |
+            evidence/m5_t1_024_spirodela_search/
+            search.log
+          if-no-files-found: error
+          retention-days: 30
