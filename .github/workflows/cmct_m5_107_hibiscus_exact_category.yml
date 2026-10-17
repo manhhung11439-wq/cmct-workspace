@@ -1,0 +1,23 @@
+name: CMCT M5 107 exact Hibiscus category
+on:
+  push:
+    paths:
+      - 'scripts/scan_m5_107_hibiscus_exact_category.py'
+      - '.github/workflows/cmct_m5_107_hibiscus_exact_category.yml'
+  workflow_dispatch:
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pillow
+      - run: set -o pipefail; python scripts/scan_m5_107_hibiscus_exact_category.py | tee scan.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-107-hibiscus-exact-category
+          path: |
+            evidence/m5_t1_107_hibiscus_exact_category/
+            scan.log
+          if-no-files-found: error
+          retention-days: 30
