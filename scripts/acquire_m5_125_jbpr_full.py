@@ -1,23 +1,39 @@
-import pathlib,requests,time,hashlib,json,re
+import pathlib,requests,time,hashlib,json,re,urllib.parse
 import fitz
-from PIL import Image,ImageOps,ImageDraw
+from PIL import Image,ImageDraw
 OUT=pathlib.Path("evidence/m5_t1_125_jbpr_full"); OUT.mkdir(parents=True,exist_ok=True)
-URL="https://jbpr.in/index.php/jbpr/article/download/956/827/1758"
-s=requests.Session(); s.headers["User-Agent"]="Mozilla/5.0 CMCT-image-audit/33.0 exact Scoparia dulcis pharmacognosy acquisition"
-def get(u):
+ARTICLE="https://jbpr.in/index.php/jbpr/article/view/956"
+VIEWER="https://jbpr.in/index.php/jbpr/article/view/956/827"
+s=requests.Session()
+s.headers.update({"User-Agent":"Mozilla/5.0 CMCT-image-audit/34.0 exact Scoparia dulcis pharmacognosy acquisition",
+                  "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"})
+def get(u,headers=None):
   last=None
   for i in range(8):
-    r=s.get(u,timeout=180,allow_redirects=True); last=r
+    r=s.get(u,timeout=180,allow_redirects=True,headers=headers or {}); last=r
     if r.status_code in (429,500,502,503,504):
       time.sleep(min(60,2*(2**i))); continue
-    r.raise_for_status(); return r
-  last.raise_for_status()
+    return r
+  return last
 def hh(b): return hashlib.sha1(b).hexdigest(),hashlib.sha256(b).hexdigest()
-r=get(URL); b=r.content
-if b[:4]!=b"%PDF": raise RuntimeError(f"Not PDF: {r.status_code} {r.url} {r.headers.get('content-type')} {len(b)}")
-pdf=OUT/"article.pdf"; pdf.write_bytes(b)
-doc=fitz.open(stream=b,filetype="pdf")
-pages=[]; extracted=[]
+# prime OJS session/cookies
+a=get(ARTICLE); (OUT/"article.html").write_bytes(a.content)
+v=get(VIEWER,headers={"Referer":ARTICLE}); (OUT/"viewer.html").write_bytes(v.content)
+if v.status_code!=200: raise RuntimeError(f"viewer status {v.status_code}")
+m=re.search(rb'https?://[^"\']+/article/download/956/827/1758',v.content)
+PDFURL=(m.group(0).decode() if m else "https://jbpr.in/index.php/jbpr/article/download/956/827/1758")
+# Try same-session download with referer plus query/cache-busters accepted by OJS.
+attempts=[]
+r=None
+for u in [PDFURL, PDFURL+"?download=1", PDFURL+"?inline=1"]:
+  rr=get(u,headers={"Referer":VIEWER,"Accept":"application/pdf,*/*;q=0.9"})
+  attempts.append({"url":u,"final":rr.url,"status":rr.status_code,"content_type":rr.headers.get("content-type"),"bytes":len(rr.content)})
+  if rr.status_code==200 and (rr.content[:4]==b"%PDF" or "pdf" in (rr.headers.get("content-type") or "").lower()):
+    r=rr; break
+if r is None:
+  raise RuntimeError("PDF unavailable after primed viewer session: "+json.dumps(attempts))
+b=r.content; pdf=OUT/"article.pdf"; pdf.write_bytes(b)
+doc=fitz.open(stream=b,filetype="pdf"); extracted=[]; pages=[]
 for i,p in enumerate(doc):
   txt=p.get_text("text")
   imgs=[]
@@ -32,20 +48,15 @@ for i,p in enumerate(doc):
     rec={"page":i+1,"idx":j,"file":str(fn),"width":info.get("width"),"height":info.get("height"),"bytes":len(data),"sha1":s1,"sha256":s256}
     imgs.append(rec); extracted.append(rec)
   pages.append({"page":i+1,"text":txt,"images":imgs})
-# render pages with Scoparia/figure mentions at 3x
-rendered=[]
-for rec in pages:
-  tl=rec["text"].lower()
-  if "scoparia dulcis" in tl or "figure" in tl or "fig." in tl:
-    p=doc[rec["page"]-1]; pix=p.get_pixmap(matrix=fitz.Matrix(3,3),alpha=False)
-    fn=OUT/f"page_{rec['page']:02d}_3x.png"; pix.save(fn); rendered.append(str(fn))
-# contact extracted images
+  pix=p.get_pixmap(matrix=fitz.Matrix(2.2,2.2),alpha=False)
+  pix.save(OUT/f"page_{i+1:02d}_preview.png")
+# contact sheet of extracted images
 thumbs=[]
-for rec in extracted[:30]:
+for rec in extracted[:40]:
   try:
     im=Image.open(rec["file"]).convert("RGB"); im.thumbnail((300,220))
   except: continue
-  c=Image.new("RGB",(320,260),"white"); c.paste(im,((320-im.width)//2,10))
+  c=Image.new("RGB",(320,260),"white"); c.paste(im,((320-im.width)//2,8))
   ImageDraw.Draw(c).text((8,235),f"p{rec['page']} img{rec['idx']} {rec['width']}x{rec['height']}",fill="black"); thumbs.append(c)
 if thumbs:
   cols=3; rows=(len(thumbs)+cols-1)//cols
@@ -53,13 +64,14 @@ if thumbs:
   for k,c in enumerate(thumbs): sheet.paste(c,((k%cols)*320,(k//cols)*260))
   sheet.save(OUT/"contact.jpg",quality=90)
 alltext="\n".join(x["text"] for x in pages)
-licctx=[]
-for needle in ["Creative Commons","CC BY","license","Scoparia dulcis","powder","dried","whole plant","whole herb","macroscopic"]:
-  for m in re.finditer(re.escape(needle),alltext,re.I):
-    licctx.append(alltext[max(0,m.start()-500):m.end()+1200]); break
-man={"id":125,"target":"Cam Thảo Đất / Scoparia dulcis L. / whole plant dried","url":URL,"final_url":r.url,
-"pdf_bytes":len(b),"pdf_sha1":hh(b)[0],"pdf_sha256":hh(b)[1],"pdf_pages":len(doc),
-"pages":pages,"rendered_pages":rendered,"contexts":licctx,
-"controller_status":"PDF/images acquired; exact material image + file/article reuse rights require controller lock"}
+contexts=[]
+for needle in ["Creative Commons","CC BY","Scoparia dulcis","whole plant","powder","dried","macroscopy","morphology"]:
+  m=re.search(re.escape(needle),alltext,re.I)
+  if m: contexts.append(alltext[max(0,m.start()-800):m.end()+1800])
+man={"id":125,"target":"Cam Thảo Đất / Scoparia dulcis L. / whole plant dried",
+     "article_url":ARTICLE,"viewer_url":VIEWER,"pdf_url":r.url,"attempts":attempts,
+     "pdf_bytes":len(b),"pdf_sha1":hh(b)[0],"pdf_sha256":hh(b)[1],"pdf_pages":len(doc),
+     "pages":pages,"images":extracted,"contexts":contexts,
+     "controller_status":"PDF/images acquired; visual controller must confirm actual dried whole-plant/powder material"}
 (OUT/"manifest.json").write_text(json.dumps(man,ensure_ascii=False,indent=2),encoding="utf-8")
-print("SUMMARY="+json.dumps({"bytes":len(b),"sha1":hh(b)[0],"sha256":hh(b)[1],"pages":len(doc),"images":extracted,"rendered":rendered,"contexts":licctx},ensure_ascii=False),flush=True)
+print("SUMMARY="+json.dumps({"attempts":attempts,"pdf_bytes":len(b),"sha1":hh(b)[0],"sha256":hh(b)[1],"pages":len(doc),"images":extracted,"contexts":contexts},ensure_ascii=False),flush=True)
