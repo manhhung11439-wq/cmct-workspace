@@ -12,8 +12,17 @@ def get(u):
         r.raise_for_status(); return r
     last.raise_for_status()
 def hh(b): return hashlib.sha1(b).hexdigest(),hashlib.sha256(b).hexdigest()
-r=get(URL); b=r.content
-if b[:4]!=b"%PDF": raise RuntimeError("Not PDF "+r.url+" "+str(r.headers.get("content-type")))
+r=None; b=None; errors=[]
+for u0 in URLS:
+    try:
+        rr=get(u0)
+        if rr.content[:4]==b"%PDF":
+            r=rr; b=rr.content; break
+        errors.append({"url":u0,"status":rr.status_code,"content_type":rr.headers.get("content-type"),"bytes":len(rr.content)})
+    except Exception as e:
+        errors.append({"url":u0,"error":repr(e)})
+if b is None:
+    raise RuntimeError("No PDF: "+json.dumps(errors))
 pdf=OUT/"article.pdf"; pdf.write_bytes(b)
 doc=fitz.open(stream=b,filetype="pdf")
 pages=[]; extracted=[]
