@@ -1,0 +1,23 @@
+name: CMCT M5 WIKTROP species probe 032 120
+on:
+  push:
+    paths:
+      - 'scripts/probe_m5_wiktrop_species_032_120.py'
+      - '.github/workflows/cmct_m5_wiktrop_species_032_120.yml'
+  workflow_dispatch:
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests beautifulsoup4 pillow
+      - run: set -o pipefail; python scripts/probe_m5_wiktrop_species_032_120.py | tee probe.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-wiktrop-species-032-120
+          path: |
+            evidence/m5_t1_wiktrop_species_probe_032_120/
+            probe.log
+          if-no-files-found: error
+          retention-days: 30
