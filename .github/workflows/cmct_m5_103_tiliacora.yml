@@ -1,0 +1,23 @@
+name: CMCT M5 103 Tiliacora fresh material
+on:
+  push:
+    paths:
+      - 'scripts/acquire_m5_103_tiliacora.py'
+      - '.github/workflows/cmct_m5_103_tiliacora.yml'
+  workflow_dispatch:
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pillow
+      - run: set -o pipefail; python scripts/acquire_m5_103_tiliacora.py | tee acquire_m5_103_tiliacora.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-103-tiliacora
+          path: |
+            evidence/m5_t1_103_tiliacora/
+            acquire_m5_103_tiliacora.log
+          if-no-files-found: error
+          retention-days: 30
