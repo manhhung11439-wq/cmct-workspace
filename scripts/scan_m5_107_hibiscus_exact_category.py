@@ -58,3 +58,5 @@ for start in range(0,len(rows),12):
     sh.save(OUT/f"contact_{start//12+1:02d}.jpg",quality=90)
 print("TOTAL="+str(len(rows)),flush=True)
 print("MANIFEST="+json.dumps(rows,ensure_ascii=False),flush=True)
+
+# rerun 2026-10-17 Batch32 exact-category refresh
