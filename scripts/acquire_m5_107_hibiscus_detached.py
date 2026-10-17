@@ -1,8 +1,8 @@
 import json,hashlib,pathlib,time,requests,html,re
 from PIL import Image,ImageOps,ImageDraw
 OUT=pathlib.Path("evidence/m5_t1_107_hibiscus_detached"); OUT.mkdir(parents=True,exist_ok=True)
-TITLE="File:Hibiscus rosa-sinensis displaying unique flower parts.jpg"
-s=requests.Session(); s.headers["User-Agent"]="CMCT-image-audit/31.3 Hibiscus detached-flower acquisition"
+TITLE="File:Hibiscus Flower in women's hand.jpg"
+s=requests.Session(); s.headers["User-Agent"]="CMCT-image-audit/31.3 Hibiscus freshly-plucked flower acquisition"
 def get(u,params=None):
     last=None
     for i in range(8):
@@ -20,7 +20,7 @@ q=get("https://commons.wikimedia.org/w/api.php",{
 }).json()
 p=next(iter(q["query"]["pages"].values())); ii=p["imageinfo"][0]; meta=ii.get("extmetadata",{})
 b=get(ii["url"]).content
-out=OUT/"m5_107_Hibiscus_rosa_sinensis_flower_source.jpg"; out.write_bytes(b)
+out=OUT/"m5_107_Hibiscus_freshly_plucked_flower_in_hand.jpg"; out.write_bytes(b)
 im=Image.open(out); im.load(); s1,s256=hh(b)
 assert s1==ii.get("sha1"),(s1,ii.get("sha1"))
 rec={"id":107,"target":"Dâm Bụt / Hibiscus × rosa-sinensis L.","title":TITLE,
@@ -31,7 +31,7 @@ rec={"id":107,"target":"Dâm Bụt / Hibiscus × rosa-sinensis L.","title":TITLE
 "credit":clean(meta.get("Credit","")),"license_short":clean(meta.get("LicenseShortName","")),
 "license_url":clean(meta.get("LicenseUrl","")),"usage_terms":clean(meta.get("UsageTerms","")),
 "copyrighted":clean(meta.get("Copyrighted","")),"categories":clean(meta.get("Categories","")),
-"controller_status":"ORIGINAL_ACQUIRED; visually verify detached/fallen flower region before any crop/promotion"}
+"controller_status":"ORIGINAL_ACQUIRED; verify exact-species metadata/category and freshly-plucked visual role before promotion"}
 (OUT/"manifest.json").write_text(json.dumps(rec,ensure_ascii=False,indent=2),encoding="utf-8")
 # Full-size review and quadrant sheet
 v=ImageOps.exif_transpose(Image.open(out)).convert("RGB")
