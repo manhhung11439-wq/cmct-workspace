@@ -1,0 +1,23 @@
+name: CMCT M5 broad detached reusable screen
+on:
+  push:
+    paths:
+      - 'scripts/scout_m5_broad_detached_060_062_067_068_107_113_114_116.py'
+      - '.github/workflows/cmct_m5_broad_detached_060_062_067_068_107_113_114_116.yml'
+  workflow_dispatch:
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pillow
+      - run: set -o pipefail; python scripts/scout_m5_broad_detached_060_062_067_068_107_113_114_116.py | tee scout.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-broad-detached-060-062-067-068-107-113-114-116
+          path: |
+            evidence/m5_detached_broad_screen_060_062_067_068_107_113_114_116/
+            scout.log
+          if-no-files-found: error
+          retention-days: 30
