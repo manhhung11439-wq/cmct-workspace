@@ -1,0 +1,23 @@
+name: CMCT M5 108 Blumea harvested aerial part
+on:
+  push:
+    paths:
+      - 'scripts/acquire_m5_108_blumea.py'
+      - '.github/workflows/cmct_m5_108_blumea.yml'
+  workflow_dispatch:
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pillow
+      - run: set -o pipefail; python scripts/acquire_m5_108_blumea.py | tee acquire.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-108-blumea
+          path: |
+            evidence/m5_t1_108_blumea/
+            acquire.log
+          if-no-files-found: error
+          retention-days: 30
