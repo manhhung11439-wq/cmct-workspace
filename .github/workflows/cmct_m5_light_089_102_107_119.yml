@@ -1,0 +1,23 @@
+name: CMCT M5 light detached screen 089 102 107 119
+on:
+  push:
+    paths:
+      - 'scripts/scout_m5_light_089_102_107_119.py'
+      - '.github/workflows/cmct_m5_light_089_102_107_119.yml'
+  workflow_dispatch:
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests
+      - run: set -o pipefail; python scripts/scout_m5_light_089_102_107_119.py | tee scout.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-light-089-102-107-119
+          path: |
+            evidence/m5_light_screen_089_102_107_119/
+            scout.log
+          if-no-files-found: error
+          retention-days: 30
