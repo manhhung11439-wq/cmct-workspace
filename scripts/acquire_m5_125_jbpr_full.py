@@ -5,7 +5,7 @@ OUT=pathlib.Path("evidence/m5_t1_125_jbpr_full"); OUT.mkdir(parents=True,exist_o
 ARTICLE="https://jbpr.in/index.php/jbpr/article/view/956"
 VIEWER="https://jbpr.in/index.php/jbpr/article/view/956/827"
 s=requests.Session()
-s.headers.update({"User-Agent":"Mozilla/5.0 CMCT-image-audit/34.0 exact Scoparia dulcis pharmacognosy acquisition",
+s.headers.update({"User-Agent":"Mozilla/5.0 CMCT-image-audit/34.1 exact Scoparia dulcis pharmacognosy acquisition",
                   "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"})
 def get(u,headers=None):
   last=None
