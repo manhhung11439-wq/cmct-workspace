@@ -1,0 +1,23 @@
+name: CMCT M5 detached research screen 022 032 039 052 106 119
+on:
+  push:
+    paths:
+      - 'scripts/scout_m5_detached_research_022_032_039_052_106_119.py'
+      - '.github/workflows/cmct_m5_detached_research_022_032_039_052_106_119.yml'
+  workflow_dispatch:
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip install --quiet requests pillow
+      - run: set -o pipefail; python scripts/scout_m5_detached_research_022_032_039_052_106_119.py | tee scout.log
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmct-m5-detached-research-022-032-039-052-106-119
+          path: |
+            evidence/m5_detached_research_screen_022_032_039_052_106_119/
+            scout.log
+          if-no-files-found: error
+          retention-days: 30
