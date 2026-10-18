@@ -21,11 +21,11 @@ a=get(ARTICLE); (OUT/"article.html").write_bytes(a.content)
 v=get(VIEWER,headers={"Referer":ARTICLE}); (OUT/"viewer.html").write_bytes(v.content)
 if v.status_code!=200: raise RuntimeError(f"viewer status {v.status_code}")
 m=re.search(rb'https?://[^"\']+/article/download/956/827/1758',v.content)
-PDFURL=(m.group(0).decode() if m else "https://jbpr.in/index.php/jbpr/article/download/956/827/1758")
+PDFURL=(m.group(0).decode() if m else "https://jbpr.in/index.php/jbpr/article/download/956/827/")
 # Try same-session download with referer plus query/cache-busters accepted by OJS.
 attempts=[]
 r=None
-for u in [PDFURL, PDFURL+"?download=1", PDFURL+"?inline=1"]:
+for u in ["https://jbpr.in/index.php/jbpr/article/download/956/827/","https://jbpr.in/index.php/jbpr/article/download/956/827",PDFURL, PDFURL+"?download=1", PDFURL+"?inline=1"]:
   rr=get(u,headers={"Referer":VIEWER,"Accept":"application/pdf,*/*;q=0.9"})
   attempts.append({"url":u,"final":rr.url,"status":rr.status_code,"content_type":rr.headers.get("content-type"),"bytes":len(rr.content)})
   if rr.status_code==200 and (rr.content[:4]==b"%PDF" or "pdf" in (rr.headers.get("content-type") or "").lower()):
